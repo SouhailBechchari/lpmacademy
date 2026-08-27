@@ -1,9 +1,11 @@
 import { createContext, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import {
   ArrowRight,
+  ArrowUp,
   AtSign,
   Award,
   BadgeCheck,
+  BookOpen,
   Briefcase,
   CalendarRange,
   Check,
@@ -566,7 +568,6 @@ function WorkshopCard({ w }: { w: (typeof WORKSHOPS)[number] }) {
   const line = cart.lines.find((l) => l.workshopId === w.id)
   const [sel, setSel] = useState<'P' | 'D'>(line ? line.format : 'P')
   const format: 'P' | 'D' = line ? line.format : sel
-  const price = unitPrice(cart.count || 1, format)
   const module = MODULES.find((m) => m.id === w.module)!
   const pick = (f: 'P' | 'D') => {
     setSel(f)
@@ -620,7 +621,7 @@ function WorkshopCard({ w }: { w: (typeof WORKSHOPS)[number] }) {
           className={`add ${line ? 'in' : ''}`}
           onClick={() => (line ? cart.remove(w.id) : cart.add(w.id, format))}
         >
-          {line ? (
+{line ? (
             <>
               <Check size={15} /> Ajouté
             </>
@@ -631,9 +632,6 @@ function WorkshopCard({ w }: { w: (typeof WORKSHOPS)[number] }) {
           )}
         </button>
       </div>
-      <div className="price-line">
-    {price} DH <span>/ atelier</span>
-  </div>
     </article>
   )
 }
@@ -855,6 +853,13 @@ function Hero() {
             </div>
           </div>
           <div className="hs-item">
+            <BookOpen size={20} strokeWidth={1.8} />
+            <div>
+              <b>+80</b>
+              <span>ateliers au catalogue</span>
+            </div>
+          </div>
+          <div className="hs-item">
             <Award size={20} strokeWidth={1.8} />
             <div>
               <b>01</b>
@@ -1029,7 +1034,7 @@ function Intervenants() {
   return (
     <section className="section intervenants" id="intervenants">
       <ReReveal>
-        <p className="eyebrow">04 / Les intervenants</p>
+        <p className="eyebrow">05 / Les intervenants</p>
       </ReReveal>
       <ReReveal delay={60}>
         <h2>
@@ -1070,6 +1075,9 @@ function Tarifs() {
   return (
     <section className="pricing" id="tarifs">
       <div className="pricing-copy">
+        <ReReveal>
+          <p className="eyebrow">04 / Formules et tarifs</p>
+        </ReReveal>
         <ReReveal delay={60}>
           <h2>
             Trois formules, <i>dégressives.</i>
@@ -1485,8 +1493,8 @@ function Home() {
       <Philosophie />
       <ModulesSection />
       <Programme />
-      <Intervenants />
       <Tarifs />
+      <Intervenants />
       <FAQSection />
     </>
   )
@@ -1626,6 +1634,25 @@ function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
   )
 }
 
+function ScrollTop() {
+  const [show, setShow] = useState(false)
+  useEffect(() => {
+    const onScroll = () => setShow(window.scrollY > 600)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+  return (
+    <button
+      className={`to-top ${show ? 'in' : ''}`}
+      aria-label="Revenir en haut"
+      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+    >
+      <ArrowUp size={18} />
+    </button>
+  )
+}
+
 function AppShell() {
   const cart = useCart()
   const [cartOpen, setCartOpen] = useState(false)
@@ -1640,6 +1667,7 @@ function AppShell() {
       </main>
       <Footer />
       <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
+      <ScrollTop />
     </div>
   )
 }
