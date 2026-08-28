@@ -1080,8 +1080,32 @@ input.err { border-color: #d64545; background: #fff6f6; }
 }
 .to-top.in { opacity: 1; visibility: visible; transform: translateY(0); }
 .to-top:hover { background: var(--green-b); }
+
+/* Bouton WhatsApp flottant */
+.wa-float {
+  position: fixed; left: 22px; bottom: 22px; z-index: 50;
+  width: 56px; height: 56px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, #2bbf5a, #1fae4c); color: #fff;
+  box-shadow: 0 14px 30px rgba(31,174,76,.42);
+  transition: transform 0.25s cubic-bezier(0.2,0.8,0.2,1), box-shadow 0.25s ease;
+}
+.wa-float::before {
+  content: ''; position: absolute; inset: 0; border-radius: 50%;
+  background: rgba(31,174,76,.35); z-index: -1;
+  animation: wa-pulse 2.4s ease-out infinite;
+}
+.wa-float:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 18px 36px rgba(31,174,76,.52); }
+.wa-float:active { transform: scale(.96); }
+@keyframes wa-pulse {
+  0% { transform: scale(1); opacity: .8; }
+  70% { transform: scale(1.55); opacity: 0; }
+  100% { transform: scale(1.55); opacity: 0; }
+}
+
 @media (max-width: 640px) {
   .to-top { width: 42px; height: 42px; right: 16px; bottom: 16px; border-radius: 12px; }
+  .wa-float { width: 50px; height: 50px; left: 16px; bottom: 16px; }
 }
 
 /* ------------------------------------------------------------------ */

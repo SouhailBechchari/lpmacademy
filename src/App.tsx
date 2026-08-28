@@ -1689,6 +1689,21 @@ function ScrollTop() {
   )
 }
 
+function WhatsAppFloat() {
+  return (
+    <a
+      className="wa-float"
+      href={`https://wa.me/${AGENCY_WA}`}
+      target="_blank"
+      rel="noreferrer"
+      aria-label="Nous contacter sur WhatsApp"
+      title="Contactez-nous sur WhatsApp"
+    >
+      <MessageCircle size={26} />
+    </a>
+  )
+}
+
 function AppShell() {
   const cart = useCart()
   const [cartOpen, setCartOpen] = useState(false)
@@ -1723,6 +1738,7 @@ function AppShell() {
       <Footer />
       <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
       <ScrollTop />
+      <WhatsAppFloat />
     </div>
   )
 }
