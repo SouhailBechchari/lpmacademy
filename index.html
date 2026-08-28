@@ -5,6 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#16395B" />
     <meta name="description" content="Passeport Formation — la formation continue pensée pour les pharmaciens d'aujourd'hui." />
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem('pf-theme')
+          t = t === 'light' || t === 'dark' ? t : matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+          document.documentElement.setAttribute('data-theme', t)
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'light')
+        }
+      })()
+    </script>
     <link rel="icon" type="image/png" href="/images/icone.png" />
     <link rel="apple-touch-icon" href="/images/icone.png" />
     <title>Passeport Formation | Pharmaciens</title>

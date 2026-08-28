@@ -21,11 +21,13 @@ import {
   MessageCircle,
   Minus,
   Monitor,
+  Moon,
   Phone,
   Play,
   Plus,
   ShoppingBag,
   Sparkles,
+  Sun,
   Target,
   Users,
   X,
@@ -46,6 +48,11 @@ import {
 
 const AGENCY_WA = '212780931067'
 const WHATSAPP_ID = AGENCY_WA.replace(/^212/, '07') // 07 80 93 10 67
+const WHATSAPP_MASKED = '07 80 ** ** 67'
+
+const LOCATION_SHORT = "l'Espace Le Carré d'Or"
+const LOCATION_FULL = "à l'Espace Le Carré d'Or, à côté de la gare Casa Oasis, Casablanca"
+const LOCATION_CARD = "Le Carré d'Or, Casablanca"
 
 const MODULES = [
   {
@@ -350,7 +357,7 @@ const SPEAKERS = [
 
 const FAQ = [
   ['Puis-je ne prendre qu\u2019un seul atelier ?', "Oui. La formule à l'unité est faite pour ça. Si vous en ajoutez plusieurs, la remise pack s'applique automatiquement."],
-  ['Présentiel ou distanciel ?', 'Chaque atelier est hybride. En présentiel, vous êtes sur place à Casablanca ; en distanciel, vous suivez la même séance en direct, à un tarif réduit de 100 DH.'],
+  ['Présentiel ou distanciel ?', `Chaque atelier est hybride. En présentiel, vous êtes sur place ${LOCATION_FULL} ; en distanciel, vous suivez la même séance en direct, à un tarif réduit de 100 DH.`],
   ['Comment se passe le paiement ?', "Vous finalisez sur WhatsApp. Nous confirmons le montant et vous envoyons le RIB ; votre place est réservée dès réception du justificatif."],
   ['Y a-t-il une attestation ?', 'Oui, une attestation de participation est remise à l\u2019issue de chaque atelier.'],
   ['Où ont lieu les ateliers ?', "À l'Espace Le Carré d'Or, à Casablanca (à côté de la gare Casa Oasis), et en direct à distance."],
@@ -378,7 +385,7 @@ const PHILOSOPHIE = [
   ['Quiz et mises en situation', 'Vous participez et testez vos réflexes en direct.', 'Target'],
   ['Interactif, en petit comité', 'Des échanges avec l\u2019expert et entre pairs.', 'Users'],
   ['Fiche pratique offerte', 'Une synthèse à emporter à la fin de chaque atelier.', 'FileText'],
-  ['Présentiel & distanciel', 'À Casablanca ou en direct à distance, au choix.', 'Monitor'],
+  ['Présentiel & distanciel', `À l'Espace Le Carré d'Or, à côté de la gare Casa Oasis (Casablanca), ou en direct à distance, au choix.`, 'Monitor'],
   ['Attestation', 'Remise à l\u2019issue de chaque atelier.', 'Award'],
 ] as const
 
@@ -599,6 +606,9 @@ function WorkshopCard({ w }: { w: (typeof WORKSHOPS)[number] }) {
       <div className="exp">
         <Users size={14} /> {w.speaker}
       </div>
+      <div className="loc">
+        <MapPin size={13} /> {LOCATION_CARD} · ou en direct
+      </div>
 
       <AxesBlock w={w} />
 
@@ -648,7 +658,15 @@ function ScrollToTop() {
   return null
 }
 
-function Header({ onCartOpen }: { onCartOpen: () => void }) {
+function Header({
+  onCartOpen,
+  theme,
+  onToggleTheme,
+}: {
+  onCartOpen: () => void
+  theme: 'light' | 'dark'
+  onToggleTheme: () => void
+}) {
   const [open, setOpen] = useState(false)
   const { pathname } = useLocation()
   const cart = useCart()
@@ -685,6 +703,17 @@ function Header({ onCartOpen }: { onCartOpen: () => void }) {
           <Link to="/inscription" className="nav-cta">
             Réserver ma place <ArrowRight size={16} />
           </Link>
+          <button
+            className="theme-btn"
+            aria-label={theme === 'dark' ? 'Passer en mode clair' : 'Passer en mode sombre'}
+            title={theme === 'dark' ? 'Mode clair' : 'Mode sombre'}
+            onClick={() => {
+              setOpen(false)
+              onToggleTheme()
+            }}
+          >
+            {theme === 'dark' ? <Sun size={17} /> : <Moon size={17} />}
+          </button>
           <button
             className="nav-cart"
             aria-label={`Ouvrir le panier (${cart.count} ateliers)`}
@@ -744,7 +773,7 @@ function Footer() {
             <img src="/images/logo.png" alt="Passeport Formation Pharmaciens" className="brand-logo" />
           </Link>
           <p>
-            La formation continue des pharmaciens d'officine, en présentiel à Casablanca et en
+            La formation continue des pharmaciens d'officine, en présentiel {LOCATION_FULL} et en
             direct à distance.
           </p>
         </div>
@@ -766,16 +795,16 @@ function Footer() {
         <div className="foot-col">
           <h4>Contact</h4>
           <a href={`https://wa.me/${AGENCY_WA}`}>
-            <Phone size={14} /> WhatsApp {WHATSAPP_ID}
+            <Phone size={14} /> WhatsApp {WHATSAPP_MASKED}
           </a>
           <a href="https://instagram.com/lpmacademy" target="_blank" rel="noreferrer">
             <AtSign size={14} /> @lpmacademy
           </a>
           <a href="#" onClick={(e) => e.preventDefault()}>
-            <Briefcase size={14} /> Pharmacien Manager Academy
+            <Briefcase size={14} /> Pharmacien Manager Académie
           </a>
           <span>
-            <MapPin size={14} /> Espace Le Carré d'Or, Casablanca
+            <MapPin size={14} /> {LOCATION_CARD} · à côté de la gare Casa Oasis
           </span>
         </div>
       </div>
@@ -820,7 +849,7 @@ function Hero() {
         </div>
         <div className="hero-stripe">
           <span>
-            <MapPin size={15} /> Présentiel à <b>Casablanca</b>
+            <MapPin size={15} /> Présentiel à <b>{LOCATION_SHORT}</b>
           </span>
           <span>
             <Monitor size={15} /> Distanciel <b>en direct</b>
@@ -898,13 +927,23 @@ function Hero() {
           </div>
           <div className="hc-meta">
             <span>
-              <MapPin size={13} /> Présentiel · Casablanca
+              <MapPin size={13} /> Présentiel · {LOCATION_CARD}
             </span>
             <span>15h – 18h30</span>
           </div>
           <Link to="/programme" className="card-link">
             Réserver ma place <ArrowRight size={15} />
           </Link>
+        </div>
+        <div className="hero-ads">
+          <a className="hero-ad" href={`https://wa.me/${AGENCY_WA}`} target="_blank" rel="noreferrer">
+            <img src="/images/logo.png" alt="Réservez votre place au programme d'octobre" loading="lazy" />
+            <span>Programme d'octobre · réservez votre place</span>
+          </a>
+          <a className="hero-ad" href="https://instagram.com/lpmacademy" target="_blank" rel="noreferrer">
+            <img src="/images/iconlogo.png" alt="Suivez l'actualité sur Instagram" loading="lazy" />
+            <span>Suivez l'actualité · @lpmacademy</span>
+          </a>
         </div>
       </div>
     </section>
@@ -1075,9 +1114,6 @@ function Tarifs() {
   return (
     <section className="pricing" id="tarifs">
       <div className="pricing-copy">
-        <ReReveal>
-          <p className="eyebrow">04 / Formules et tarifs</p>
-        </ReReveal>
         <ReReveal delay={60}>
           <h2>
             Trois formules, <i>dégressives.</i>
@@ -1656,12 +1692,31 @@ function ScrollTop() {
 function AppShell() {
   const cart = useCart()
   const [cartOpen, setCartOpen] = useState(false)
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    try {
+      const t = localStorage.getItem('pf-theme')
+      if (t === 'light' || t === 'dark') return t
+    } catch {}
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  })
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme
+    try {
+      localStorage.setItem('pf-theme', theme)
+    } catch {}
+  }, [theme])
+
   return (
     <div className="site-shell">
       <Cursor />
       <ScrollToTop />
       <TopMarquee />
-      <Header onCartOpen={() => setCartOpen(true)} />
+      <Header
+        theme={theme}
+        onToggleTheme={() => setTheme((t) => (t === 'light' ? 'dark' : 'light'))}
+        onCartOpen={() => setCartOpen(true)}
+      />
       <main>
         <AppRoutes />
       </main>
