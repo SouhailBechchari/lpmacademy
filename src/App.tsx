@@ -128,7 +128,7 @@ const WORKSHOPS = [
       'Reconnaître les signes de gravité.',
       'Les gestes immédiats de secours.',
       'Orienter le patient selon la gravité.',
-      'Scénario de simulation en direct.',
+      'Scénario de simulation à distance.',
       "La trousse d'urgence à l'officine.",
     ],
   },
@@ -201,10 +201,10 @@ const WORKSHOPS = [
     speaker: 'Dr Nabyl Bentayeb',
     accro: 'Diagnostic data et IA, cas réels, outils prêts à l\u2019emploi.',
     axes: [
-      'Le quiz du titulaire, en direct.',
+      'Le quiz du titulaire, à distance.',
       "Les 5 chiffres qui pilotent l'officine.",
       'Le cash qui dort dans vos rayons.',
-      "L'IA en direct sur vos ventes.",
+      "L'IA à distance sur vos ventes.",
       'Données patients : la limite à ne pas franchir.',
     ],
   },
@@ -357,10 +357,10 @@ const SPEAKERS = [
 
 const FAQ = [
   ['Puis-je ne prendre qu\u2019un seul atelier ?', "Oui. La formule à l'unité est faite pour ça. Si vous en ajoutez plusieurs, la remise pack s'applique automatiquement."],
-  ['Présentiel ou distanciel ?', `Chaque atelier est hybride. En présentiel, vous êtes sur place ${LOCATION_FULL} ; en distanciel, vous suivez la même séance en direct, à un tarif réduit de 100 DH.`],
+  ['Présentiel ou distanciel ?', `Chaque atelier est hybride. En présentiel, vous êtes sur place ${LOCATION_FULL} ; en distanciel, vous suivez la même séance à distance, à un tarif réduit de 100 DH.`],
   ['Comment se passe le paiement ?', "Vous finalisez sur WhatsApp. Nous confirmons le montant et vous envoyons le RIB ; votre place est réservée dès réception du justificatif."],
   ['Y a-t-il une attestation ?', 'Oui, une attestation de participation est remise à l\u2019issue de chaque atelier.'],
-  ['Où ont lieu les ateliers ?', "À l'Espace Le Carré d'Or, à Casablanca (à côté de la gare Casa Oasis), et en direct à distance."],
+  ['Où ont lieu les ateliers ?', "À l'Espace Le Carré d'Or, à Casablanca (à côté de la gare Casa Oasis), et à distance."],
   ['Les packs sont-ils nominatifs ?', "Oui. Chaque inscription est nominative : le tarif dégressif s'applique selon le nombre d'ateliers que vous suivez vous-même. Il ne s'agit pas de places à répartir dans une équipe."],
 ]
 
@@ -382,10 +382,10 @@ function tierLabel(n: number) {
 
 const PHILOSOPHIE = [
   ['Cas réels de comptoir', "On part de situations vécues à l'officine, pas de théorie.", 'FlaskConical'],
-  ['Quiz et mises en situation', 'Vous participez et testez vos réflexes en direct.', 'Target'],
+  ['Quiz et mises en situation', 'Vous participez et testez vos réflexes à distance.', 'Target'],
   ['Interactif, en petit comité', 'Des échanges avec l\u2019expert et entre pairs.', 'Users'],
   ['Fiche pratique offerte', 'Une synthèse à emporter à la fin de chaque atelier.', 'FileText'],
-  ['Présentiel & distanciel', `À l'Espace Le Carré d'Or, à côté de la gare Casa Oasis (Casablanca), ou en direct à distance, au choix.`, 'Monitor'],
+  ['Présentiel & distanciel', `À l'Espace Le Carré d'Or, à côté de la gare Casa Oasis (Casablanca), ou à distance, au choix.`, 'Monitor'],
   ['Attestation', 'Remise à l\u2019issue de chaque atelier.', 'Award'],
 ] as const
 
@@ -607,7 +607,7 @@ function WorkshopCard({ w }: { w: (typeof WORKSHOPS)[number] }) {
         <Users size={14} /> {w.speaker}
       </div>
       <div className="loc">
-        <MapPin size={13} /> {LOCATION_CARD} · ou en direct
+        <MapPin size={13} /> {LOCATION_CARD} · ou à distance
       </div>
 
       <AxesBlock w={w} />
@@ -746,7 +746,7 @@ function MarqueeRow() {
       <span>·</span>
       <span>PROCHAIN RENDEZ-VOUS · OCTOBRE 2026</span>
       <span>·</span>
-      <span>PRÉSENTIEL &amp; DISTANCIEL EN DIRECT</span>
+      <span>PRÉSENTIEL &amp; À DISTANCE</span>
       <span>·</span>
     </span>
   )
@@ -773,8 +773,8 @@ function Footer() {
             <img src="/images/logo.png" alt="Passeport Formation Pharmaciens" className="brand-logo" />
           </Link>
           <p>
-            La formation continue des pharmaciens d'officine, en présentiel {LOCATION_FULL} et en
-            direct à distance.
+            La formation continue des pharmaciens d'officine, en présentiel {LOCATION_FULL} et à
+            distance.
           </p>
         </div>
         <div className="foot-col">
@@ -809,8 +809,9 @@ function Footer() {
         </div>
       </div>
       <div className="foot-bottom">
-        <span>© 2026 Passeport Formation · Pharmacien Manager (agence Easycom)</span>
-        <span>Lpmacademy.com</span>
+        <span>© 2026 Passeport Formation · Pharmacien Manager</span>
+        <span>Lpmacademie.com</span>
+        <span className="easycom-logo">Logo Easycom</span>
       </div>
     </footer>
   )
@@ -829,10 +830,10 @@ function Hero() {
       <div className="hero-copy">
         <p className="eyebrow hero-eyebrow">
           <Sparkles size={14} strokeWidth={1.6} />
-          FORMATION CONTINUE · PHARMACIENS D'OFFICINE
+          FORMATION CONTINUE · PHARMACIENS
         </p>
         <h1>
-          La formation continue des pharmaciens, <em>en présentiel et en direct.</em>
+          La formation continue des pharmaciens, <em>en présentiel et à distance.</em>
         </h1>
         <p className="hero-text">
           Deux ateliers par semaine, animés par des experts reconnus. Des cas de comptoir concrets,
@@ -852,7 +853,7 @@ function Hero() {
             <MapPin size={15} /> Présentiel à <b>{LOCATION_SHORT}</b>
           </span>
           <span>
-            <Monitor size={15} /> Distanciel <b>en direct</b>
+            <Monitor size={15} /> À <b>distance</b>
           </span>
           <span>
             <Clock size={15} /> Mardi &amp; jeudi · <b>15h à 18h30</b>
@@ -912,7 +913,7 @@ function Hero() {
             <span className="card-label">
               <CalendarRange size={14} /> Prochaine session
             </span>
-            <span className="hc-fmt">En direct</span>
+            <span className="hc-fmt">À distance</span>
           </div>
           <div className="hc-date">
             <span className="hc-bb">{next.d}</span>

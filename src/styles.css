@@ -734,7 +734,7 @@ body.has-mouse * { cursor: none !important; }
 .av-tbd { background: linear-gradient(145deg, #e8f0e2, #dee9d8); color: var(--mut); border: 1.5px dashed rgba(47,107,18,.35); box-shadow: none; }
 .av-note { position: absolute; bottom: -12px; left: 50%; transform: translateX(-50%); font-size: 9px; background: var(--green); color: #fff; padding: 3px 11px; border-radius: 999px; white-space: nowrap; font-family: 'Manrope', sans-serif; font-weight: 600; }
 .av-photo { overflow: hidden; padding: 0; }
-.av-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.av-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
 .spk {
   position: relative; overflow: hidden;
   background: var(--card); border: 1px solid var(--line); border-radius: var(--r-m);
@@ -1113,6 +1113,12 @@ footer::before {
   border-top: 1px solid rgba(255,255,255,.1);
   display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;
   font-size: 12px; color: #7f9cb8; position: relative;
+}
+.easycom-logo {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 6px 14px; border: 1px dashed rgba(255,255,255,.28);
+  border-radius: 10px; color: #8fa6b8; font-size: 11px;
+  font-weight: 600; letter-spacing: .04em; line-height: 1.4;
 }
 
 /* ------------------------------------------------------------------ */
