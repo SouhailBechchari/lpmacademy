@@ -1698,7 +1698,7 @@ function AppShell() {
       const t = localStorage.getItem('pf-theme')
       if (t === 'light' || t === 'dark') return t
     } catch {}
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+    return 'light'
   })
 
   useEffect(() => {
