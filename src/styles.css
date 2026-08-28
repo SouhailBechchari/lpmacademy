@@ -1395,6 +1395,14 @@ footer::before {
 /* Publicités hero */
 :root[data-theme='dark'] .hero-ad span { color: #eaf3fa; }
 
+/* Bandeau défilant — version sombre cohérente (marine + lime) */
+:root[data-theme='dark'] .marquee {
+  background: linear-gradient(90deg, var(--navy-d) 0%, var(--navy-2) 50%, #1b4a75 100%);
+  color: var(--lime);
+  border-bottom: 1px solid rgba(141,198,63,.35);
+}
+:root[data-theme='dark'] .marquee-row span:nth-child(even) { color: var(--lime-2); opacity: .6; }
+
 /* Menu mobile */
 @media (max-width: 800px) {
   :root[data-theme='dark'] .nav-links { background: rgba(13,28,44,.98); }
