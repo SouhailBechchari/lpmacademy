@@ -811,7 +811,9 @@ function Footer() {
       <div className="foot-bottom">
         <span>© 2026 Passeport Formation · Pharmacien Manager</span>
         <span>Lpmacademie.com</span>
-        <span className="easycom-logo">Logo Easycom</span>
+        <span className="easycom-logo">
+          <img src="/images/easycom.png" alt="Agence Easycom" />
+        </span>
       </div>
     </footer>
   )
