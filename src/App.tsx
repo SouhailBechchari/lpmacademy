@@ -814,7 +814,7 @@ function Footer() {
           <a href="https://instagram.com/lpmacademy" target="_blank" rel="noreferrer">
             <InstagramIcon size={14} /> @lpmacademy
           </a>
-          <a href="#" onClick={(e) => e.preventDefault()}>
+          <a href="https://www.linkedin.com/company/pharmacien-manager-academy/" target="_blank" rel="noreferrer">
             <LinkedInIcon size={14} /> LinkedIn
           </a>
           <a href="#" onClick={(e) => e.preventDefault()}>
