@@ -1145,11 +1145,8 @@ footer::before {
 }
 .easycom-logo {
   display: inline-flex; align-items: center; justify-content: center;
-  padding: 6px 10px; border-radius: 12px;
-  background: #fff;
-  box-shadow: 0 4px 14px rgba(0,0,0,.18);
 }
-.easycom-logo img { height: 34px; width: auto; display: block; }
+.easycom-logo img { height: 38px; width: auto; display: block; }
 
 /* ------------------------------------------------------------------ */
 /* Page générique                                                      */
