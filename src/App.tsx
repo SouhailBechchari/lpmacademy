@@ -913,7 +913,7 @@ function Hero() {
             <span className="card-label">
               <CalendarRange size={14} /> Prochaine session
             </span>
-            <span className="hc-fmt">À distance</span>
+            <span className="hc-fmt">Présentiel &amp; à distance</span>
           </div>
           <div className="hc-date">
             <span className="hc-bb">{next.d}</span>
