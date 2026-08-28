@@ -744,8 +744,6 @@ function MarqueeRow() {
       <span>·</span>
       <span>DES COMPÉTENCES QUI RESTENT</span>
       <span>·</span>
-      <span>PROCHAIN RENDEZ-VOUS · OCTOBRE 2026</span>
-      <span>·</span>
       <span>PRÉSENTIEL &amp; À DISTANCE</span>
       <span>·</span>
     </span>
