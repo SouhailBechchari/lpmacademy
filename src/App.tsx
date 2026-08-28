@@ -1097,7 +1097,6 @@ function Intervenants() {
                 {s.finalised ? 'Intervenant' : 'Non finalisé · à modifier'}
               </div>
               <h3>{s.name}</h3>
-              <p className="role">{s.role}</p>
               <ul>
                 {s.points.map((p, j) => (
                   <li key={j}>{p}</li>
