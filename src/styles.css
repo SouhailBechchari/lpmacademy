@@ -504,7 +504,7 @@ body.has-mouse * { cursor: none !important; }
 }
 .card-link:hover { gap: 13px; color: var(--lime-2); }
 
-.hero-ads { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 16px; }
+.hero-ads { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 16px; align-items: start; }
 .hero-ad {
   position: relative; overflow: hidden; border-radius: 16px;
   display: block; background: var(--card);
