@@ -958,11 +958,9 @@ function Hero() {
         <div className="hero-ads">
           <a className="hero-ad" href={`https://wa.me/${AGENCY_WA}`} target="_blank" rel="noreferrer">
             <img src="/publicites/pub2.jpeg" alt="Réservez votre place au programme d'octobre" loading="lazy" />
-            <span>Programme d'octobre · réservez votre place</span>
           </a>
           <a className="hero-ad" href="https://instagram.com/lpmacademy" target="_blank" rel="noreferrer">
             <img src="/publicites/pub1.jpeg" alt="Suivez l'actualité sur Instagram" loading="lazy" />
-            <span>Suivez l'actualité · @lpmacademy</span>
           </a>
         </div>
       </div>
