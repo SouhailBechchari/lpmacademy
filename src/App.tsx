@@ -269,7 +269,7 @@ const SPEAKERS = [
     role: 'Pharmacovigilance · Sécurité du médicament',
     points: [
       'Pharmacienne clinicienne, consultante et formatrice en pharmacovigilance.',
-      'Parcours hospitalier de référence (Lyon, Grenoble).',
+      'Parcours hospitalier de référence (Lyon, Grenoble, CHU Sainte-Justine de Montréal).',
       "Spécialiste de l'analyse pharmaceutique et de la sécurisation du médicament.",
       "Expertise sécurité du médicament pendant la grossesse et l'allaitement.",
     ],
@@ -326,7 +326,7 @@ const SPEAKERS = [
     ],
   },
   {
-    name: 'Mr Marouane Zahir',
+    name: 'Dr Marouane Zahir',
     ini: 'MZ',
     photo: '/intervenant/Photo_Marouane_Zahir.jpg.jpeg',
     finalised: true,
@@ -957,11 +957,11 @@ function Hero() {
         </div>
         <div className="hero-ads">
           <a className="hero-ad" href={`https://wa.me/${AGENCY_WA}`} target="_blank" rel="noreferrer">
-            <img src="/images/logo.png" alt="Réservez votre place au programme d'octobre" loading="lazy" />
+            <img src="/publicites/pub2.jpeg" alt="Réservez votre place au programme d'octobre" loading="lazy" />
             <span>Programme d'octobre · réservez votre place</span>
           </a>
           <a className="hero-ad" href="https://instagram.com/lpmacademy" target="_blank" rel="noreferrer">
-            <img src="/images/iconlogo.png" alt="Suivez l'actualité sur Instagram" loading="lazy" />
+            <img src="/publicites/pub1.jpeg" alt="Suivez l'actualité sur Instagram" loading="lazy" />
             <span>Suivez l'actualité · @lpmacademy</span>
           </a>
         </div>
@@ -1058,7 +1058,7 @@ function Programme() {
       </ReReveal>
       <ReReveal delay={120}>
         <p className="lead">
-          Horaire 15h–18h30. Le prix affiché est le tarif à l'unité ; il baisse selon votre panier.
+          Le prix affiché est le tarif à l'unité ; il baisse selon votre panier.
           Le distanciel coûte 100 DH de moins par atelier.
         </p>
       </ReReveal>
