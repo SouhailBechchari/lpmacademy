@@ -5,7 +5,6 @@ import {
   Award,
   BadgeCheck,
   BookOpen,
-  Briefcase,
   CalendarRange,
   Check,
   ChevronDown,
@@ -269,7 +268,7 @@ const SPEAKERS = [
     role: 'Pharmacovigilance · Sécurité du médicament',
     points: [
       'Pharmacienne clinicienne, consultante et formatrice en pharmacovigilance.',
-      'Parcours hospitalier de référence (Lyon, Grenoble, CHU Sainte-Justine de Montréal).',
+      'Parcours hospitalier de référence (Lyon, Grenoble, Montréal).',
       "Spécialiste de l'analyse pharmaceutique et de la sécurisation du médicament.",
       "Expertise sécurité du médicament pendant la grossesse et l'allaitement.",
     ],
@@ -815,10 +814,7 @@ function Footer() {
             <InstagramIcon size={14} /> @lpmacademy
           </a>
           <a href="https://www.linkedin.com/company/pharmacien-manager-academy/" target="_blank" rel="noreferrer">
-            <LinkedInIcon size={14} /> LinkedIn
-          </a>
-          <a href="#" onClick={(e) => e.preventDefault()}>
-            <Briefcase size={14} /> Pharmacien Manager Académie
+            <LinkedInIcon size={14} /> Pharmacien Manager Académie
           </a>
           <span>
             <MapPin size={14} /> {LOCATION_CARD} · à côté de la gare Casa Oasis
@@ -1054,13 +1050,6 @@ function Programme() {
           Le <span>programme</span> du mois.
         </h2>
       </ReReveal>
-      <ReReveal delay={120}>
-        <p className="lead">
-          Le prix affiché est le tarif à l'unité ; il baisse selon votre panier.
-          Le distanciel coûte 100 DH de moins par atelier.
-        </p>
-      </ReReveal>
-
       <ReReveal delay={160} className="filters">
         <button className={`chip ${filter === 'all' ? 'on' : ''}`} onClick={() => setFilter('all')}>
           Tous
