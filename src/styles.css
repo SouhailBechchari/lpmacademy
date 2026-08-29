@@ -448,7 +448,10 @@ body.has-mouse * { cursor: none !important; }
 }
 .hero-tag:hover { background: var(--navy); color: #fff; border-color: var(--navy); transform: translateY(-2px); }
 
-.hero-card-wrap { position: relative; justify-self: end; width: min(430px, 100%); margin-top: 46px; }
+.hero-card-wrap {
+  position: relative; justify-self: end; width: min(560px, 100%); margin-top: 46px;
+  display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 16px; align-items: stretch;
+}
 .hero-card {
   position: relative;
   overflow: hidden;
@@ -504,12 +507,13 @@ body.has-mouse * { cursor: none !important; }
 }
 .card-link:hover { gap: 13px; color: var(--lime-2); }
 
-.hero-ads { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 16px; }
+.hero-ads { display: grid; grid-template-columns: 1fr; grid-auto-rows: 1fr; gap: 16px; }
 .hero-ad {
   position: relative; overflow: hidden; border-radius: 16px;
   display: block; background: var(--card);
   border: 1px solid rgba(141,198,63,.28);
   box-shadow: var(--shadow-s);
+  height: 100%;
   transition: transform 0.3s cubic-bezier(0.2,0.8,0.2,1), box-shadow 0.3s ease, border-color 0.3s ease;
 }
 .hero-ad:hover { transform: translateY(-4px); box-shadow: var(--shadow-m); border-color: rgba(141,198,63,.5); }
@@ -1182,7 +1186,8 @@ footer::before {
 /* ------------------------------------------------------------------ */
 @media (max-width: 1024px) {
   .hero { grid-template-columns: 1fr; gap: 34px; padding-top: 72px; padding-bottom: 72px; }
-  .hero-card-wrap { justify-self: start; width: 100%; max-width: 440px; margin-top: 0; }
+  .hero-card-wrap { justify-self: start; width: 100%; max-width: 440px; margin-top: 0; grid-template-columns: 1fr; }
+  .hero-ads { grid-template-columns: 1fr 1fr; grid-auto-rows: auto; }
   .pricing { gap: 48px; }
   .price-stack { grid-template-columns: 1fr; max-width: 560px; }
   .pillars, .mod-grid { grid-template-columns: repeat(2, 1fr); }
