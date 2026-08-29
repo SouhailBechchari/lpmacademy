@@ -215,7 +215,7 @@ const WORKSHOPS = [
     module: 'management',
     finalised: true,
     title: "Les réflexes comptoir qui font la différence sur votre chiffre d'affaires",
-    speaker: 'Marouane Zahir',
+    speaker: 'Dr Marouane Zahir',
     accro: null,
     axes: [
       'Mieux conseiller pour mieux vendre, sans vente forcée.',
