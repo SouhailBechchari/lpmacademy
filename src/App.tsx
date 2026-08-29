@@ -1100,8 +1100,7 @@ function Intervenants() {
       </ReReveal>
       <ReReveal delay={120}>
         <p className="lead">
-          Des experts reconnus. Un intervenant peut animer plusieurs ateliers au fil des éditions ;
-          on ne le lie donc pas à un seul titre.
+          Des experts reconnus.
         </p>
       </ReReveal>
       <div className="spk-grid">
