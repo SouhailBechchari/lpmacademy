@@ -551,72 +551,31 @@ function SpeakerAvatar({ name, ini, photo, finalised }: { name: string; ini: str
   )
 }
 
-function AxesModal({
-  title,
-  module,
-  axes,
-  onClose,
-}: {
-  title: string
-  module: string
-  axes: string[]
-  onClose: () => void
-}) {
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose()
-    document.addEventListener('keydown', onKey)
-    const prev = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
-    return () => {
-      document.removeEventListener('keydown', onKey)
-      document.body.style.overflow = prev
-    }
-  }, [onClose])
-
-  return (
-    <div className="axes-modal" role="dialog" aria-modal="true" aria-label="Axes abordés">
-      <div className="axes-backdrop" onClick={onClose} aria-hidden="true" />
-      <div className="axes-window">
-        <div className="axes-window-head">
-          <span className="axes-module">{module}</span>
-          <button type="button" className="axes-close" onClick={onClose} aria-label="Fermer">
-            <X size={18} />
-          </button>
-        </div>
-        <h3 className="axes-window-title">{title}</h3>
-        <ul className="axes">
-          <li className="lbl">Axes abordés</li>
-          {axes.map((a, i) => (
-            <li key={i}>{a}</li>
-          ))}
-        </ul>
-        <button type="button" className="button primary full" onClick={onClose}>
-          Retour aux ateliers
-        </button>
-      </div>
-    </div>
-  )
-}
-
 function AxesBlock({ w }: { w: (typeof WORKSHOPS)[number] }) {
-  const [modal, setModal] = useState(false)
-  const module = MODULES.find((m) => m.id === w.module)
+  const [open, setOpen] = useState(false)
   if (w.finalised) {
     return (
       <>
         {w.accro && <div className="accro">{w.accro}</div>}
         {w.axes && (
-          <button type="button" className="axes-toggle" onClick={() => setModal(true)}>
-            <ChevronDown size={15} /> Voir les axes
-          </button>
-        )}
-        {modal && w.axes && (
-          <AxesModal
-            title={w.title}
-            module={module ? module.name : ''}
-            axes={w.axes}
-            onClose={() => setModal(false)}
-          />
+          <>
+            <button
+              type="button"
+              className={`axes-toggle ${open ? 'on' : ''}`}
+              onClick={() => setOpen((o) => !o)}
+            >
+              <ChevronDown size={15} className={open ? 'rot' : ''} />
+              {open ? 'Masquer les axes' : 'Voir les axes'}
+            </button>
+            {open && (
+              <ul className="axes">
+                <li className="lbl">Axes abordés</li>
+                {w.axes.map((a, i) => (
+                  <li key={i}>{a}</li>
+                ))}
+              </ul>
+            )}
+          </>
         )}
       </>
     )
