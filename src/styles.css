@@ -669,11 +669,12 @@ body.has-mouse * { cursor: none !important; }
 .page-btn:disabled { opacity: .4; cursor: not-allowed; }
 .page-info { font-size: 13px; font-weight: 600; color: var(--mut); font-family: 'Manrope', sans-serif; }
 
-.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: start; }
 .card-slot { display: block; }
 .card {
   background: var(--card); border: 1px solid var(--line); border-radius: var(--r-m);
   padding: 20px; display: flex; flex-direction: column; gap: 12px; height: 100%;
+  min-height: 560px;
   position: relative; overflow: hidden;
   box-shadow: var(--shadow-s);
   transition: transform 0.4s cubic-bezier(0.2,0.8,0.2,1), box-shadow 0.4s ease, border-color 0.3s ease;
@@ -723,6 +724,16 @@ body.has-mouse * { cursor: none !important; }
   width: fit-content;
 }
 .loc svg { flex: 0 0 auto; }
+.axes-toggle {
+  display: inline-flex; align-items: center; gap: 7px; width: fit-content;
+  background: transparent; border: 1px dashed rgba(141,198,63,.6); color: var(--green);
+  border-radius: 999px; padding: 8px 15px; font-size: 12.5px; font-weight: 600;
+  font-family: 'Manrope', sans-serif; cursor: pointer;
+  transition: all 0.22s ease;
+}
+.axes-toggle:hover { background: rgba(141,198,63,.1); border-style: solid; transform: translateY(-1px); }
+.axes-toggle svg { transition: transform 0.25s ease; }
+.axes-toggle svg.rot { transform: rotate(180deg); }
 .accro { color: var(--navy); font-size: 14px; font-style: italic; line-height: 1.65; }
 .axes {
   list-style: none; margin: 0;
@@ -731,7 +742,23 @@ body.has-mouse * { cursor: none !important; }
   background: linear-gradient(180deg, rgba(141,198,63,.07), rgba(141,198,63,.02));
   padding: 16px 18px 14px;
   display: flex; flex-direction: column; gap: 9px;
+  transform-origin: top;
+  animation: axes-in 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
+@keyframes axes-in {
+  from { opacity: 0; transform: translateY(-8px) scaleY(0.96); }
+  to { opacity: 1; transform: translateY(0) scaleY(1); }
+}
+.axes li { animation: axes-li 0.3s ease both; }
+.axes li:nth-child(2) { animation-delay: 0.04s; }
+.axes li:nth-child(3) { animation-delay: 0.08s; }
+.axes li:nth-child(4) { animation-delay: 0.12s; }
+.axes li:nth-child(5) { animation-delay: 0.16s; }
+@keyframes axes-li {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.axes .lbl { animation: none; }
 .axes .lbl {
   font-family: 'Manrope', sans-serif; font-weight: 700; color: var(--navy);
   font-size: 12px; letter-spacing: .13em; text-transform: uppercase;
@@ -1207,7 +1234,7 @@ input.err { border-color: #d64545; background: #fff6f6; }
 /* ------------------------------------------------------------------ */
 footer {
   background: linear-gradient(160deg, #0f2c49, var(--navy-d) 60%, #091c33);
-  color: #bcd3e8;
+  color: #dbe9f5;
   padding: 72px clamp(20px, 10vw, 160px) 34px;
   position: relative; overflow: hidden;
 }
@@ -1222,11 +1249,11 @@ footer::before {
   height: 66px;
   filter: drop-shadow(0 6px 16px rgba(0,0,0,.35));
 }
-.foot-brand p { max-width: 300px; line-height: 1.75; font-size: 14px; color: #b4cade; }
+.foot-brand p { max-width: 300px; line-height: 1.75; font-size: 14px; color: #d6e6f3; }
 .foot-col h4 { font: 700 18px 'Manrope', sans-serif; color: #fff; margin-bottom: 18px; }
 .foot-col a, .foot-col span {
   display: flex; align-items: center; gap: 10px;
-  font-size: 14px; color: #b4cade; margin: 11px 0;
+  font-size: 14px; color: #d6e6f3; margin: 11px 0;
   transition: color 0.2s ease, transform 0.2s ease;
 }
 .foot-col a:hover { color: var(--lime); transform: translateX(4px); }
@@ -1235,12 +1262,12 @@ footer::before {
   margin-top: 52px; padding-top: 26px;
   border-top: 1px solid rgba(255,255,255,.1);
   display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;
-  font-size: 12px; color: #7f9cb8; position: relative;
+  font-size: 12px; color: #a6bed3; position: relative;
 }
 .easycom-logo {
   display: inline-flex; align-items: center; justify-content: center;
 }
-.easycom-logo img { height: 76px; width: auto; display: block; }
+.easycom-logo img { height: 44px; width: auto; display: block; }
 
 /* ------------------------------------------------------------------ */
 /* Page générique                                                      */

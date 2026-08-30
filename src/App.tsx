@@ -552,17 +552,30 @@ function SpeakerAvatar({ name, ini, photo, finalised }: { name: string; ini: str
 }
 
 function AxesBlock({ w }: { w: (typeof WORKSHOPS)[number] }) {
+  const [open, setOpen] = useState(false)
   if (w.finalised) {
     return (
       <>
         {w.accro && <div className="accro">{w.accro}</div>}
         {w.axes && (
-          <ul className="axes">
-            <li className="lbl">Axes abordés</li>
-            {w.axes.map((a, i) => (
-              <li key={i}>{a}</li>
-            ))}
-          </ul>
+          <>
+            <button
+              type="button"
+              className={`axes-toggle ${open ? 'on' : ''}`}
+              onClick={() => setOpen((o) => !o)}
+            >
+              <ChevronDown size={15} className={open ? 'rot' : ''} />
+              {open ? 'Masquer les axes' : 'Voir les axes'}
+            </button>
+            {open && (
+              <ul className="axes">
+                <li className="lbl">Axes abordés</li>
+                {w.axes.map((a, i) => (
+                  <li key={i}>{a}</li>
+                ))}
+              </ul>
+            )}
+          </>
         )}
       </>
     )
