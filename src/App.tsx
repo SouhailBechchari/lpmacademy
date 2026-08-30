@@ -947,7 +947,7 @@ function Hero() {
         <div className="hero-tags">
           {MODULES.slice(0, 6).map((m) => (
             <Link key={m.id} to={`/module/${m.id}`} className="hero-tag">
-              {m.short}
+              {m.name}
             </Link>
           ))}
         </div>
