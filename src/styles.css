@@ -673,7 +673,7 @@ body.has-mouse * { cursor: none !important; }
 .card-slot { display: block; }
 .card {
   background: var(--card); border: 1px solid var(--line); border-radius: var(--r-m);
-  padding: 20px; display: flex; flex-direction: column; gap: 12px; height: 560px;
+  padding: 20px; display: flex; flex-direction: column; gap: 12px; min-height: 560px;
   position: relative; overflow: hidden;
   box-shadow: var(--shadow-s);
   transition: transform 0.4s cubic-bezier(0.2,0.8,0.2,1), box-shadow 0.4s ease, border-color 0.3s ease;
@@ -741,8 +741,6 @@ body.has-mouse * { cursor: none !important; }
   background: linear-gradient(180deg, rgba(141,198,63,.07), rgba(141,198,63,.02));
   padding: 16px 18px 14px;
   display: flex; flex-direction: column; gap: 9px;
-  max-height: 168px; overflow-y: auto;
-  scrollbar-width: thin; scrollbar-color: rgba(141,198,63,.5) transparent;
   transform-origin: top;
   animation: axes-in 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
