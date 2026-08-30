@@ -894,6 +894,7 @@ body.has-mouse * { cursor: none !important; }
   border: 1px solid var(--line-2);
   box-shadow: var(--shadow-m);
   transform: translateX(0);
+  display: flex; flex-direction: column;
   transition: transform 0.4s cubic-bezier(0.2,0.8,0.2,1), box-shadow 0.4s ease, border-color 0.3s ease;
 }
 .price-card::before {
@@ -918,7 +919,7 @@ body.has-mouse * { cursor: none !important; }
 .cond { color: #88a095; font-size: 13.5px; margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--line); }
 .price-card.best {
   border: 2px solid var(--lime);
-  transform: translateY(-10px);
+  transform: none;
   box-shadow: 0 24px 60px rgba(141,198,63,.28), var(--shadow-m);
   background:
     radial-gradient(400px 260px at 100% 0%, rgba(141,198,63,.18), transparent 60%),
@@ -935,7 +936,7 @@ body.has-mouse * { cursor: none !important; }
 }
 .price-cta {
   display: inline-flex; align-items: center; gap: 8px;
-  margin-top: 22px; border-radius: 999px;
+  margin-top: auto; padding-top: 22px; align-self: flex-start; border-radius: 999px;
   background: linear-gradient(135deg, var(--navy), var(--navy-2)); color: #fff;
   padding: 14px 22px; font-size: 13px; font-weight: 600;
   box-shadow: 0 12px 26px rgba(12,36,64,.3);
