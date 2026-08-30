@@ -8,8 +8,10 @@ import {
   CalendarRange,
   Check,
   ChevronDown,
+  ChevronLeft,
   ChevronRight,
   Clock,
+  Search,
   FileText,
   FlaskConical,
   Gauge,
@@ -55,36 +57,42 @@ const MODULES = [
     id: 'pathologies',
     name: 'Pathologies et cas de comptoir',
     short: 'Pathologies',
+    photo: '/modules/pathologie.png',
     desc: "Reconnaître, conseiller, orienter : les situations cliniques du quotidien, de l'urgence vitale à l'ordonnance à risque.",
   },
   {
     id: 'nutrition',
     name: 'Nutrition et micronutrition',
     short: 'Nutrition',
+    photo: '/modules/nutrition.png',
     desc: "Microbiote, compléments et micronutriments : conseiller juste sur des demandes qui explosent au comptoir.",
   },
   {
     id: 'dermo',
     name: 'Dermocosmétique',
     short: 'Dermocosmétique',
+    photo: '/modules/dermocosmetique.png',
     desc: "Lire une peau et bâtir la bonne routine : le conseil dermo qui rassure et fidélise.",
   },
   {
     id: 'management',
     name: 'Management officinal',
     short: 'Management',
+    photo: '/modules/management.png',
     desc: "Piloter son officine par les chiffres : gestion, comptabilité, trésorerie, stocks, données et IA.",
   },
   {
     id: 'relation',
     name: 'Développement personnel et relation client',
     short: 'Relation client',
+    photo: '/modules/relationclient.png',
     desc: "Mieux écouter, mieux conseiller, mieux vendre : la relation client au service du patient.",
   },
   {
     id: 'naturelles',
     name: 'Médecines naturelles',
     short: 'Médecines naturelles',
+    photo: null,
     desc: "Phytothérapie et approches naturelles : un conseil complémentaire, maîtrisé et sécurisé.",
   },
 ]
@@ -477,7 +485,7 @@ function ReReveal({ children, as: Tag = 'div', delay = 0, className = '' }: any)
 
 function ModuleBadge({ id }: { id: string }) {
   const m = MODULES.find((x) => x.id === id)
-  return <span className="tag">{m ? m.short : id}</span>
+  return <span className="tag">{m ? m.name : id}</span>
 }
 
 function Cursor() {
@@ -572,6 +580,7 @@ function WorkshopCard({ w }: { w: (typeof WORKSHOPS)[number] }) {
   const [sel, setSel] = useState<'P' | 'D'>(line ? line.format : 'P')
   const format: 'P' | 'D' = line ? line.format : sel
   const module = MODULES.find((m) => m.id === w.module)!
+  const speakerPhoto = SPEAKERS.find((s) => s.name === w.speaker)?.photo ?? null
   const pick = (f: 'P' | 'D') => {
     setSel(f)
     if (line) cart.setFormat(w.id, f)
@@ -579,6 +588,11 @@ function WorkshopCard({ w }: { w: (typeof WORKSHOPS)[number] }) {
 
   return (
     <article className={`card ${line ? 'on' : ''}`}>
+      {module.photo ? (
+        <div className="mod-banner">
+          <img src={module.photo} alt={module.name} loading="lazy" />
+        </div>
+      ) : null}
       <div className="top">
         <div className="datebox">
           <b>{w.d}</b>
@@ -596,11 +610,16 @@ function WorkshopCard({ w }: { w: (typeof WORKSHOPS)[number] }) {
       </div>
 
       <Link to={`/module/${module.id}`} className="card-module">
-        {module.short} <ChevronRight size={13} />
+        {module.name} <ChevronRight size={13} />
       </Link>
       <h3>{w.title}</h3>
       <div className="exp">
-        <Users size={14} /> {w.speaker}
+        {speakerPhoto ? (
+          <img className="exp-photo" src={speakerPhoto} alt={w.speaker} loading="lazy" />
+        ) : (
+          <Users size={14} />
+        )}
+        {w.speaker}
       </div>
       <div className="loc">
         <MapPin size={13} /> {LOCATION_CARD} · ou à distance
@@ -807,7 +826,7 @@ function Footer() {
         <div className="foot-col">
           <h4>Contact</h4>
           <a href={`https://wa.me/${AGENCY_WA}`}>
-            <WhatsAppIcon size={14} /> WhatsApp
+            <WhatsAppIcon size={14} /> +{AGENCY_WA.slice(0, 3)} {AGENCY_WA.slice(3, 5)} {AGENCY_WA.slice(5, 7)} {AGENCY_WA.slice(7, 9)} {AGENCY_WA.slice(9)}
           </a>
           <a href="https://instagram.com/lpmacademy" target="_blank" rel="noreferrer">
             <InstagramIcon size={14} /> @lpmacademy
@@ -847,7 +866,7 @@ function Hero() {
           FORMATION CONTINUE · PHARMACIENS
         </p>
         <h1>
-          La formation continue des pharmaciens, <em>en présentiel et à distance.</em>
+          La formation continue des pharmaciens, <em>en présentiel à Casablanca et à distance.</em>
         </h1>
         <p className="hero-text">
           Deux ateliers par semaine, animés par des experts reconnus. Des cas de comptoir concrets,
@@ -858,13 +877,13 @@ function Hero() {
           <Link to="/programme" className="button primary">
             Voir le programme d'octobre <ArrowRight size={18} />
           </Link>
-          <Link to="/philosophie" className="text-link">
+          <Link to="/philosophie" className="button primary">
             <Play size={15} fill="currentColor" /> Comment ça marche
           </Link>
         </div>
         <div className="hero-stripe">
           <span>
-            <MapPin size={15} /> Présentiel à <b>{LOCATION_SHORT}</b>
+            <MapPin size={15} /> Présentiel à <b>{LOCATION_SHORT}, Casablanca</b>
           </span>
           <span>
             <Monitor size={15} /> À <b>distance</b>
@@ -1043,7 +1062,30 @@ function ModulesSection() {
 
 function Programme() {
   const [filter, setFilter] = useState('all')
-  const shown = filter === 'all' ? WORKSHOPS : WORKSHOPS.filter((w) => w.module === filter)
+  const [q, setQ] = useState('')
+  const [page, setPage] = useState(1)
+  const PER = 9
+
+  const shown = (filter === 'all' ? WORKSHOPS : WORKSHOPS.filter((w) => w.module === filter)).filter(
+    (w) => {
+      const term = q.trim().toLowerCase()
+      if (!term) return true
+      return (
+        w.title.toLowerCase().includes(term) ||
+        w.speaker.toLowerCase().includes(term) ||
+        w.date.toLowerCase().includes(term)
+      )
+    }
+  )
+  const pages = Math.max(1, Math.ceil(shown.length / PER))
+  const safePage = Math.min(page, pages)
+  const current = shown.slice((safePage - 1) * PER, safePage * PER)
+
+  const changeFilter = (f: string) => {
+    setFilter(f)
+    setPage(1)
+  }
+
   return (
     <section className="section programme" id="programme" style={{ background: 'var(--cloud)' }}>
       <ReReveal>
@@ -1055,27 +1097,64 @@ function Programme() {
         </h2>
       </ReReveal>
       <ReReveal delay={160} className="filters">
-        <button className={`chip ${filter === 'all' ? 'on' : ''}`} onClick={() => setFilter('all')}>
+        <button className={`chip ${filter === 'all' ? 'on' : ''}`} onClick={() => changeFilter('all')}>
           Tous
         </button>
         {MODULES.map((m) => (
           <button
             key={m.id}
             className={`chip ${filter === m.id ? 'on' : ''}`}
-            onClick={() => setFilter(m.id)}
+            onClick={() => changeFilter(m.id)}
           >
-            {m.short}
+            {m.name}
           </button>
         ))}
       </ReReveal>
 
+      <ReReveal delay={200} className="prog-search">
+        <Search size={17} />
+        <input
+          type="text"
+          placeholder="Rechercher un atelier, un intervenant, une date…"
+          value={q}
+          onChange={(e) => {
+            setQ(e.target.value)
+            setPage(1)
+          }}
+        />
+      </ReReveal>
+
       <div className="cards">
-        {shown.map((w, i) => (
+        {current.map((w, i) => (
           <ReReveal key={w.id} delay={Math.min(i * 40, 200)} className="card-slot">
             <WorkshopCard w={w} />
           </ReReveal>
         ))}
       </div>
+
+      {shown.length === 0 && <p className="prog-empty">Aucun atelier ne correspond à votre recherche.</p>}
+
+      {pages > 1 && (
+        <div className="pagination">
+          <button
+            className="page-btn"
+            disabled={safePage === 1}
+            onClick={() => setPage((p) => Math.max(1, p - 1))}
+          >
+            <ChevronLeft size={16} /> Précédent
+          </button>
+          <span className="page-info">
+            Page {safePage} / {pages}
+          </span>
+          <button
+            className="page-btn"
+            disabled={safePage === pages}
+            onClick={() => setPage((p) => Math.min(pages, p + 1))}
+          >
+            Suivant <ChevronRight size={16} />
+          </button>
+        </div>
+      )}
     </section>
   )
 }
