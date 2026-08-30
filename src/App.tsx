@@ -559,21 +559,31 @@ function AxesBlock({ w }: { w: (typeof WORKSHOPS)[number] }) {
         {w.accro && <div className="accro">{w.accro}</div>}
         {w.axes && (
           <>
-            <button
-              type="button"
-              className={`axes-toggle ${open ? 'on' : ''}`}
-              onClick={() => setOpen((o) => !o)}
-            >
-              <ChevronDown size={15} className={open ? 'rot' : ''} />
-              {open ? 'Masquer les axes' : 'Voir les axes'}
+            <button type="button" className="axes-toggle" onClick={() => setOpen(true)}>
+              <ChevronDown size={15} /> Voir les axes
             </button>
             {open && (
-              <ul className="axes">
-                <li className="lbl">Axes abordés</li>
-                {w.axes.map((a, i) => (
-                  <li key={i}>{a}</li>
-                ))}
-              </ul>
+              <div className="axes-pop">
+                <div className="axes-pop-head">
+                  <span className="axes-pop-title">Axes abordés</span>
+                  <button
+                    type="button"
+                    className="axes-pop-close"
+                    onClick={() => setOpen(false)}
+                    aria-label="Fermer"
+                  >
+                    <X size={16} />
+                  </button>
+                </div>
+                <ul className="axes">
+                  {w.axes.map((a, i) => (
+                    <li key={i}>{a}</li>
+                  ))}
+                </ul>
+                <button type="button" className="axes-pop-back" onClick={() => setOpen(false)}>
+                  Fermer
+                </button>
+              </div>
             )}
           </>
         )}
