@@ -377,12 +377,12 @@ function tierLabel(n: number) {
 }
 
 const PHILOSOPHIE = [
-  ['Cas réels de comptoir', "On part de situations vécues à l'officine, pas de théorie.", 'FlaskConical'],
-  ['Quiz et mises en situation', 'Vous participez et testez vos réflexes à distance.', 'Target'],
-  ['Interactif, en petit comité', 'Des échanges avec l\u2019expert et entre pairs.', 'Users'],
-  ['Fiche pratique offerte', 'Une synthèse à emporter à la fin de chaque atelier.', 'FileText'],
-  ['Présentiel & distanciel', `À l'Espace Le Carré d'Or, à côté de la gare Casa Oasis (Casablanca), ou à distance, au choix.`, 'Monitor'],
-  ['Attestation', 'Remise à l\u2019issue de chaque atelier.', 'Award'],
+  ['Cas réels de comptoir', "On part de situations vécues à l'officine, pas de théorie.", 'FlaskConical', '/philosophie/comptoir.jpg'],
+  ['Quiz et mises en situation', 'Vous participez et testez vos réflexes à distance.', 'Target', '/philosophie/quiz.png'],
+  ['Interactif, en petit comité', 'Des échanges avec l\u2019expert et entre pairs.', 'Users', '/philosophie/interactif.png'],
+  ['Fiche pratique offerte', 'Une synthèse à emporter à la fin de chaque atelier.', 'FileText', '/philosophie/fichepratique.png'],
+  ['Présentiel & distanciel', `À l'Espace Le Carré d'Or, à côté de la gare Casa Oasis (Casablanca), ou à distance, au choix.`, 'Monitor', '/philosophie/presentieletadistance.png'],
+  ['Attestation', 'Remise à l\u2019issue de chaque atelier.', 'Award', '/philosophie/attestation.png'],
 ] as const
 
 const PHIL_ICONS: Record<string, React.ReactNode> = {
@@ -950,6 +950,7 @@ function Hero() {
             Réserver ma place <ArrowRight size={15} />
           </Link>
         </div>
+        {/* Photos de publicités masquées temporairement
         <div className="hero-ads">
           <a className="hero-ad" href={`https://wa.me/${AGENCY_WA}`} target="_blank" rel="noreferrer">
             <img src="/publicites/pub2.jpeg" alt="Réservez votre place au programme d'octobre" loading="lazy" />
@@ -958,6 +959,7 @@ function Hero() {
             <img src="/publicites/pub1.jpeg" alt="Suivez l'actualité sur Instagram" loading="lazy" />
           </a>
         </div>
+        */}
       </div>
     </section>
   )
@@ -981,8 +983,11 @@ function Philosophie() {
         </p>
       </ReReveal>
       <div className="pillars">
-        {PHILOSOPHIE.map(([t, d, icon], i) => (
+        {PHILOSOPHIE.map(([t, d, icon, img], i) => (
           <ReReveal key={t} delay={i * 70} className="pillar">
+            <div className="pillar-photo">
+              <img src={img} alt={t} loading="lazy" />
+            </div>
             <div className="pillar-ico">{PHIL_ICONS[icon as keyof typeof PHIL_ICONS]}</div>
             <h3>{t}</h3>
             <p>{d}</p>
@@ -1482,6 +1487,10 @@ function Inscription() {
                 <button className="button wa full" onClick={submit}>
                   <MessageCircle size={18} /> Finaliser sur WhatsApp
                 </button>
+                <p className="rib-note tax-note">
+                  Les prix affichés sont <b>hors taxes</b>. Si vous souhaitez une facture, la TVA
+                  sera ajoutée au montant.
+                </p>
                 <p className="rib-note">
                   Règlement par RIB après confirmation sur WhatsApp. Place réservée dès réception du
                   justificatif.

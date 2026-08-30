@@ -572,6 +572,12 @@ body.has-mouse * { cursor: none !important; }
 }
 .pillar:hover { transform: translateY(-8px); box-shadow: var(--shadow-m); border-color: rgba(141,198,63,.5); }
 .pillar:hover::before { transform: scaleX(1); }
+.pillar-photo {
+  margin: -34px -30px 22px; height: 160px; overflow: hidden;
+  background: linear-gradient(135deg, rgba(141,198,63,.18), rgba(141,198,63,.05));
+}
+.pillar-photo img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s cubic-bezier(0.2,0.8,0.2,1); }
+.pillar:hover .pillar-photo img { transform: scale(1.05); }
 .pillar-ico {
   width: 54px; height: 54px; border-radius: 18px;
   background: linear-gradient(135deg, rgba(141,198,63,.22), rgba(141,198,63,.08));
@@ -997,6 +1003,11 @@ input.err { border-color: #d64545; background: #fff6f6; }
 .sum-row strong { font: 700 28px 'Manrope', sans-serif; color: var(--navy); }
 .save-row { font-size: 13px; font-weight: 700; color: var(--green-b); }
 .rib-note { font-size: 12px; color: #88a095; margin-top: 14px; text-align: center; line-height: 1.6; }
+.tax-note {
+  background: rgba(141,198,63,.1); border: 1px dashed rgba(141,198,63,.45);
+  border-radius: 12px; padding: 10px 12px; color: #5f7a7c; font-size: 12px;
+}
+.tax-note b { color: var(--green); }
 
 /* ------------------------------------------------------------------ */
 /* Panier (drawer latéral)                                             */
@@ -1289,6 +1300,7 @@ footer::before {
   .mv-block > h2 { font-size: 26px; }
 
   .card, .pillar, .mod, .spk, .form-card, .cart-card { padding: 22px; }
+  .pillar-photo { margin: -22px -22px 18px; height: 130px; }
   .card h3 { font-size: 22px; }
   .card .top { gap: 8px; }
 
