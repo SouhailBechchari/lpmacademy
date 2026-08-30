@@ -1241,9 +1241,6 @@ function Tarifs() {
             </div>
             <div className="dist">{dist} DH en distanciel</div>
             <div className="cond">{cond}</div>
-            <Link to="/inscription" className="price-cta">
-              {i === 0 ? 'Commencer' : 'Je choisis ce pack'} <ArrowRight size={16} />
-            </Link>
           </ReReveal>
         ))}
         <ReReveal className="price-card best">
