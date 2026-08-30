@@ -814,7 +814,7 @@ function Footer() {
       <div className="foot-grid">
         <div className="foot-brand">
           <Link to="/" className="brand" aria-label="Passeport Formation Pharmaciens">
-            <img src="/images/logo.png" alt="Passeport Formation Pharmaciens" className="brand-logo" />
+            <img src="/images/logowhite.png" alt="Passeport Formation Pharmaciens" className="brand-logo" />
           </Link>
           <p>
             La formation continue des pharmaciens d'officine, en présentiel {LOCATION_FULL} et à
