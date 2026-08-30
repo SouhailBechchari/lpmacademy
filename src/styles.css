@@ -669,8 +669,8 @@ body.has-mouse * { cursor: none !important; }
 .page-btn:disabled { opacity: .4; cursor: not-allowed; }
 .page-info { font-size: 13px; font-weight: 600; color: var(--mut); font-family: 'Manrope', sans-serif; }
 
-.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: start; }
-.card-slot { display: block; }
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: stretch; }
+.card-slot { display: block; height: 100%; }
 .card {
   background: var(--card); border: 1px solid var(--line); border-radius: var(--r-m);
   padding: 20px; display: flex; flex-direction: column; gap: 12px; height: 100%;
@@ -742,6 +742,8 @@ body.has-mouse * { cursor: none !important; }
   background: linear-gradient(180deg, rgba(141,198,63,.07), rgba(141,198,63,.02));
   padding: 16px 18px 14px;
   display: flex; flex-direction: column; gap: 9px;
+  max-height: 168px; overflow-y: auto;
+  scrollbar-width: thin; scrollbar-color: rgba(141,198,63,.5) transparent;
   transform-origin: top;
   animation: axes-in 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
