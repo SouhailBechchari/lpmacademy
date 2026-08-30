@@ -669,11 +669,11 @@ body.has-mouse * { cursor: none !important; }
 .page-btn:disabled { opacity: .4; cursor: not-allowed; }
 .page-info { font-size: 13px; font-weight: 600; color: var(--mut); font-family: 'Manrope', sans-serif; }
 
-.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: start; }
-.card-slot { display: block; }
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: stretch; }
+.card-slot { display: block; height: 100%; }
 .card {
   background: var(--card); border: 1px solid var(--line); border-radius: var(--r-m);
-  padding: 20px; display: flex; flex-direction: column; gap: 12px; min-height: 560px;
+  padding: 20px; display: flex; flex-direction: column; gap: 12px; height: 100%;
   position: relative; overflow: hidden;
   box-shadow: var(--shadow-s);
   transition: transform 0.4s cubic-bezier(0.2,0.8,0.2,1), box-shadow 0.4s ease, border-color 0.3s ease;
