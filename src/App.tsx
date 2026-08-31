@@ -970,6 +970,11 @@ function Hero() {
           </div>
         </div>
 
+        <div className="hero-comite">
+          <Users size={16} strokeWidth={2} />
+          En petit comité
+        </div>
+
         <div className="hero-tags">
           {MODULES.slice(0, 6).map((m) => (
             <Link key={m.id} to={`/module/${m.id}`} className="hero-tag">

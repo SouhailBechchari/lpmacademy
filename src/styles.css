@@ -454,6 +454,19 @@ body.has-mouse * { cursor: none !important; }
 }
 .hero-tag:hover { background: var(--navy); color: #fff; border-color: var(--navy); transform: translateY(-2px); }
 
+.hero-comite {
+  margin-top: 14px;
+  display: inline-flex; align-items: center; gap: 9px;
+  width: fit-content;
+  font-family: 'Manrope', sans-serif;
+  font-size: 13px; font-weight: 600; color: var(--navy);
+  padding: 10px 18px; border-radius: 999px;
+  background: linear-gradient(135deg, rgba(141,198,63,.14), rgba(29,74,118,.08));
+  border: 1px solid rgba(141,198,63,.45);
+  box-shadow: var(--shadow-s);
+}
+.hero-comite svg { color: var(--green); flex: 0 0 auto; }
+
 .hero-card-wrap { position: relative; justify-self: end; width: min(430px, 100%); margin-top: 46px; }
 .hero-card {
   position: relative;
@@ -673,7 +686,7 @@ body.has-mouse * { cursor: none !important; }
 .card-slot { display: block; }
 .card {
   background: var(--card); border: 1px solid var(--line); border-radius: var(--r-m);
-  padding: 20px; display: flex; flex-direction: column; gap: 12px; min-height: 560px;
+  padding: 20px; display: flex; flex-direction: column; gap: 12px; height: 645px;
   position: relative; overflow: hidden;
   box-shadow: var(--shadow-s);
   transition: transform 0.4s cubic-bezier(0.2,0.8,0.2,1), box-shadow 0.4s ease, border-color 0.3s ease;
@@ -1541,6 +1554,7 @@ footer::before {
 :root[data-theme='dark'] .hs-item b { color: #eaf3fa; }
 :root[data-theme='dark'] .hs-item span { color: #9db2c3; }
 :root[data-theme='dark'] .hero-tag { color: #d7e6f0; }
+:root[data-theme='dark'] .hero-comite { color: #eaf3fa; border-color: rgba(141,198,63,.55); }
 
 /* Sections & cartes */
 :root[data-theme='dark'] .lead { color: #b1c5d3; }
