@@ -689,9 +689,8 @@ body.has-mouse * { cursor: none !important; }
 .card.on::after { transform: scaleX(1); }
 .card .top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
 .mod-banner {
-  margin: -20px -20px 14px; overflow: hidden;
+  margin: -20px -20px 14px; height: 110px; overflow: hidden;
   background: linear-gradient(135deg, rgba(141,198,63,.18), rgba(141,198,63,.04));
-  aspect-ratio: 3.1 / 1; width: 100%; max-height: 130px;
 }
 .mod-banner img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s cubic-bezier(0.2,0.8,0.2,1); }
 .card:hover .mod-banner img { transform: scale(1.06); }
