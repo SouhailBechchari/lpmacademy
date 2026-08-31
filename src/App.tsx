@@ -615,7 +615,11 @@ function WorkshopCard({ w }: { w: (typeof WORKSHOPS)[number] }) {
         <div className="mod-banner">
           <img src={module.photo} alt={module.name} loading="lazy" />
         </div>
-      ) : null}
+      ) : (
+        <div className="mod-banner placeholder">
+          <span>{module.short}</span>
+        </div>
+      )}
       <div className="top">
         <div className="datebox">
           <b>{w.d}</b>
