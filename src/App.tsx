@@ -106,6 +106,7 @@ const WORKSHOPS = [
     date: 'mardi 6 oct.',
     module: 'nutrition',
     finalised: true,
+    photo: '/ateliers/Micronutrition à l\'officine.jpg',
     title: "Micronutrition à l'officine : l'atelier immersif pour transformer votre conseil",
     speaker: 'Dr Misk Mouri',
     accro: 'Workshop 100 % interactif : cas de comptoir réels, quiz, mises en situation et fiche pratique clé en main.',
@@ -125,6 +126,7 @@ const WORKSHOPS = [
     date: 'jeudi 8 oct.',
     module: 'pathologies',
     finalised: true,
+    photo: '/ateliers/urgencevitale.jpg',
     title: "Quand l'urgence vitale survient en pleine officine",
     speaker: 'Pr Mohammed Mouhaoui',
     accro: 'Workshop avec simulation : reconnaître les signes de gravité, agir, orienter.',
@@ -144,6 +146,7 @@ const WORKSHOPS = [
     date: 'mardi 13 oct.',
     module: 'management',
     finalised: true,
+    photo: '/ateliers/Pharmacien & expert-comptable.jpg',
     title: 'Pharmacien et expert-comptable : décoder la relation pour mieux collaborer',
     speaker: 'Mr Zohair Kazmane',
     accro: 'Décoder la relation entre le pharmacien et son expert-comptable pour mieux collaborer : missions, obligations et bonnes pratiques.',
@@ -163,6 +166,7 @@ const WORKSHOPS = [
     date: 'jeudi 15 oct.',
     module: 'pathologies',
     finalised: true,
+    photo: '/ateliers/Interactions médicamenteuses.jpg',
     title: "Interactions médicamenteuses à l'officine : les réflexes qui évitent l'iatrogénie",
     speaker: 'Dr Saadia Skalli',
     accro: null,
@@ -182,6 +186,7 @@ const WORKSHOPS = [
     date: 'mardi 20 oct.',
     module: 'relation',
     finalised: true,
+    photo: '/ateliers/le comptoir autrement.jpg',
     title: 'Le comptoir autrement : conseiller, convaincre, fidéliser',
     speaker: 'Dr Maha El Haddaj',
     accro: 'Workshop 100 % interactif : écoute active, objections, vente additionnelle et fidélisation (exemples concrets, quiz, jeux).',
@@ -201,6 +206,7 @@ const WORKSHOPS = [
     date: 'jeudi 22 oct.',
     module: 'management',
     finalised: true,
+    photo: '/ateliers/Les angles morts de votre officine.jpg',
     title: "Les angles morts de votre officine : ce que vous ignorez de vos données",
     speaker: 'Dr Nabyl Bentayeb',
     accro: 'Diagnostic data et IA, cas réels, outils prêts à l\u2019emploi.',
@@ -220,6 +226,7 @@ const WORKSHOPS = [
     date: 'mardi 27 oct.',
     module: 'management',
     finalised: true,
+    photo: '/ateliers/Les réflexes comptoir.jpg',
     title: "Les réflexes comptoir qui font la différence sur votre chiffre d'affaires",
     speaker: 'Dr Marouane Zahir',
     accro: null,
@@ -240,6 +247,7 @@ const WORKSHOPS = [
     date: 'jeudi 29 oct.',
     module: 'dermo',
     finalised: true,
+    photo: '/ateliers/diagnostic de peau dermocosmétique.jpg',
     title: "Diagnostic de peau à l'officine : le conseil dermocosmétique qui rassure et fidélise",
     speaker: 'Dr Najla Boujaddaini',
     accro: null,
@@ -611,7 +619,11 @@ function WorkshopCard({ w }: { w: (typeof WORKSHOPS)[number] }) {
 
   return (
     <article className={`card ${line ? 'on' : ''}`}>
-      {module.photo ? (
+      {w.photo ? (
+        <div className="mod-banner">
+          <img src={w.photo} alt={w.title} loading="lazy" />
+        </div>
+      ) : module.photo ? (
         <div className="mod-banner">
           <img src={module.photo} alt={module.name} loading="lazy" />
         </div>
