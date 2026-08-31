@@ -968,11 +968,12 @@ function Hero() {
               <span>attestation / atelier</span>
             </div>
           </div>
-        </div>
-
-        <div className="hero-comite">
-          <Users size={16} strokeWidth={2} />
-          En petit comité
+          <div className="hs-item">
+            <Users size={20} strokeWidth={1.8} />
+            <div>
+              <span>en petit comité</span>
+            </div>
+          </div>
         </div>
 
         <div className="hero-tags">
