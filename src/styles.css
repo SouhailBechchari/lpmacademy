@@ -736,6 +736,16 @@ body.has-mouse * { cursor: none !important; }
   width: fit-content;
 }
 .loc svg { flex: 0 0 auto; }
+.loc a {
+  color: inherit; text-decoration: underline dotted; text-decoration-color: currentColor;
+  text-underline-offset: 3px; transition: opacity .2s ease;
+}
+.loc a:hover { opacity: .7; }
+.hero-stripe a {
+  color: inherit; text-decoration: underline dotted; text-decoration-color: currentColor;
+  text-underline-offset: 3px; transition: opacity .2s ease;
+}
+.hero-stripe a:hover { opacity: .7; }
 .axes-toggle {
   display: inline-flex; align-items: center; gap: 7px; width: fit-content;
   background: transparent; border: 1px dashed rgba(141,198,63,.6); color: var(--green);

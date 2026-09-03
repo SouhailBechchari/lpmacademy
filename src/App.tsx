@@ -51,6 +51,7 @@ const WHATSAPP_ID = AGENCY_WA.replace(/^212/, '07') // 07 80 93 10 67
 const LOCATION_SHORT = "l'Espace Le Carré d'Or"
 const LOCATION_FULL = "à l'Espace Le Carré d'Or, à côté de la gare Casa Oasis, Casablanca"
 const LOCATION_CARD = "Le Carré d'Or, Casablanca"
+const LOCATION_MAPS = 'https://www.google.com/maps/search/?api=1&query=Espace%20Le%20Carr%C3%A9%20d%27Or%20Casablanca'
 
 const MODULES = [
   {
@@ -188,7 +189,7 @@ const WORKSHOPS = [
     finalised: true,
     photo: '/ateliers/le comptoir autrement.jpg',
     title: 'Le comptoir autrement : conseiller, convaincre, fidéliser',
-    speaker: 'Dr Maha El Haddaj',
+    speaker: 'Dr Maha El Hadaj',
     accro: 'Workshop 100 % interactif : écoute active, objections, vente additionnelle et fidélisation (exemples concrets, quiz, jeux).',
     axes: [
       'Écoute active : cerner le vrai besoin.',
@@ -228,7 +229,7 @@ const WORKSHOPS = [
     finalised: true,
     photo: '/ateliers/Les réflexes comptoir.jpg',
     title: "Les réflexes comptoir qui font la différence sur votre chiffre d'affaires",
-    speaker: 'Dr Marouane Zahir',
+    speaker: 'Mr Marouane Zahir',
     accro: null,
     axes: [
       'Mieux conseiller pour mieux vendre, sans vente forcée.',
@@ -289,7 +290,7 @@ const SPEAKERS = [
     ],
   },
   {
-    name: 'Dr Maha El Haddaj',
+    name: 'Dr Maha El Hadaj',
     ini: 'MH',
     photo: '/intervenant/Photo_Maha_El_Haddaj.jpg.jpeg',
     finalised: true,
@@ -340,7 +341,7 @@ const SPEAKERS = [
     ],
   },
   {
-    name: 'Dr Marouane Zahir',
+    name: 'Mr Marouane Zahir',
     ini: 'MZ',
     photo: '/intervenant/Photo_Marouane_Zahir.jpg.jpeg',
     finalised: true,
@@ -661,7 +662,7 @@ function WorkshopCard({ w }: { w: (typeof WORKSHOPS)[number] }) {
         {w.speaker}
       </div>
       <div className="loc">
-        <MapPin size={13} /> {LOCATION_CARD} · ou à distance
+        <MapPin size={13} /> <a href={LOCATION_MAPS} target="_blank" rel="noreferrer">{LOCATION_CARD}</a> · ou à distance
       </div>
 
       <AxesBlock w={w} />
@@ -922,7 +923,7 @@ function Hero() {
         </div>
         <div className="hero-stripe">
           <span>
-            <MapPin size={15} /> Présentiel à <b>{LOCATION_SHORT}, Casablanca</b>
+            <MapPin size={15} /> Présentiel à <a href={LOCATION_MAPS} target="_blank" rel="noreferrer"><b>{LOCATION_SHORT}, Casablanca</b></a>
           </span>
           <span>
             <Monitor size={15} /> À <b>distance</b>
