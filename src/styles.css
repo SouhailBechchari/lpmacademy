@@ -1136,6 +1136,7 @@ input.err { border-color: #d64545; background: #fff6f6; }
   box-shadow: 0 14px 30px rgba(31,174,76,.32);
 }
 .button.wa:hover { background: linear-gradient(135deg, #27b453, #189b40); transform: translateY(-2px); box-shadow: 0 18px 36px rgba(31,174,76,.42); }
+.button.wa:disabled { opacity: .6; cursor: default; transform: none; box-shadow: none; }
 .button.full { width: 100%; justify-content: center; }
 
 .cart-card { position: sticky; top: 104px; }
@@ -1171,6 +1172,14 @@ input.err { border-color: #d64545; background: #fff6f6; }
 .sum-row strong { font: 700 28px 'Manrope', sans-serif; color: var(--navy); }
 .save-row { font-size: 13px; font-weight: 700; color: var(--green-b); }
 .rib-note { font-size: 12px; color: #88a095; margin-top: 14px; text-align: center; line-height: 1.6; }
+.rib-note.send-ok {
+  color: var(--green-b); background: rgba(141,198,63,.1);
+  border: 1px dashed rgba(141,198,63,.45); border-radius: 12px; padding: 10px 12px;
+}
+.rib-note.send-err {
+  color: #c0392b; background: #fdeeee; border: 1px solid #f5c8c8;
+  border-radius: 12px; padding: 10px 12px;
+}
 .tax-note {
   background: rgba(141,198,63,.1); border: 1px dashed rgba(141,198,63,.45);
   border-radius: 12px; padding: 10px 12px; color: #5f7a7c; font-size: 12px;

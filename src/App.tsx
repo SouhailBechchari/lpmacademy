@@ -48,6 +48,9 @@ import {
 const AGENCY_WA = '212780931067'
 const WHATSAPP_ID = AGENCY_WA.replace(/^212/, '07') // 07 80 93 10 67
 
+// Google Apps Script (Google Sheets + email) : coller l'URL Web du déploiement.
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxBq8DIk_emPIaa_ND-Me5C8xchRurIOS2VwnpDPC_IVEsn_WDy7b1oGrXObOLWXUoedg/exec'
+
 const LOCATION_SHORT = "l'Espace Le Carré d'Or"
 const LOCATION_FULL = "à l'Espace Le Carré d'Or, à côté de la gare Casa Oasis, Casablanca"
 const LOCATION_CARD = "Le Carré d'Or, Casablanca"
@@ -1425,6 +1428,7 @@ function Inscription() {
   const tier = findTier(n || 1)
   const [form, setForm] = useState({ prenom: '', nom: '', tel: '', pharma: '', ville: '' })
   const [tried, setTried] = useState(false)
+  const [send, setSend] = useState<'idle' | 'sending' | 'ok' | 'error'>('idle')
 
   const total = useMemo(
     () => cart.lines.reduce((s, l) => s + unitPrice(cart.count, l.format), 0),
@@ -1441,15 +1445,21 @@ function Inscription() {
 
   const empty = (Object.keys(form) as (keyof typeof form)[]).filter((k) => !form[k].trim())
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault()
     setTried(true)
     if (empty.length || n === 0) return
-    const lignes = cart.lines.map((l) => {
+    const ateliers = cart.lines.map((l) => {
       const w = WORKSHOPS.find((x) => x.id === l.workshopId)!
       const p = unitPrice(cart.count, l.format)
-      return `- ${w.title.split(' : ')[0]} (${l.format === 'P' ? 'présentiel' : 'distanciel'}, ${w.date}) : ${p} DH`
+      return {
+        titre: w.title.split(' : ')[0],
+        format: l.format === 'P' ? 'présentiel' : 'distanciel',
+        date: w.date,
+        prix: p,
+      }
     })
+    const lignes = ateliers.map((a) => `- ${a.titre} (${a.format}, ${a.date}) : ${a.prix} DH`)
     const msg = [
       'Bonjour, je souhaite m\u2019inscrire au Passeport Formation.',
       '',
@@ -1470,6 +1480,31 @@ function Inscription() {
       .filter(Boolean)
       .join('\n')
     window.open(`https://wa.me/${AGENCY_WA}?text=${encodeURIComponent(msg)}`, '_blank')
+
+    if (APPS_SCRIPT_URL.startsWith('COLLER_ICI')) return
+    try {
+      setSend('sending')
+      const res = await fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({
+          prenom: form.prenom.trim(),
+          nom: form.nom.trim(),
+          tel: form.tel.trim(),
+          pharma: form.pharma.trim(),
+          ville: form.ville.trim(),
+          formule: `${tier.label} (${tier.pres} DH/atelier en présentiel)`,
+          total,
+          nbAteliers: n,
+          ateliers,
+        }),
+      })
+      const json = await res.json().catch(() => null)
+      if (json && json.ok) { setSend('ok'); return }
+      setSend('error')
+    } catch {
+      setSend('error')
+    }
   }
 
   return (
@@ -1609,9 +1644,24 @@ function Inscription() {
                   <strong>{total.toLocaleString('fr-FR')} DH</strong>
                 </div>
                 {save > 0 && <div className="save-row">Vous économisez {save.toLocaleString('fr-FR')} DH</div>}
-                <button className="button wa full" onClick={submit}>
-                  <MessageCircle size={18} /> Finaliser sur WhatsApp
+                <button className="button wa full" onClick={submit} disabled={send === 'sending'}>
+                  <MessageCircle size={18} />{' '}
+                  {send === 'sending' ? 'Envoi en cours…' : 'Finaliser sur WhatsApp'}
                 </button>
+                {send === 'ok' && (
+                  <p className="rib-note send-ok">
+                    Votre demande a bien été enregistrée. Nous revenons vers vous sur WhatsApp pour
+                    confirmer et vous envoyer le RIB.
+                  </p>
+                )}
+                {send === 'error' && (
+                  <p className="rib-note send-err">
+                    L'enregistrement a échoué, mais votre message WhatsApp a bien été ouvert.
+                    Vous pouvez aussi nous contacter directement au +{AGENCY_WA.slice(0, 3)}{' '}
+                    {AGENCY_WA.slice(3, 5)} {AGENCY_WA.slice(5, 7)} {AGENCY_WA.slice(7, 9)}{' '}
+                    {AGENCY_WA.slice(9)}.
+                  </p>
+                )}
                 <p className="rib-note tax-note">
                   Les prix affichés sont <b>hors taxes</b>. Si vous souhaitez une facture, la TVA
                   sera ajoutée au montant.
