@@ -96,7 +96,7 @@ const MODULES = [
     id: 'naturelles',
     name: 'Médecines naturelles',
     short: 'Médecines naturelles',
-    photo: null,
+    photo: '/modules/medecinenaturelle.png',
     desc: "Phytothérapie et approches naturelles : un conseil complémentaire, maîtrisé et sécurisé.",
   },
 ]
@@ -263,6 +263,160 @@ const WORKSHOPS = [
       'Le conseil qui fidélise, et savoir quand réorienter.',
     ],
   },
+  {
+    id: 9,
+    jour: 'Mar',
+    d: '3',
+    mois: 'nov',
+    date: 'mardi 3 nov.',
+    module: 'nutrition',
+    finalised: true,
+    photo: null,
+    title: "Compléments alimentaires à l'officine : lire une formule, conseiller juste, vendre mieux",
+    speaker: 'Dr Misk Mouri',
+    accro: null,
+    axes: [
+      'Les grands axes de la micronutrition : sommeil, stress, immunité, digestion, articulations, ménopause.',
+      'Associer les bons actifs et repérer contre-indications et interactions.',
+      'Décrypter une formule : formes, biodisponibilité, dosages efficaces.',
+      'Gagner en légitimité face à des patients de plus en plus informés.',
+    ],
+  },
+  {
+    id: 10,
+    jour: 'Jeu',
+    d: '5',
+    mois: 'nov',
+    date: 'jeudi 5 nov.',
+    module: 'naturelles',
+    finalised: true,
+    photo: null,
+    title: "La phytothérapie à l'officine : conseiller les plantes efficacement et en toute sécurité",
+    speaker: 'Dr Salma Lyoubi Idrissi',
+    accro: null,
+    axes: [
+      "Les fondamentaux de la phytothérapie à l'officine : principes et précautions.",
+      'Les plantes par aire thérapeutique : respiratoire, digestive, rhumatologie, sommeil et stress.',
+      'Conseiller en sécurité : indications, contre-indications, interactions.',
+      'Cas pratiques au comptoir : du savoir au conseil concret.',
+    ],
+  },
+  {
+    id: 11,
+    jour: 'Mar',
+    d: '10',
+    mois: 'nov',
+    date: 'mardi 10 nov.',
+    module: 'management',
+    finalised: true,
+    photo: null,
+    title: "Stocks, périmés et trésorerie : libérez le cash qui dort dans votre officine",
+    speaker: 'Dr Abderrafia Hifdi',
+    accro: 'Atelier appuyé sur une enquête réelle menée sur 233 officines marocaines.',
+    axes: [
+      'Diagnostiquer et classer son stock : méthode ABC et taux de rotation.',
+      "Sécuriser l'approvisionnement et anticiper les pénuries.",
+      'Libérer la trésorerie immobilisée : coût de possession, déstockage ciblé.',
+      'Trésorerie et crédit client : délais, créances, relances.',
+      "Anti-péremption : FEFO / FIFO, alertes du LGO, organisation de l'équipe.",
+    ],
+  },
+  {
+    id: 12,
+    jour: 'Jeu',
+    d: '12',
+    mois: 'nov',
+    date: 'jeudi 12 nov.',
+    module: 'relation',
+    finalised: true,
+    photo: null,
+    title: 'Manager autrement : les clés neuro-comportementales pour une équipe engagée et performante',
+    speaker: 'Mme Ikhlass Ferrane',
+    accro: null,
+    axes: [
+      "Décoder les comportements de l'équipe : les mécanismes neuro-comportementaux et ses propres automatismes managériaux.",
+      'Motiver et engager : activer les bons leviers de motivation selon les situations et les collaborateurs.',
+      'Désamorcer les conflits : distinguer faits et interprétations, favoriser le dialogue et la recherche de solutions.',
+      "Mobiliser et faire grandir son équipe : un leadership bienveillant et exigeant (confiance, autonomie, feedback).",
+    ],
+  },
+  {
+    id: 13,
+    jour: 'Mar',
+    d: '17',
+    mois: 'nov',
+    date: 'mardi 17 nov.',
+    module: 'pathologies',
+    finalised: true,
+    photo: null,
+    title: 'Antibiothérapie des infections courantes en officine : comprendre les stratégies thérapeutiques pour sécuriser la dispensation',
+    speaker: 'Pr Amal Mrani Alaoui',
+    accro: null,
+    axes: [
+      "Comprendre la stratégie de l'antibiothérapie : probabiliste, documentée, antibiogramme.",
+      'Les infections courantes en ambulatoire : germes, indications, recommandations.',
+      'Sécuriser la dispensation : prescription, conseils au patient, antibiorésistance.',
+    ],
+  },
+  {
+    id: 14,
+    jour: 'Jeu',
+    d: '19',
+    mois: 'nov',
+    date: 'jeudi 19 nov.',
+    module: 'management',
+    finalised: true,
+    photo: null,
+    title: "La fiscalité de l'officine sans stress : IR, TVA et les erreurs à éviter",
+    speaker: 'Mr Zohair Kazmane',
+    accro: null,
+    axes: [
+      'Comprendre son régime fiscal en officine.',
+      "L'IR au quotidien : de la déclaration au paiement.",
+      'La TVA en officine : un mécanisme souvent mal compris.',
+      'Les erreurs fréquentes et comment les éviter.',
+    ],
+  },
+  {
+    id: 15,
+    jour: 'Mar',
+    d: '24',
+    mois: 'nov',
+    date: 'mardi 24 nov.',
+    module: 'management',
+    finalised: true,
+    photo: null,
+    title: 'Le comptoir qui performe : du conseil OTC à la vente associée',
+    speaker: 'Mr Marouane Zahir',
+    accro: null,
+    axes: [
+      'Mieux conseiller pour mieux vendre, sans forcer.',
+      'Les techniques de vente adaptées au comptoir.',
+      'Développer les ventes associées : OTC, parapharmacie, compléments.',
+      'Détecter les besoins non exprimés et lever les objections.',
+      'Cas concrets et réflexes applicables immédiatement.',
+    ],
+  },
+  {
+    id: 16,
+    jour: 'Jeu',
+    d: '26',
+    mois: 'nov',
+    date: 'jeudi 26 nov.',
+    module: 'dermo',
+    finalised: true,
+    photo: null,
+    title: 'Le conseil dermo qui fidélise : les actifs qui marchent et la routine sur-mesure',
+    speaker: 'Dr Najla Boujaddaini',
+    accro: null,
+    axes: [
+      'Les actifs qui marchent vraiment : rétinoïdes, vitamine C, niacinamide, acides.',
+      "Construire une routine sur-mesure selon la peau et l'objectif.",
+      "Associer les actifs sans faux pas : synergies et incompatibilités.",
+      'Les demandes qui fidélisent : acné, taches, anti-âge, sensibilité.',
+      "Transformer l'essai en habitude : suivi et rachat.",
+    ],
+  },
 ]
 
 const SPEAKERS = [
@@ -367,6 +521,53 @@ const SPEAKERS = [
       'Spécialiste du conseil dermocosmétique : peau, actifs et routines de soin.',
       'Créatrice de contenu en vulgarisation scientifique.',
       "Communication claire et fiable, au service d'un conseil qui fidélise.",
+    ],
+  },
+  {
+    name: 'Dr Salma Lyoubi Idrissi',
+    ini: 'SL',
+    photo: '/intervenant/salmalyoubi.jpeg',
+    finalised: true,
+    role: 'Phytothérapie · Médecines naturelles',
+    points: [
+      'Docteure en pharmacie et experte en nutraceutiques, phytothérapie et compléments alimentaires.',
+    ],
+  },
+  {
+    name: 'Dr Abderrafia Hifdi',
+    ini: 'AH',
+    photo: '/intervenant/hifdi.jpeg',
+    finalised: true,
+    role: 'Gestion officinale · Stocks et trésorerie',
+    points: [
+      "Pharmacien d'officine.",
+      'Enseignant en gestion et comptabilité officinale à la FMPC-UM6SS.',
+      "Consultant auprès de l'industrie pharmaceutique.",
+    ],
+  },
+  {
+    name: 'Mme Ikhlass Ferrane',
+    ini: 'IF',
+    photo: '/intervenant/ikhlass.jpeg',
+    finalised: true,
+    role: "Leadership · Management d'équipe",
+    points: [
+      'Auteure, experte en leadership, transformation humaine et dynamiques collectives.',
+      'Fondatrice de PROGRESS Centre Maroc.',
+      'Accompagne dirigeants, managers et collectifs : sciences comportementales, expérimentation et mise en action.',
+    ],
+  },
+  {
+    name: 'Pr Amal Mrani Alaoui',
+    ini: 'AM',
+    photo: '/intervenant/amalmrani.jpeg',
+    finalised: true,
+    role: 'Pharmacie clinique · Antibiorésistance',
+    points: [
+      'Professeure agrégée de pharmacie clinique (FMP Casablanca).',
+      'Pharmacienne clinicienne au CHU Ibn Rochd.',
+      'Vice-présidente du Moroccan College of Clinical Pharmacy (MCCP).',
+      'Enseignante-chercheuse en innovation thérapeutique et IA en santé.',
     ],
   },
 ]
@@ -918,7 +1119,7 @@ function Hero() {
         </p>
         <div className="hero-actions">
           <Link to="/programme" className="button primary">
-            Voir le programme d'octobre <ArrowRight size={18} />
+            Voir le programme d'octobre & novembre <ArrowRight size={18} />
           </Link>
           <Link to="/philosophie" className="button primary">
             <Play size={15} fill="currentColor" /> Comment ça marche
@@ -1110,13 +1311,15 @@ function ModulesSection() {
 }
 
 function Programme() {
+  const [month, setMonth] = useState('all')
   const [filter, setFilter] = useState('all')
   const [q, setQ] = useState('')
   const [page, setPage] = useState(1)
   const PER = 9
 
-  const shown = (filter === 'all' ? WORKSHOPS : WORKSHOPS.filter((w) => w.module === filter)).filter(
-    (w) => {
+  const shown = WORKSHOPS.filter((w) => month === 'all' || w.mois === month)
+    .filter((w) => filter === 'all' || w.module === filter)
+    .filter((w) => {
       const term = q.trim().toLowerCase()
       if (!term) return true
       return (
@@ -1124,11 +1327,15 @@ function Programme() {
         w.speaker.toLowerCase().includes(term) ||
         w.date.toLowerCase().includes(term)
       )
-    }
-  )
+    })
   const pages = Math.max(1, Math.ceil(shown.length / PER))
   const safePage = Math.min(page, pages)
   const current = shown.slice((safePage - 1) * PER, safePage * PER)
+
+  const changeMonth = (m: string) => {
+    setMonth(m)
+    setPage(1)
+  }
 
   const changeFilter = (f: string) => {
     setFilter(f)
@@ -1138,12 +1345,27 @@ function Programme() {
   return (
     <section className="section programme" id="programme" style={{ background: 'var(--cloud)' }}>
       <ReReveal>
-        <p className="eyebrow">03 / Le programme d'octobre</p>
+        <p className="eyebrow">03 / Le programme d'octobre & novembre</p>
       </ReReveal>
       <ReReveal delay={60}>
         <h2>
-          Le <span>programme</span> du mois.
+          Le <span>programme</span> d'octobre & novembre.
         </h2>
+      </ReReveal>
+      <ReReveal delay={120} className="filters month-tabs">
+        {[
+          ['all', 'Les deux mois'],
+          ['oct', 'Octobre'],
+          ['nov', 'Novembre'],
+        ].map(([m, label]) => (
+          <button
+            key={m}
+            className={`chip ${month === m ? 'on' : ''}`}
+            onClick={() => changeMonth(m)}
+          >
+            {label}
+          </button>
+        ))}
       </ReReveal>
       <ReReveal delay={160} className="filters">
         <button className={`chip ${filter === 'all' ? 'on' : ''}`} onClick={() => changeFilter('all')}>

@@ -640,6 +640,13 @@ body.has-mouse * { cursor: none !important; }
   border-color: var(--navy); box-shadow: 0 8px 20px rgba(12,36,64,.2);
 }
 
+.month-tabs .chip { font-weight: 700; }
+.month-tabs .chip.on {
+  background: linear-gradient(135deg, var(--lime), var(--green));
+  color: #0b2b21; border-color: var(--green);
+  box-shadow: 0 8px 20px rgba(141,198,63,.25);
+}
+
 .prog-search {
   display: flex; align-items: center; gap: 10px;
   background: var(--card); border: 1px solid var(--line); border-radius: 999px;
