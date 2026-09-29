@@ -1178,6 +1178,21 @@ input.err { border-color: #d64545; background: #fff6f6; }
 .sum-row { display: flex; justify-content: space-between; align-items: baseline; margin: 10px 0 2px; }
 .sum-row strong { font: 700 28px 'Manrope', sans-serif; color: var(--navy); }
 .save-row { font-size: 13px; font-weight: 700; color: var(--green-b); }
+.facture-box {
+  border: 1px solid var(--line); background: #fcfcf9; border-radius: 14px;
+  padding: 14px 16px; margin-bottom: 14px;
+}
+.facture-box > b { display: block; font-size: 13.5px; color: var(--ink); }
+.facture-box p { font-size: 12.5px; color: #88a095; line-height: 1.55; margin: 4px 0 12px; }
+.facture-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.facture-opt {
+  font-size: 12.5px; font-weight: 600; color: #5f7a7c; background: #fff;
+  border: 1px solid var(--line); border-radius: 999px; padding: 10px 8px;
+  font-family: 'Manrope', sans-serif; transition: all 0.2s ease; text-align: center;
+}
+.facture-opt:hover { border-color: var(--green); color: var(--navy); }
+.facture-opt.on { background: linear-gradient(135deg, var(--navy), var(--navy-2)); color: #fff; border-color: var(--navy); }
+.tva-row { font-size: 12.5px; color: #5f7a7c; margin: 4px 0 2px; }
 .rib-note { font-size: 12px; color: #88a095; margin-top: 14px; text-align: center; line-height: 1.6; }
 .rib-note.send-ok {
   color: var(--green-b); background: rgba(141,198,63,.1);
@@ -1648,6 +1663,15 @@ footer::before {
 :root[data-theme='dark'] .ci-x:hover { background: #3a232d; }
 :root[data-theme='dark'] .cd-close,
 :root[data-theme='dark'] .cd-secondary { color: #eaf3fa; }
+
+/* Option facture + TVA */
+:root[data-theme='dark'] .facture-box { background: #0e2233; border-color: #2c4a63; }
+:root[data-theme='dark'] .facture-box p { color: #9db2c3; }
+:root[data-theme='dark'] .facture-opt { background: #12283a; color: #a9c0d3; border-color: #2c4a63; }
+:root[data-theme='dark'] .facture-opt:hover { color: #eaf3fa; border-color: var(--lime); }
+:root[data-theme='dark'] .facture-opt.on { border-color: #3d6a8f; box-shadow: 0 0 0 1px rgba(141,198,63,.25); }
+:root[data-theme='dark'] .tva-row { color: #9db2c3; }
+:root[data-theme='dark'] .tax-note { background: rgba(141,198,63,.08); border-color: rgba(141,198,63,.32); color: #9db2c3; }
 
 /* Barre de navigation sous-pages */
 :root[data-theme='dark'] .subpage-nav { background: rgba(13,28,44,.85); }

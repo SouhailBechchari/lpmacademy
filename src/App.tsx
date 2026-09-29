@@ -587,6 +587,8 @@ const TIERS = [
   { min: 0, label: "À l'unité", pres: 900, dist: 800 },
 ]
 
+const TVA_RATE = 0.2
+
 function findTier(n: number) {
   return TIERS.find((t) => n >= t.min)!
 }
@@ -1651,11 +1653,14 @@ function Inscription() {
   const [form, setForm] = useState({ prenom: '', nom: '', tel: '', pharma: '', ville: '' })
   const [tried, setTried] = useState(false)
   const [send, setSend] = useState<'idle' | 'sending' | 'ok' | 'error'>('idle')
+  const [facture, setFacture] = useState(false)
 
   const total = useMemo(
     () => cart.lines.reduce((s, l) => s + unitPrice(cart.count, l.format), 0),
     [cart.lines, cart.count],
   )
+  const tva = facture ? Math.round(total * TVA_RATE) : 0
+  const totalTtc = total + tva
   const ref = useMemo(
     () => cart.lines.reduce((s, l) => s + unitPrice(1, l.format), 0),
     [cart.lines],
@@ -1694,8 +1699,15 @@ function Inscription() {
       `Formule : ${tier.label} (${tier.pres} DH/atelier en présentiel)`,
       'Ateliers :',
       ...lignes,
-      'Total à régler : ' + total.toLocaleString('fr-FR') + ' DH',
+      facture
+        ? `Sous-total (hors taxes) : ${total.toLocaleString('fr-FR')} DH`
+        : '',
+      facture ? `TVA 20% : ${tva.toLocaleString('fr-FR')} DH` : '',
+      `Total à régler${facture ? ' (TTC)' : ''} : ${totalTtc.toLocaleString('fr-FR')} DH`,
       save > 0 ? `Économie vs tarif unité : ${save.toLocaleString('fr-FR')} DH` : '',
+      facture
+        ? 'Je souhaite une facture : merci de me l\u2019envoyer avec les informations nécessaires.'
+        : '',
       '',
       'Merci de me confirmer et de m\u2019envoyer le RIB.',
     ]
@@ -1717,6 +1729,9 @@ function Inscription() {
           ville: form.ville.trim(),
           formule: `${tier.label} (${tier.pres} DH/atelier en présentiel)`,
           total,
+          totalTtc,
+          tva,
+          facture,
           nbAteliers: n,
           ateliers,
         }),
@@ -1861,10 +1876,42 @@ function Inscription() {
               </div>
               <div className="cart-ft">
                 <div className="tier">{tierLabel(n)}</div>
-                <div className="sum-row">
-                  <span>Total</span>
-                  <strong>{total.toLocaleString('fr-FR')} DH</strong>
+
+                <div className="facture-box">
+                  <b>Besoin d’une facture ?</b>
+                  <p>
+                    Les tarifs sont hors taxes. Avec facture, la TVA de 20 % est ajoutée au montant
+                    ci-dessous.
+                  </p>
+                  <div className="facture-opts">
+                    <button
+                      type="button"
+                      className={`facture-opt ${facture ? 'on' : ''}`}
+                      onClick={() => setFacture(true)}
+                      aria-pressed={facture}
+                    >
+                      Oui, avec facture
+                    </button>
+                    <button
+                      type="button"
+                      className={`facture-opt ${!facture ? 'on' : ''}`}
+                      onClick={() => setFacture(false)}
+                      aria-pressed={!facture}
+                    >
+                      Non, sans facture
+                    </button>
+                  </div>
                 </div>
+
+                <div className="sum-row">
+                  <span>Total{facture ? ' TTC' : ' (HT)'}</span>
+                  <strong>{totalTtc.toLocaleString('fr-FR')} DH</strong>
+                </div>
+                {facture && (
+                  <div className="tva-row">
+                    dont {tva.toLocaleString('fr-FR')} DH de TVA (20 %)
+                  </div>
+                )}
                 {save > 0 && <div className="save-row">Vous économisez {save.toLocaleString('fr-FR')} DH</div>}
                 <button className="button wa full" onClick={submit} disabled={send === 'sending'}>
                   <MessageCircle size={18} />{' '}
@@ -1885,8 +1932,17 @@ function Inscription() {
                   </p>
                 )}
                 <p className="rib-note tax-note">
-                  Les prix affichés sont <b>hors taxes</b>. Si vous souhaitez une facture, la TVA
-                  sera ajoutée au montant.
+                  {facture ? (
+                    <>
+                      Facture demandée : la <b>TVA de 20 %</b> est appliquée. Indiquez-nous vos
+                      informations de facturation (nom, adresse, ICE / IF) sur WhatsApp.
+                    </>
+                  ) : (
+                    <>
+                      Les prix affichés sont <b>hors taxes</b>. Si vous souhaitez une facture, la TVA
+                      sera ajoutée au montant.
+                    </>
+                  )}
                 </p>
                 <p className="rib-note">
                   Règlement par RIB après confirmation sur WhatsApp. Place réservée dès réception du

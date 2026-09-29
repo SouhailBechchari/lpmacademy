@@ -20,6 +20,12 @@
 const SHEET_NAME = 'Inscriptions'
 const EMAIL_TO = 'ADRESSE_A_REMPLACER@exemple.com'
 
+const HEADERS = [
+  'Horodatage', 'Prénom', 'Nom', 'Téléphone', 'Pharmacie / faculté', 'Ville',
+  'Ateliers', 'Formule', 'Total (DH)', 'Nombre d\'ateliers',
+  'Facture', 'TVA 20% (DH)', 'Total TTC (DH)',
+]
+
 function doGet() {
   try {
     var res = { ok: true, message: 'Apps Script opérationnel. POST = enregistrement Sheet + email.', email: EMAIL_TO }
@@ -50,10 +56,9 @@ function doPost(e) {
     }
 
     if (ws.getLastRow() === 0) {
-      ws.appendRow([
-        'Horodatage', 'Prénom', 'Nom', 'Téléphone', 'Pharmacie / faculté', 'Ville',
-        'Ateliers', 'Formule', 'Total (DH)', 'Nombre d\'ateliers',
-      ])
+      ws.appendRow(HEADERS)
+    } else if (!ws.getRange(1, 11).getValue()) {
+      ws.getRange(1, HEADERS.length).setValues([HEADERS.slice(10)])
     }
 
     ws.appendRow([
@@ -67,6 +72,9 @@ function doPost(e) {
       data.formule || '',
       data.total || '',
       data.nbAteliers || '',
+      data.facture ? 'Oui' : 'Non',
+      data.facture ? (data.tva || '') : '',
+      data.facture ? (data.totalTtc || '') : '',
     ])
 
     if (EMAIL_TO && !EMAIL_TO.startsWith('ADRESSE_A_REMPLACER')) {
@@ -87,10 +95,16 @@ function doPost(e) {
         '',
         'Formule : ' + data.formule,
         'Total à régler : ' + data.total + ' DH',
-        '',
-        'La ligne a également été ajoutée à la Google Sheet.',
-      ].join('\n')
-      MailApp.sendEmail(EMAIL_TO, sujet, corps)
+        'Facture : ' + (data.facture ? 'oui' : 'non'),
+      ]
+      if (data.facture) {
+        corps.push('TVA 20% : ' + data.tva + ' DH')
+        corps.push('Total TTC : ' + data.totalTtc + ' DH')
+        corps.push('Penser à demander les informations de facturation (nom, adresse, ICE / IF).')
+      }
+      corps.push('')
+      corps.push('La ligne a également été ajoutée à la Google Sheet.')
+      MailApp.sendEmail(EMAIL_TO, sujet, corps.join('\n'))
     }
 
     return jsonResponse({ ok: true, feuille: ss.getName(), url: ss.getUrl(), onglet: ws.getSheetName() })
