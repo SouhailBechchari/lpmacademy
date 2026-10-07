@@ -110,6 +110,7 @@ const WORKSHOPS = [
     date: 'mardi 6 oct.',
     module: 'nutrition',
     finalised: true,
+    passed: true,
     photo: '/ateliers/Micronutrition à l\'officine.jpg',
     title: "Micronutrition à l'officine : l'atelier immersif pour transformer votre conseil",
     speaker: 'Dr Misk Mouri',
@@ -812,6 +813,19 @@ function AxesBlock({ w }: { w: (typeof WORKSHOPS)[number] }) {
   )
 }
 
+function isWorkshopPast(w: { passed?: boolean; d: string; mois: string }) {
+  if (typeof w.passed === 'boolean') return w.passed
+  const monthMap: Record<string, number> = { oct: 9, nov: 10 }
+  const monthIndex = monthMap[w.mois.toLowerCase()]
+  if (monthIndex !== undefined) {
+    const day = parseInt(w.d, 10)
+    const workshopDate = new Date(2026, monthIndex, day, 23, 59, 59)
+    const now = new Date()
+    return now > workshopDate
+  }
+  return false
+}
+
 function WorkshopCard({ w }: { w: (typeof WORKSHOPS)[number] }) {
   const cart = useCart()
   const line = cart.lines.find((l) => l.workshopId === w.id)
@@ -819,13 +833,15 @@ function WorkshopCard({ w }: { w: (typeof WORKSHOPS)[number] }) {
   const format: 'P' | 'D' = line ? line.format : sel
   const module = MODULES.find((m) => m.id === w.module)!
   const speakerPhoto = SPEAKERS.find((s) => s.name === w.speaker)?.photo ?? null
+  const past = isWorkshopPast(w)
   const pick = (f: 'P' | 'D') => {
+    if (past) return
     setSel(f)
     if (line) cart.setFormat(w.id, f)
   }
 
   return (
-    <article className={`card ${line ? 'on' : ''}`}>
+    <article className={`card ${line ? 'on' : ''} ${past ? 'past' : ''}`}>
       {w.photo ? (
         <div className="mod-banner">
           <img src={w.photo} alt={w.title} loading="lazy" />
@@ -846,12 +862,15 @@ function WorkshopCard({ w }: { w: (typeof WORKSHOPS)[number] }) {
             {w.jour} {w.mois}
           </span>
         </div>
-        <div className="top-right">
-          {w.finalised ? (
+        <div className="top-right" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '4px' }}>
+          {past ? (
+            <span className="badge past-badge">Passé</span>
+          ) : w.finalised ? (
             <ModuleBadge id={w.module} />
           ) : (
             <span className="badge warn">Non finalisé</span>
           )}
+          {past && w.finalised && <ModuleBadge id={w.module} />}
         </div>
       </div>
 
@@ -874,34 +893,42 @@ function WorkshopCard({ w }: { w: (typeof WORKSHOPS)[number] }) {
       <AxesBlock w={w} />
 
       <div className="row">
-        <div className="toggle">
-          <button
-            className={format === 'P' ? 'on' : ''}
-            onClick={() => pick('P')}
-          >
-            Présentiel
+        {past ? (
+          <button className="add disabled" disabled aria-disabled="true" title="Cet atelier est passé et n'est plus disponible">
+            <Clock size={15} /> Passé · Non dispo
           </button>
-          <button
-            className={format === 'D' ? 'on' : ''}
-            onClick={() => pick('D')}
-          >
-            Distanciel
-          </button>
-        </div>
-        <button
-          className={`add ${line ? 'in' : ''}`}
-          onClick={() => (line ? cart.remove(w.id) : cart.add(w.id, format))}
-        >
-{line ? (
-            <>
-              <Check size={15} /> Ajouté
-            </>
-          ) : (
-            <>
-              <Plus size={15} /> Ajouter
-            </>
-          )}
-        </button>
+        ) : (
+          <>
+            <div className="toggle">
+              <button
+                className={format === 'P' ? 'on' : ''}
+                onClick={() => pick('P')}
+              >
+                Présentiel
+              </button>
+              <button
+                className={format === 'D' ? 'on' : ''}
+                onClick={() => pick('D')}
+              >
+                Distanciel
+              </button>
+            </div>
+            <button
+              className={`add ${line ? 'in' : ''}`}
+              onClick={() => (line ? cart.remove(w.id) : cart.add(w.id, format))}
+            >
+              {line ? (
+                <>
+                  <Check size={15} /> Ajouté
+                </>
+              ) : (
+                <>
+                  <Plus size={15} /> Ajouter
+                </>
+              )}
+            </button>
+          </>
+        )}
       </div>
     </article>
   )
@@ -1101,7 +1128,7 @@ function Footer() {
 // ---------------------------------------------------------------------------
 
 function Hero() {
-  const next = WORKSHOPS[0]
+  const next = WORKSHOPS.find((w) => !isWorkshopPast(w)) ?? WORKSHOPS[0]
   const module = MODULES.find((m) => m.id === next.module)!
   return (
     <section className="hero">
@@ -1577,8 +1604,9 @@ function ModuleView() {
   }
 
   const current = WORKSHOPS.filter((w) => w.module === module.id && w.finalised)
+  const available = current.filter((w) => !isWorkshopPast(w))
   const addAll = () => {
-    current.forEach((w) => {
+    available.forEach((w) => {
       if (!cart.lines.find((l) => l.workshopId === w.id)) cart.add(w.id, 'P')
     })
     navigate('/inscription')
@@ -1597,9 +1625,9 @@ function ModuleView() {
       <div className="mv-head">
         <h1>{module.name}</h1>
         <p className="lead">{module.desc}</p>
-        {current.length > 0 && (
+        {available.length > 0 && (
           <button className="button primary" onClick={addAll}>
-            <Plus size={17} /> Réserver les {current.length} atelier{current.length > 1 ? 's' : ''}
+            <Plus size={17} /> Réserver les {available.length} atelier{available.length > 1 ? 's' : ''} disponible{available.length > 1 ? 's' : ''}
           </button>
         )}
       </div>

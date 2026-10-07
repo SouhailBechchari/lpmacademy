@@ -1704,3 +1704,80 @@ footer::before {
 @media (max-width: 800px) {
   :root[data-theme='dark'] .nav-links { background: rgba(13,28,44,.98); }
 }
+
+/* ------------------------------------------------------------------ */
+/* Ateliers passés (gris / non disponible)                             */
+/* ------------------------------------------------------------------ */
+.card.past {
+  opacity: 0.72;
+  filter: grayscale(0.85);
+  background: #f3f4f6;
+  border-color: #d1d5db;
+}
+.card.past:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-s);
+  border-color: #9ca3af;
+}
+.card.past::after {
+  display: none;
+}
+.card.past .datebox {
+  background: linear-gradient(155deg, #6b7280, #4b5563);
+  box-shadow: none;
+}
+.card.past .datebox span {
+  color: #e5e7eb;
+}
+.badge.past-badge {
+  background: #6b7280;
+  color: #ffffff;
+  border: 1px solid #4b5563;
+  font-weight: 700;
+}
+.add.disabled, button.add.disabled {
+  width: 100%;
+  background: #e5e7eb;
+  color: #6b7280;
+  border: 1px solid #d1d5db;
+  cursor: not-allowed;
+  justify-content: center;
+  box-shadow: none;
+  pointer-events: none;
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: 'Manrope', sans-serif;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.add.disabled svg, button.add.disabled svg {
+  color: #6b7280;
+}
+
+:root[data-theme='dark'] .card.past {
+  background: #111c26;
+  border-color: #273b4d;
+  opacity: 0.65;
+}
+:root[data-theme='dark'] .card.past .datebox {
+  background: linear-gradient(155deg, #374151, #1f2937);
+}
+:root[data-theme='dark'] .badge.past-badge {
+  background: #374151;
+  color: #d1d5db;
+  border-color: #4b5563;
+}
+:root[data-theme='dark'] .add.disabled,
+:root[data-theme='dark'] button.add.disabled {
+  background: #1f2937;
+  color: #9ca3af;
+  border-color: #374151;
+}
+:root[data-theme='dark'] .add.disabled svg,
+:root[data-theme='dark'] button.add.disabled svg {
+  color: #9ca3af;
+}
+
