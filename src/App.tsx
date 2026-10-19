@@ -1678,7 +1678,7 @@ function Inscription() {
   const cart = useCart()
   const n = cart.count
   const tier = findTier(n || 1)
-  const [form, setForm] = useState({ prenom: '', nom: '', tel: '', pharma: '', ville: '' })
+  const [form, setForm] = useState({ prenom: '', nom: '', tel: '', email: '', pharma: '', ville: '', adresseFacture: '', iceFacture: '' })
   const [tried, setTried] = useState(false)
   const [send, setSend] = useState<'idle' | 'sending' | 'ok' | 'error'>('idle')
   const [facture, setFacture] = useState(false)
@@ -1695,14 +1695,45 @@ function Inscription() {
   )
   const save = ref - total
 
-  const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement>) =>
-    setForm({ ...form, [k]: e.target.value })
+  const set =
+    (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+      setForm({ ...form, [k]: e.target.value })
 
-  const empty = (Object.keys(form) as (keyof typeof form)[]).filter((k) => !form[k].trim())
+  const requiredBase = ['prenom', 'nom', 'tel', 'email', 'pharma', 'ville'] as const
+  const getEmpty = () => {
+    const list: string[] = []
+    requiredBase.forEach((k) => {
+      if (!form[k].trim()) list.push(label(k))
+    })
+    if (facture) {
+      if (!form.adresseFacture.trim()) list.push('Adresse de facturation')
+      if (!form.iceFacture.trim()) list.push('ICE')
+    }
+    return list
+  }
+  const label = (k: string) => {
+    switch (k) {
+      case 'prenom':
+        return 'Prénom'
+      case 'nom':
+        return 'Nom'
+      case 'tel':
+        return 'Téléphone'
+      case 'email':
+        return 'E-mail'
+      case 'pharma':
+        return 'Pharmacie ou faculté'
+      case 'ville':
+        return 'Ville'
+      default:
+        return k
+    }
+  }
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault()
     setTried(true)
+    const empty = getEmpty()
     if (empty.length || n === 0) return
     const ateliers = cart.lines.map((l) => {
       const w = WORKSHOPS.find((x) => x.id === l.workshopId)!
@@ -1721,6 +1752,7 @@ function Inscription() {
       'Mes coordonnées :',
       `- Nom et prénom : ${form.prenom} ${form.nom}`,
       `- Téléphone : ${form.tel}`,
+      `- E-mail : ${form.email}`,
       `- Pharmacie ou faculté : ${form.pharma}`,
       `- Ville : ${form.ville}`,
       '',
@@ -1733,9 +1765,9 @@ function Inscription() {
       facture ? `TVA 20% : ${tva.toLocaleString('fr-FR')} DH` : '',
       `Total à régler${facture ? ' (TTC)' : ''} : ${totalTtc.toLocaleString('fr-FR')} DH`,
       save > 0 ? `Économie vs tarif unité : ${save.toLocaleString('fr-FR')} DH` : '',
-      facture
-        ? 'Je souhaite une facture : merci de me l\u2019envoyer avec les informations nécessaires.'
-        : '',
+      facture ? 'Je souhaite une facture.' : '',
+      facture ? `Adresse de facturation : ${form.adresseFacture}` : '',
+      facture ? `ICE : ${form.iceFacture}` : '',
       '',
       'Merci de me confirmer et de m\u2019envoyer le RIB.',
     ]
@@ -1753,8 +1785,11 @@ function Inscription() {
           prenom: form.prenom.trim(),
           nom: form.nom.trim(),
           tel: form.tel.trim(),
+          email: form.email.trim(),
           pharma: form.pharma.trim(),
           ville: form.ville.trim(),
+          adresseFacture: facture ? form.adresseFacture.trim() : '',
+          iceFacture: facture ? form.iceFacture.trim() : '',
           formule: `${tier.label} (${tier.pres} DH/atelier en présentiel)`,
           total,
           totalTtc,
@@ -1789,7 +1824,10 @@ function Inscription() {
         <div className="insc-form">
           <div className="form-card">
             <h2>Vos coordonnées</h2>
-            <p className="hint">Tous les champs sont obligatoires.</p>
+            <p className="hint">
+              Tous les champs sont obligatoires.{' '}
+              {facture && 'L’adresse de facturation et l’ICE sont requis pour la facture.'}
+            </p>
             <form onSubmit={submit} noValidate>
               <div className="field-row">
                 <label>
@@ -1811,15 +1849,27 @@ function Inscription() {
                   />
                 </label>
               </div>
-              <label>
-                <span>Téléphone</span>
-                <input
-                  placeholder="06 XX XX XX XX"
-                  value={form.tel}
-                  onChange={set('tel')}
-                  className={tried && !form.tel.trim() ? 'err' : ''}
-                />
-              </label>
+              <div className="field-row">
+                <label>
+                  <span>Téléphone</span>
+                  <input
+                    placeholder="06 XX XX XX XX"
+                    value={form.tel}
+                    onChange={set('tel')}
+                    className={tried && !form.tel.trim() ? 'err' : ''}
+                  />
+                </label>
+                <label>
+                  <span>E-mail</span>
+                  <input
+                    type="email"
+                    placeholder="exemple@pharmacie.ma"
+                    value={form.email}
+                    onChange={set('email')}
+                    className={tried && !form.email.trim() ? 'err' : ''}
+                  />
+                </label>
+              </div>
               <div className="field-row">
                 <label>
                   <span>Pharmacie ou faculté</span>
@@ -1840,8 +1890,31 @@ function Inscription() {
                   />
                 </label>
               </div>
-              {tried && empty.length > 0 && (
-                <p className="form-err">Merci de renseigner : {empty.join(', ')}.</p>
+              {facture && (
+                <>
+                  <label>
+                    <span>Adresse de facturation</span>
+                    <textarea
+                      rows={2}
+                      placeholder="Adresse complète de la pharmacie / structure"
+                      value={form.adresseFacture}
+                      onChange={set('adresseFacture')}
+                      className={tried && !form.adresseFacture.trim() ? 'err' : ''}
+                    />
+                  </label>
+                  <label>
+                    <span>ICE</span>
+                    <input
+                      placeholder="Ex : 001234567000029"
+                      value={form.iceFacture}
+                      onChange={set('iceFacture')}
+                      className={tried && !form.iceFacture.trim() ? 'err' : ''}
+                    />
+                  </label>
+                </>
+              )}
+              {tried && getEmpty().length > 0 && (
+                <p className="form-err">Merci de renseigner : {getEmpty().join(', ')}.</p>
               )}
               {tried && n === 0 && <p className="form-err">Votre panier est vide.</p>}
             </form>
@@ -1909,7 +1982,7 @@ function Inscription() {
                   <b>Besoin d’une facture ?</b>
                   <p>
                     Les tarifs sont hors taxes. Avec facture, la TVA de 20 % est ajoutée au montant
-                    ci-dessous.
+                    ci-dessous, et l’adresse de facturation ainsi que l’ICE vous seront demandés.
                   </p>
                   <div className="facture-opts">
                     <button

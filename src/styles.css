@@ -1137,6 +1137,15 @@ input {
 input::placeholder { color: #b3b8ad; }
 input:focus { outline: none; border-color: var(--lime); background: #fff; box-shadow: 0 0 0 4px rgba(141,198,63,.2); }
 input.err { border-color: #d64545; background: #fff6f6; }
+textarea {
+  border: 1px solid var(--line); background: #fcfcf9; color: var(--ink);
+  padding: 15px 16px; font: inherit; font-size: 14.5px; border-radius: 14px;
+  resize: vertical; min-height: 52px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+textarea::placeholder { color: #b3b8ad; }
+textarea:focus { outline: none; border-color: var(--lime); background: #fff; box-shadow: 0 0 0 4px rgba(141,198,63,.2); }
+textarea.err { border-color: #d64545; background: #fff6f6; }
 .form-err { color: #c0392b; font-size: 13px; background: #fdeeee; border: 1px solid #f5c8c8; padding: 12px 16px; border-radius: 14px; }
 .button.wa {
   background: linear-gradient(135deg, #2bbf5a, #1fae4c); color: #fff; justify-content: center;
@@ -1642,6 +1651,10 @@ footer::before {
 :root[data-theme='dark'] input:focus { background: #11273b; }
 :root[data-theme='dark'] input::placeholder { color: #6e8798; }
 :root[data-theme='dark'] input.err { background: #2a1620; border-color: #d64545; }
+:root[data-theme='dark'] textarea { background: #0e2233; border-color: #2c4a63; }
+:root[data-theme='dark'] textarea:focus { background: #11273b; }
+:root[data-theme='dark'] textarea::placeholder { color: #6e8798; }
+:root[data-theme='dark'] textarea.err { background: #2a1620; border-color: #d64545; }
 :root[data-theme='dark'] .form-err { color: #ffb3a7; background: #31171f; border-color: #6b2c2c; }
 
 /* Recherche & pagination du programme */

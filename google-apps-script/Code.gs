@@ -21,7 +21,8 @@ const SHEET_NAME = 'Inscriptions'
 const EMAIL_TO = 'ADRESSE_A_REMPLACER@exemple.com'
 
 const HEADERS = [
-  'Horodatage', 'Prénom', 'Nom', 'Téléphone', 'Pharmacie / faculté', 'Ville',
+  'Horodatage', 'Prénom', 'Nom', 'Téléphone', 'E-mail', 'Pharmacie / faculté', 'Ville',
+  'Adresse facture', 'ICE',
   'Ateliers', 'Formule', 'Total (DH)', 'Nombre d\'ateliers',
   'Facture', 'TVA 20% (DH)', 'Total TTC (DH)',
 ]
@@ -57,8 +58,10 @@ function doPost(e) {
 
     if (ws.getLastRow() === 0) {
       ws.appendRow(HEADERS)
-    } else if (!ws.getRange(1, 11).getValue()) {
-      ws.getRange(1, HEADERS.length).setValues([HEADERS.slice(10)])
+    } else if (ws.getRange(1, 5).getValue() !== 'E-mail') {
+      // Ancien format : insère les colonnes E-mail / Adresse facture / ICE après Téléphone
+      ws.insertColumnsAfter(4, 3)
+      ws.getRange(1, 5, 1, 3).setValues([['E-mail', 'Adresse facture', 'ICE']])
     }
 
     ws.appendRow([
@@ -66,8 +69,11 @@ function doPost(e) {
       data.prenom || '',
       data.nom || '',
       data.tel || '',
+      data.email || '',
       data.pharma || '',
       data.ville || '',
+      data.facture ? (data.adresseFacture || '') : '',
+      data.facture ? (data.iceFacture || '') : '',
       (data.ateliers || []).map(fmtAtelier).join('\n'),
       data.formule || '',
       data.total || '',
@@ -87,6 +93,7 @@ function doPost(e) {
         'Prénom : ' + data.prenom,
         'Nom : ' + data.nom,
         'Téléphone : ' + data.tel,
+        'E-mail : ' + data.email,
         'Pharmacie / faculté : ' + data.pharma,
         'Ville : ' + data.ville,
         '',
@@ -100,7 +107,8 @@ function doPost(e) {
       if (data.facture) {
         corps.push('TVA 20% : ' + data.tva + ' DH')
         corps.push('Total TTC : ' + data.totalTtc + ' DH')
-        corps.push('Penser à demander les informations de facturation (nom, adresse, ICE / IF).')
+        corps.push('Adresse de facturation : ' + (data.adresseFacture || ''))
+        corps.push('ICE : ' + (data.iceFacture || ''))
       }
       corps.push('')
       corps.push('La ligne a également été ajoutée à la Google Sheet.')
