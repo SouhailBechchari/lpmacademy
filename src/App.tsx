@@ -15,6 +15,7 @@ import {
   FileText,
   FlaskConical,
   Gauge,
+  Images,
   Layers,
   MapPin,
   Menu,
@@ -24,12 +25,15 @@ import {
   Moon,
   Play,
   Plus,
+  Quote,
   ShoppingBag,
   Sparkles,
+  Star,
   Sun,
   Target,
   Users,
   X,
+  Download,
 } from 'lucide-react'
 import {
   BrowserRouter,
@@ -285,10 +289,11 @@ const WORKSHOPS = [
   },
   {
     id: 10,
-    jour: 'Jeu',
-    d: '5',
+    jour: 'Sam',
+    d: '21',
     mois: 'nov',
-    date: 'jeudi 5 nov.',
+    date: 'samedi 21 nov.',
+    horaires: '15h – 18h',
     module: 'naturelles',
     finalised: true,
     photo: null,
@@ -330,6 +335,7 @@ const WORKSHOPS = [
     date: 'jeudi 12 nov.',
     module: 'relation',
     finalised: true,
+    postponed: true,
     photo: '/ateliers/managerneuro.png',
     title: 'Manager autrement : les clés neuro-comportementales pour une équipe engagée et performante',
     speaker: 'Mme Ikhlass Ferrane',
@@ -582,6 +588,114 @@ const FAQ = [
   ['Les packs sont-ils nominatifs ?', "Oui. Chaque inscription est nominative : le tarif dégressif s'applique selon le nombre d'ateliers que vous suivez vous-même. Il ne s'agit pas de places à répartir dans une équipe."],
 ]
 
+const AVIS = [
+  {
+    text: "Mes sincères remerciements aux organisateurs pour cet atelier très enrichissant, et une mention spéciale au Dr Misk Mouri pour son partage généreux de connaissances et la qualité de son enseignement. Les échanges étaient passionnants, le contenu pertinent et directement applicable à la pratique. Ce fut un réel plaisir d'y assister.",
+    name: 'Dr Saida Farah',
+    lieu: 'Pharmacie Ibn Sina · Beni Mellal',
+    theme: 'Micronutrition',
+  },
+  {
+    text: "Je tiens à vous remercier, ainsi que Dr Misk Mouri, pour la présentation d'aujourd'hui. C'était très intéressant et clair. Les informations et les conseils partagés sont très pertinents et nous seront certainement utiles dans notre pratique professionnelle.",
+    name: 'Dr Saida Legdam',
+    lieu: 'Pharmacie Oasis · Taroudant',
+    theme: 'Micronutrition',
+  },
+  {
+    text: "Un grand merci pour cette excellente formation, très enrichissante et très qualitative. Les informations acquises nous seront d'une grande utilité dans notre pratique professionnelle quotidienne. Bravo pour votre professionnalisme.",
+    name: 'Dr Hind Fadil',
+    lieu: 'Pharmacie Fadil · Casablanca',
+    theme: 'Formation continue',
+  },
+  {
+    text: "Je peux en toute honnêteté vous faire part de mon agréable expérience. Cette formation m'a été d'une grande utilité pour comprendre le back-office de l'officine. Mr Kazmane a fait preuve d'un grand professionnalisme et l'organisation était à la hauteur de l'événement.",
+    name: 'Dr Rim Laraqui Houssaini',
+    lieu: 'Pharmacie Romandie · Casablanca',
+    theme: 'Gestion officinale',
+  },
+  {
+    text: "Excellente formation, très bien montée, bravo ! Tout ce qu'il faut pour une excellente collaboration pharmacien et expert-comptable.",
+    name: 'Dr Jalila Idoudre',
+    lieu: 'Pharmacie Idoudre · Casablanca',
+    theme: 'Gestion officinale',
+  },
+  {
+    text: 'La formation de Mr Zohair Kazmane était parfaite. Merci beaucoup.',
+    name: 'Dr Sofia Idoudre',
+    lieu: 'Pharmacie Av. Mohammed Bouziane · Casablanca',
+    theme: 'Gestion officinale',
+  },
+  {
+    text: "J'ai pris plaisir à participer à l'atelier sur les interactions médicamenteuses. Merci à Dr Saadia Skalli pour la clarté du contenu et la fluidité de la transmission, et à Pharmacien Manager pour le choix du thème.",
+    name: 'Dr Souleymane Traoré',
+    lieu: 'Pharmacie Diahaba-Ra · Kita, Mali',
+    theme: 'Interactions médicamenteuses',
+  },
+  {
+    text: "Merci Dr Skalli, c'était très riche et apprenant, surtout pour nous les anciens : cela rafraîchit les connaissances.",
+    name: 'Dr Bennouna Sentissi',
+    lieu: 'Casablanca',
+    theme: 'Interactions médicamenteuses',
+  },
+  {
+    text: "J'ai été ravie d'assister à cet atelier. Je remercie Dr Bentayeb pour son éclairage édifiant sur l'importance du suivi des stocks et des rotations pour une meilleure gestion de nos officines. Je félicite également les organisateurs pour la réussite de ces ateliers et le choix judicieux des thématiques.",
+    name: 'Dr Fadila Zemmama',
+    lieu: 'Pharmacie Zahra · Ain Harrouda',
+    theme: 'Data & gestion',
+  },
+  {
+    text: "Merci au Dr Najla pour cet atelier « Diagnostic de peau », très intéressant et enrichissant. On en ressort avec des conseils pratiques, concrets et directement applicables au comptoir.",
+    name: 'Dr Ghizlane Chana',
+    lieu: 'Pharmacie Almelia · Rabat',
+    theme: 'Dermocosmétique',
+  },
+  {
+    text: "Merci aux organisateurs et à Dr Najla pour ce bel atelier. J'ai beaucoup appris et enrichi mes connaissances. Je repars avec des conseils précieux à mettre en pratique au quotidien à l'officine.",
+    name: 'Dr Imane Slaouni',
+    lieu: 'Pharmacie Ras El Ma · Fès',
+    theme: 'Dermocosmétique',
+  },
+  {
+    text: "Je tiens à vous remercier pour cette formation très enrichissante. J'ai beaucoup appris, et je remercie particulièrement M. Marouane pour ses précieux conseils.",
+    name: 'Dr Wiam Kamari',
+    lieu: 'Casablanca',
+    theme: 'Relation client',
+  },
+]
+
+const PHOTO_FILES = [
+  '1.jpeg',
+  '2.jpeg',
+  'WhatsApp Image 2026-10-31 at 20.37.12 (1).jpeg',
+  'WhatsApp Image 2026-10-31 at 20.37.12.jpeg',
+  'WhatsApp Image 2026-10-31 at 20.37.13 (1).jpeg',
+  'WhatsApp Image 2026-10-31 at 20.37.13 (2).jpeg',
+  'WhatsApp Image 2026-10-31 at 20.37.13 (3).jpeg',
+  'WhatsApp Image 2026-10-31 at 20.37.13 (4).jpeg',
+  'WhatsApp Image 2026-10-31 at 20.37.13.jpeg',
+  'WhatsApp Image 2026-10-31 at 20.37.34 (1).jpeg',
+  'WhatsApp Image 2026-10-31 at 20.37.34 (2).jpeg',
+  'WhatsApp Image 2026-10-31 at 20.37.34.jpeg',
+  'WhatsApp Image 2026-10-31 at 20.37.35 (1).jpeg',
+  'WhatsApp Image 2026-10-31 at 20.37.35 (2).jpeg',
+  'WhatsApp Image 2026-10-31 at 20.37.35 (3).jpeg',
+  'WhatsApp Image 2026-10-31 at 20.37.35 (4).jpeg',
+  'WhatsApp Image 2026-10-31 at 20.37.35 (6).jpeg',
+  'WhatsApp Image 2026-10-31 at 20.37.35.jpeg',
+  'WhatsApp Image 2026-10-31 at 20.38.49 (1).jpeg',
+  'WhatsApp Image 2026-10-31 at 20.38.49.jpeg',
+  'WhatsApp Image 2026-10-31 at 20.38.50 (1).jpeg',
+  'WhatsApp Image 2026-10-31 at 20.38.50.jpeg',
+  'WhatsApp Image 2026-10-31 at 20.40.33 (1).jpeg',
+  'WhatsApp Image 2026-10-31 at 20.40.33 (2).jpeg',
+  'WhatsApp Image 2026-10-31 at 20.40.33 (3).jpeg',
+  'WhatsApp Image 2026-10-31 at 20.40.33 (4).jpeg',
+  'WhatsApp Image 2026-10-31 at 20.40.33 (5).jpeg',
+  'WhatsApp Image 2026-10-31 at 20.40.33.jpeg',
+]
+
+const PHOTOS = PHOTO_FILES.map((file) => `/photos du formation/${file}`)
+
 const TIERS = [
   { min: 6, label: 'Pack de 6', pres: 700, dist: 600 },
   { min: 3, label: 'Pack de 3', pres: 800, dist: 700 },
@@ -826,6 +940,20 @@ function isWorkshopPast(w: { passed?: boolean; d: string; mois: string }) {
   return false
 }
 
+function workshopTimestamp(w: { d: string; mois: string }) {
+  const monthMap: Record<string, number> = { oct: 9, nov: 10 }
+  const monthIndex = monthMap[w.mois.toLowerCase()]
+  return monthIndex === undefined ? Number.MAX_SAFE_INTEGER : new Date(2026, monthIndex, parseInt(w.d, 10)).getTime()
+}
+
+function isWorkshopBookable(w: { passed?: boolean; postponed?: boolean; d: string; mois: string }) {
+  return !w.postponed && !isWorkshopPast(w)
+}
+
+function workshopHours(w: { horaires?: string }) {
+  return w.horaires ?? '15h – 18h30'
+}
+
 function WorkshopCard({ w }: { w: (typeof WORKSHOPS)[number] }) {
   const cart = useCart()
   const line = cart.lines.find((l) => l.workshopId === w.id)
@@ -834,8 +962,9 @@ function WorkshopCard({ w }: { w: (typeof WORKSHOPS)[number] }) {
   const module = MODULES.find((m) => m.id === w.module)!
   const speakerPhoto = SPEAKERS.find((s) => s.name === w.speaker)?.photo ?? null
   const past = isWorkshopPast(w)
+  const bookable = isWorkshopBookable(w)
   const pick = (f: 'P' | 'D') => {
-    if (past) return
+    if (!bookable) return
     setSel(f)
     if (line) cart.setFormat(w.id, f)
   }
@@ -863,7 +992,9 @@ function WorkshopCard({ w }: { w: (typeof WORKSHOPS)[number] }) {
           </span>
         </div>
         <div className="top-right" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '4px' }}>
-          {past ? (
+          {w.postponed ? (
+            <span className="badge warn">Reporté</span>
+          ) : past ? (
             <span className="badge past-badge">Passé</span>
           ) : w.finalised ? (
             <ModuleBadge id={w.module} />
@@ -887,15 +1018,20 @@ function WorkshopCard({ w }: { w: (typeof WORKSHOPS)[number] }) {
         {w.speaker}
       </div>
       <div className="loc">
-        <MapPin size={13} /> <a href={LOCATION_MAPS} target="_blank" rel="noreferrer">{LOCATION_CARD}</a> · ou à distance
+        <MapPin size={13} /> <a href={LOCATION_MAPS} target="_blank" rel="noreferrer">{LOCATION_CARD}</a> · ou à distance · {workshopHours(w)}
       </div>
 
       <AxesBlock w={w} />
 
       <div className="row">
-        {past ? (
-          <button className="add disabled" disabled aria-disabled="true" title="Cet atelier est passé et n'est plus disponible">
-            <Clock size={15} /> Passé · Non dispo
+        {!bookable ? (
+          <button
+            className="add disabled"
+            disabled
+            aria-disabled="true"
+            title={w.postponed ? 'Cet atelier est reporté et n’est plus réservable' : "Cet atelier est passé et n'est plus disponible"}
+          >
+            <Clock size={15} /> {w.postponed ? 'Reporté · Non dispo' : 'Passé · Non dispo'}
           </button>
         ) : (
           <>
@@ -964,6 +1100,7 @@ function Header({
     ['/modules', 'Modules'],
     ['/programme', 'Programme'],
     ['/intervenants', 'Intervenants'],
+    ['/avis', 'Avis & photos'],
     ['/tarifs', 'Tarifs'],
     ['/faq', 'FAQ'],
   ]
@@ -979,7 +1116,13 @@ function Header({
           <Link
             key={href}
             to={href}
-            className={pathname === href || pathname.startsWith(href + '/') ? 'active' : ''}
+            className={
+              pathname === href ||
+              pathname.startsWith(href + '/') ||
+              (href === '/avis' && pathname === '/galerie')
+                ? 'active'
+                : ''
+            }
             onClick={() => setOpen(false)}
           >
             {label}
@@ -1092,6 +1235,8 @@ function Footer() {
         <div className="foot-col">
           <h4>Informations</h4>
           <Link to="/tarifs">Formules et tarifs</Link>
+          <Link to="/avis">Avis & photos</Link>
+          <Link to="/galerie">Galerie</Link>
           <Link to="/faq">FAQ</Link>
           <Link to="/inscription">S'inscrire</Link>
           <Link to="/intervenants">Intervenants</Link>
@@ -1128,7 +1273,7 @@ function Footer() {
 // ---------------------------------------------------------------------------
 
 function Hero() {
-  const next = WORKSHOPS.find((w) => !isWorkshopPast(w)) ?? WORKSHOPS[0]
+  const next = [...WORKSHOPS].filter(isWorkshopBookable).sort((a, b) => workshopTimestamp(a) - workshopTimestamp(b))[0] ?? WORKSHOPS[0]
   const module = MODULES.find((m) => m.id === next.module)!
   return (
     <section className="hero">
@@ -1242,7 +1387,7 @@ function Hero() {
             <span>
               <MapPin size={13} /> Présentiel · {LOCATION_CARD}
             </span>
-            <span>15h – 18h30</span>
+            <span>{workshopHours(next)}</span>
           </div>
           <Link to="/programme" className="card-link">
             Réserver ma place <ArrowRight size={15} />
@@ -1346,7 +1491,7 @@ function Programme() {
   const [page, setPage] = useState(1)
   const PER = 9
 
-  const shown = WORKSHOPS.filter((w) => month === 'all' || w.mois === month)
+  const matching = WORKSHOPS.filter((w) => month === 'all' || w.mois === month)
     .filter((w) => filter === 'all' || w.module === filter)
     .filter((w) => {
       const term = q.trim().toLowerCase()
@@ -1357,6 +1502,10 @@ function Programme() {
         w.date.toLowerCase().includes(term)
       )
     })
+  const shown = [
+    ...matching.filter((w) => !isWorkshopPast(w)).sort((a, b) => workshopTimestamp(a) - workshopTimestamp(b)),
+    ...matching.filter(isWorkshopPast).sort((a, b) => workshopTimestamp(a) - workshopTimestamp(b)),
+  ]
   const pages = Math.max(1, Math.ceil(shown.length / PER))
   const safePage = Math.min(page, pages)
   const current = shown.slice((safePage - 1) * PER, safePage * PER)
@@ -1554,7 +1703,7 @@ function FAQSection() {
     <section className="section faq" id="faq">
       <div className="faq-head">
         <ReReveal>
-          <p className="eyebrow">06 / Vos questions</p>
+          <p className="eyebrow">07 / Vos questions</p>
         </ReReveal>
         <ReReveal delay={60}>
           <h2>
@@ -1582,6 +1731,178 @@ function FAQSection() {
   )
 }
 
+function avisInitials(name: string) {
+  return name
+    .replace(/^(Dr|Pr|Mme|M\.)\s+/, '')
+    .split(' ')
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0])
+    .join('')
+    .toUpperCase()
+}
+
+function AvisSection({ all = false }: { all?: boolean }) {
+  const items = all ? AVIS : AVIS.slice(0, 6)
+  return (
+    <section className="section avis" id="avis">
+      <ReReveal>
+        <p className="eyebrow">04 / Avis participants</p>
+      </ReReveal>
+      <ReReveal delay={60}>
+        <h2>
+          Ils ont <span>vécu les ateliers.</span>
+        </h2>
+      </ReReveal>
+      <ReReveal delay={120}>
+        <p className="lead">
+          Des retours authentiques de pharmaciens qui ont participé aux ateliers d'octobre 2026.
+        </p>
+      </ReReveal>
+      <div className="avis-grid">
+        {items.map((a, i) => (
+          <ReReveal key={a.name} delay={Math.min(i * 50, 250)} className="avis-card">
+            <Quote className="avis-quote" size={30} strokeWidth={1.4} />
+            <div className="avis-stars" aria-label="5 étoiles sur 5">
+              {[0, 1, 2, 3, 4].map((s) => (
+                <Star key={s} size={14} fill="currentColor" strokeWidth={0} />
+              ))}
+            </div>
+            <p>{a.text}</p>
+            <span className="avis-theme">{a.theme}</span>
+            <div className="avis-who">
+              <span className="avis-ini">{avisInitials(a.name)}</span>
+              <div>
+                <b>{a.name}</b>
+                <span>{a.lieu}</span>
+              </div>
+            </div>
+          </ReReveal>
+        ))}
+      </div>
+      <ReReveal delay={160} className="avis-actions">
+        {!all && (
+          <Link to="/avis" className="avis-more">
+            Lire les {AVIS.length} avis <ArrowRight size={15} />
+          </Link>
+        )}
+        {all && (
+          <Link to="/programme" className="avis-more">
+            Découvrir le programme <ArrowRight size={15} />
+          </Link>
+        )}
+        <a
+          href="/avis/Avis_site_web.pdf"
+          className="avis-pdf"
+          download="Avis_participants_Passeport_Formation.pdf"
+        >
+          <Download size={15} /> Télécharger le recueil (PDF)
+        </a>
+      </ReReveal>
+    </section>
+  )
+}
+
+function Galerie({ all = false }: { all?: boolean }) {
+  const photos = all ? PHOTOS : PHOTOS.slice(0, 6)
+  const [idx, setIdx] = useState<number | null>(null)
+
+  const step = (dir: number) =>
+    setIdx((current) =>
+      current === null ? current : (current + dir + photos.length) % photos.length,
+    )
+
+  useEffect(() => {
+    if (idx === null) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIdx(null)
+      if (e.key === 'ArrowLeft') step(-1)
+      if (e.key === 'ArrowRight') step(1)
+    }
+    document.addEventListener('keydown', onKey)
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.removeEventListener('keydown', onKey)
+      document.body.style.overflow = previousOverflow
+    }
+  }, [idx, photos.length])
+
+  return (
+    <section className="section galerie" id="galerie">
+      <ReReveal>
+        <p className="eyebrow">06 / La galerie</p>
+      </ReReveal>
+      <ReReveal delay={60}>
+        <h2>
+          Nos ateliers, <span>en images.</span>
+        </h2>
+      </ReReveal>
+      <ReReveal delay={120}>
+        <p className="lead">
+          Ambiance, échanges et moments de partage : découvrez la vie des ateliers Passeport
+          Formation.
+        </p>
+      </ReReveal>
+      <div className="gal-grid">
+        {photos.map((src, i) => (
+          <ReReveal key={src} delay={Math.min(i * 40, 220)} className="gal-item">
+            <button
+              type="button"
+              onClick={() => setIdx(i)}
+              aria-label={`Agrandir la photo ${i + 1}`}
+            >
+              <img src={src} alt={`Atelier Passeport Formation — photo ${i + 1}`} loading="lazy" />
+              <span className="gal-zoom">
+                <Images size={14} /> Agrandir
+              </span>
+            </button>
+          </ReReveal>
+        ))}
+      </div>
+      <ReReveal delay={160} className="avis-actions">
+        {!all ? (
+          <Link to="/galerie" className="avis-more">
+            Voir les {PHOTOS.length} photos <ArrowRight size={15} />
+          </Link>
+        ) : (
+          <Link to="/programme" className="avis-more">
+            Rejoindre un atelier <ArrowRight size={15} />
+          </Link>
+        )}
+      </ReReveal>
+
+      {idx !== null && (
+        <div
+          className="lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Photo de formation"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setIdx(null)
+          }}
+        >
+          <button className="lb-close" onClick={() => setIdx(null)} aria-label="Fermer">
+            <X size={22} />
+          </button>
+          <button className="lb-nav prev" onClick={() => step(-1)} aria-label="Photo précédente">
+            <ChevronLeft size={28} />
+          </button>
+          <div className="lb-shell">
+            <img src={photos[idx]} alt={`Atelier Passeport Formation — photo ${idx + 1}`} />
+            <span className="lb-count">
+              {idx + 1} / {photos.length}
+            </span>
+          </div>
+          <button className="lb-nav next" onClick={() => step(1)} aria-label="Photo suivante">
+            <ChevronRight size={28} />
+          </button>
+        </div>
+      )}
+    </section>
+  )
+}
+
 // ---------------------------------------------------------------------------
 // Vue module dédiée
 // ---------------------------------------------------------------------------
@@ -1603,8 +1924,10 @@ function ModuleView() {
     )
   }
 
-  const current = WORKSHOPS.filter((w) => w.module === module.id && w.finalised)
-  const available = current.filter((w) => !isWorkshopPast(w))
+  const current = WORKSHOPS
+    .filter((w) => w.module === module.id && w.finalised)
+    .sort((a, b) => workshopTimestamp(a) - workshopTimestamp(b))
+  const available = current.filter(isWorkshopBookable)
   const addAll = () => {
     available.forEach((w) => {
       if (!cart.lines.find((l) => l.workshopId === w.id)) cart.add(w.id, 'P')
@@ -1810,7 +2133,7 @@ function Inscription() {
   return (
     <section className="inscription">
       <div className="insc-head">
-        <p className="eyebrow">07 / S'inscrire</p>
+        <p className="eyebrow">08 / S'inscrire</p>
         <h1>
           Réservez votre <span>place.</span>
         </h1>
@@ -2066,7 +2389,12 @@ function CartProvider({ children }: { children: React.ReactNode }) {
   const [lines, setLines] = useState<Line[]>([])
   const value: CartCtx = {
     lines,
-    add: (id, format) => setLines((l) => (l.find((x) => x.workshopId === id) ? l : [...l, { workshopId: id, format }])),
+    add: (id, format) => setLines((l) => {
+      const workshop = WORKSHOPS.find((w) => w.id === id)
+      return workshop && isWorkshopBookable(workshop) && !l.some((x) => x.workshopId === id)
+        ? [...l, { workshopId: id, format }]
+        : l
+    }),
     remove: (id) => setLines((l) => l.filter((x) => x.workshopId !== id)),
     setFormat: (id, format) => setLines((l) => l.map((x) => (x.workshopId === id ? { ...x, format } : x))),
     clear: () => setLines([]),
@@ -2096,8 +2424,10 @@ function Home() {
       <Philosophie />
       <ModulesSection />
       <Programme />
+      <AvisSection />
       <Tarifs />
       <Intervenants />
+      <Galerie />
       <FAQSection />
     </>
   )
@@ -2111,6 +2441,8 @@ function AppRoutes() {
       <Route path="/modules" element={<PageSection page="Les modules"><ModulesSection /></PageSection>} />
       <Route path="/programme" element={<PageSection page="Programme"><Programme /></PageSection>} />
       <Route path="/intervenants" element={<PageSection page="Intervenants"><Intervenants /></PageSection>} />
+      <Route path="/avis" element={<PageSection page="Avis & photos"><AvisSection all /><Galerie all /></PageSection>} />
+      <Route path="/galerie" element={<PageSection page="Galerie photos"><Galerie all /></PageSection>} />
       <Route path="/tarifs" element={<PageSection page="Formules et tarifs"><Tarifs /></PageSection>} />
       <Route path="/faq" element={<PageSection page="FAQ"><FAQSection /></PageSection>} />
       <Route path="/module/:id" element={<ModuleView />} />
