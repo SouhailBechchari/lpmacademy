@@ -1911,24 +1911,6 @@ footer::before {
   transition: gap 0.22s ease, color 0.22s ease;
 }
 .avis-more:hover { gap: 12px; color: var(--navy); }
-.avis-pdf {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 11px 18px;
-  border-radius: 999px;
-  background: var(--card);
-  border: 1px solid var(--line);
-  color: var(--navy);
-  font-size: 12.5px;
-  font-weight: 600;
-  transition: border-color 0.22s ease, color 0.22s ease, transform 0.22s ease;
-}
-.avis-pdf:hover {
-  border-color: var(--green);
-  color: var(--green);
-  transform: translateY(-2px);
-}
 
 /* ------------------------------------------------------------------ */
 /* Galerie photos                                                      */
@@ -2069,8 +2051,6 @@ footer::before {
 :root[data-theme='dark'] .avis-who b { color: #eaf3fa; }
 :root[data-theme='dark'] .avis-ini { color: #0c2440; }
 :root[data-theme='dark'] .avis-more:hover { color: #eaf3fa; }
-:root[data-theme='dark'] .avis-pdf { color: #eaf3fa; }
-:root[data-theme='dark'] .avis-pdf:hover { color: var(--lime); }
 
 @media (max-width: 1024px) {
   .avis-grid { grid-template-columns: repeat(2, 1fr); }

@@ -33,7 +33,6 @@ import {
   Target,
   Users,
   X,
-  Download,
 } from 'lucide-react'
 import {
   BrowserRouter,
@@ -1791,13 +1790,6 @@ function AvisSection({ all = false }: { all?: boolean }) {
             Découvrir le programme <ArrowRight size={15} />
           </Link>
         )}
-        <a
-          href="/avis/Avis_site_web.pdf"
-          className="avis-pdf"
-          download="Avis_participants_Passeport_Formation.pdf"
-        >
-          <Download size={15} /> Télécharger le recueil (PDF)
-        </a>
       </ReReveal>
     </section>
   )
