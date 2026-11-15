@@ -104,7 +104,30 @@ const MODULES = [
   },
 ]
 
-const WORKSHOPS = [
+type WorkshopAudience = 'pharmacien' | 'collaborateur'
+
+type Workshop = {
+  id: number
+  jour: string
+  d: string
+  mois: string
+  date: string
+  module: string
+  finalised: boolean
+  passed?: boolean
+  postponed?: boolean
+  photo: string | null
+  title: string
+  speaker: string
+  accro: string | null
+  axes?: string[]
+  horaires?: string
+  audience?: WorkshopAudience
+  promoPrice?: number
+  distance?: boolean
+}
+
+const WORKSHOPS: Workshop[] = [
   {
     id: 1,
     jour: 'Mar',
@@ -423,6 +446,179 @@ const WORKSHOPS = [
       "Transformer l'essai en habitude : suivi et rachat.",
     ],
   },
+  {
+    id: 17,
+    jour: 'Mer',
+    d: '2',
+    mois: 'dec',
+    date: 'mercredi 2 déc.',
+    horaires: '15h – 18h',
+    module: 'management',
+    finalised: true,
+    photo: null,
+    title: 'Workshop 100 % pratique : piloter trésorerie & stocks',
+    speaker: 'Dr Nabyl Bentayeb',
+    accro: 'Objectif : repartir avec son propre outil de pilotage, prêt à l’emploi.',
+    axes: [
+      'Construire son tableau de bord de trésorerie et de stocks, en direct sur ordinateur.',
+      'Piloter en temps réel : lire et anticiper ses flux (encaissements, décaissements, échéances).',
+      'Les indicateurs clés à suivre chaque mois.',
+      'Optimiser ses stocks et éviter l’argent qui dort dans les rayons.',
+      'S’appuyer sur l’IA et les logiciels pour gagner du temps.',
+      'Cas pratique : chacun repart avec ses outils personnalisés.',
+    ],
+    audience: 'pharmacien',
+    promoPrice: 500,
+    distance: true,
+  },
+  {
+    id: 18,
+    jour: 'Mer',
+    d: '9',
+    mois: 'dec',
+    date: 'mercredi 9 déc.',
+    horaires: '15h – 18h',
+    module: 'management',
+    finalised: true,
+    photo: null,
+    title: "S'installer en officine : créer, acheter ou reprendre",
+    speaker: 'Dr Abderrahim Derraji',
+    accro: 'Objectif : une feuille de route claire pour se lancer sereinement.',
+    axes: [
+      'Créer, acheter ou reprendre : quelle voie selon son profil.',
+      'Évaluer une officine et son prix : les bons repères.',
+      'Financement et montage du dossier bancaire.',
+      'Étapes administratives et pièges à éviter.',
+      'Réussir ses premiers mois d’exploitation.',
+    ],
+    audience: 'pharmacien',
+    promoPrice: 300,
+    distance: true,
+  },
+  {
+    id: 19,
+    jour: 'Mar',
+    d: '15',
+    mois: 'dec',
+    date: 'mardi 15 déc.',
+    horaires: '15h – 18h',
+    module: 'management',
+    finalised: true,
+    photo: null,
+    title: 'Sécuriser son officine face à un contrôle',
+    speaker: 'Dr Abderrafia Hifdi',
+    accro: 'Objectif : être prêt et protégé face à un éventuel contrôle.',
+    axes: [
+      'Calcul de la cotisation minimale : méthode et vérification.',
+      'Les obligations déclaratives à ne pas manquer.',
+      'Les pièces et justificatifs à tenir prêts.',
+      'Les points de vigilance qui peuvent déclencher un contrôle.',
+      'Bonnes pratiques pour sécuriser sa comptabilité au quotidien.',
+    ],
+    audience: 'pharmacien',
+    promoPrice: 500,
+    distance: true,
+  },
+  {
+    id: 20,
+    jour: 'Mer',
+    d: '23',
+    mois: 'dec',
+    date: 'mercredi 23 déc.',
+    horaires: '15h – 18h',
+    module: 'pathologies',
+    finalised: true,
+    photo: null,
+    title: "Analyse d'ordonnance en milieu hospitalier",
+    speaker: 'Pr Amal Mrani Alaoui',
+    accro: 'Objectif : sécuriser la lecture et la validation d’ordonnances complexes.',
+    axes: [
+      'Méthodologie d’analyse pharmaceutique d’une ordonnance hospitalière.',
+      'Repérer interactions, contre-indications et erreurs de prescription.',
+      'Adapter la posologie : insuffisance rénale ou hépatique, terrains particuliers.',
+      'Cas cliniques hospitaliers commentés.',
+      'L’intervention pharmaceutique : quand et comment agir.',
+    ],
+    audience: 'pharmacien',
+    promoPrice: 500,
+    distance: true,
+  },
+  {
+    id: 21,
+    jour: 'Sam',
+    d: '5',
+    mois: 'dec',
+    date: 'samedi 5 déc.',
+    horaires: '14h30 – 17h30',
+    module: 'nutrition',
+    finalised: true,
+    photo: null,
+    title: 'Compléments au comptoir : conseiller juste, en confiance',
+    speaker: 'Dr Misk Mouri',
+    accro: 'Objectif : conseiller le bon complément, en toute sécurité, et construire une cure cohérente.',
+    axes: [
+      'Comprendre le besoin réel du patient avec les bonnes questions.',
+      'Les familles clés en pratique : fatigue, sommeil, immunité, micronutrition, phyto.',
+      'Bien associer et éviter les erreurs courantes.',
+      'Sécurité : interactions et patients à risque, expliquées simplement.',
+      'Techniques de vente : argumenter une cure complète avec justesse.',
+      'Cas pratiques de comptoir.',
+    ],
+    audience: 'collaborateur',
+    promoPrice: 300,
+    distance: false,
+  },
+  {
+    id: 22,
+    jour: 'Sam',
+    d: '12',
+    mois: 'dec',
+    date: 'samedi 12 déc.',
+    horaires: '14h30 – 17h30',
+    module: 'pathologies',
+    finalised: true,
+    photo: null,
+    title: 'Le réflexe hiver : bien conseiller face aux maladies ORL et respiratoires',
+    speaker: 'Dr Saadia Skalli',
+    accro: 'Objectif : un protocole de comptoir clair pour la saison la plus chargée de l’année.',
+    axes: [
+      'L’arbre de décision par plainte : toux, mal de gorge, rhume, état grippal (quoi conseiller, quoi associer).',
+      'Les signaux d’alerte et quand orienter vers le médecin.',
+      'Le réflexe « traitement + terrain » : soulager et renforcer les défenses.',
+      'Les cas particuliers : enfant, femme enceinte, patient à risque.',
+      'Techniques de vente : présenter un conseil complet et convaincre sans forcer.',
+      'Cas pratiques de comptoir.',
+    ],
+    audience: 'collaborateur',
+    promoPrice: 300,
+    distance: false,
+  },
+  {
+    id: 23,
+    jour: 'Sam',
+    d: '26',
+    mois: 'dec',
+    date: 'samedi 26 déc.',
+    horaires: '14h30 – 17h30',
+    module: 'dermo',
+    finalised: true,
+    photo: null,
+    title: 'Conseil dermo au comptoir : bien orienter, choisir la bonne gamme',
+    speaker: 'Dr Najla Boujaddaini',
+    accro: 'Objectif : en quelques questions, orienter vers la bonne gamme et proposer une routine que le patient suivra vraiment.',
+    axes: [
+      'Reconnaître les situations les plus fréquentes : peau grasse et imperfections, taches, âge, peau sensible ou sèche.',
+      'Vers quelle gamme orienter selon le besoin : le bon produit pour le bon patient.',
+      'Construire une routine simple matin et soir, facile à suivre.',
+      'Les erreurs et associations à éviter.',
+      'Le réflexe solaire à chaque conseil.',
+      'Techniques de vente : transformer le conseil en routine complète et fidéliser.',
+      'Cas pratiques de comptoir.',
+    ],
+    audience: 'collaborateur',
+    promoPrice: 300,
+    distance: false,
+  },
 ]
 
 const SPEAKERS = [
@@ -576,15 +772,27 @@ const SPEAKERS = [
       'Enseignante-chercheuse en innovation thérapeutique et IA en santé.',
     ],
   },
+  {
+    name: 'Dr Abderrahim Derraji',
+    ini: 'AD',
+    photo: '/intervenant/derraji.jpeg',
+    finalised: true,
+    role: 'Docteur en pharmacie · pharmacie.ma & medicament.ma',
+    points: [
+      'Docteur en pharmacie et initiateur des sites pharmacie.ma et medicament.ma.',
+    ],
+  },
 ]
 
 const FAQ = [
-  ['Puis-je ne prendre qu\u2019un seul atelier ?', "Oui. La formule à l'unité est faite pour ça. Si vous en ajoutez plusieurs, la remise pack s'applique automatiquement."],
-  ['Présentiel ou distanciel ?', `Chaque atelier est hybride. En présentiel, vous êtes sur place ${LOCATION_FULL} ; en distanciel, vous suivez la même séance à distance, à un tarif réduit de 100 DH.`],
+  ['Puis-je ne prendre qu\u2019un seul atelier ?', "Oui. La formule à l'unité est faite pour ça. Pour les ateliers de décembre, le tarif Black Friday est déjà le prix final."],
+  ['Présentiel ou distanciel ?', `Les ateliers pharmaciens sont hybrides : en présentiel, vous êtes sur place ${LOCATION_FULL} ; en distanciel, vous suivez la même séance à distance. Les ateliers collaborateurs ont lieu uniquement en présentiel à Casablanca.`],
   ['Comment se passe le paiement ?', "Vous finalisez sur WhatsApp. Nous confirmons le montant et vous envoyons le RIB ; votre place est réservée dès réception du justificatif."],
   ['Y a-t-il une attestation ?', 'Oui, une attestation de participation est remise à l\u2019issue de chaque atelier.'],
-  ['Où ont lieu les ateliers ?', "À l'Espace Le Carré d'Or, à Casablanca (à côté de la gare Casa Oasis), et à distance."],
-  ['Les packs sont-ils nominatifs ?', "Oui. Chaque inscription est nominative : le tarif dégressif s'applique selon le nombre d'ateliers que vous suivez vous-même. Il ne s'agit pas de places à répartir dans une équipe."],
+  ['Où ont lieu les ateliers ?', "À l'Espace Le Carré d'Or, à Casablanca (à côté de la gare Casa Oasis), et à distance pour les ateliers pharmaciens."],
+  ['Les packs sont-ils nominatifs ?', "Oui. Chaque inscription est nominative : le tarif dégressif s'applique selon le nombre d'ateliers que vous suivez vous-même, hors ateliers Black Friday de décembre."],
+  ['Le tarif Black Friday est-il cumulable ?', "Non. C'est une seule promotion par article : le tarif Black Friday est le prix promotionnel final et ne se cumule ni avec les packs, ni avec un code promo (early bird, parrainage, fidélité)."],
+  ['Les collaborateurs peuvent-ils participer ?', "Oui. Trois ateliers de décembre sont dédiés aux aides-pharmaciens, parapharmaciens et préparateurs, en présentiel à Casablanca le samedi après-midi, de 14h30 à 17h30."],
 ]
 
 const AVIS = [
@@ -702,15 +910,10 @@ const TIERS = [
 ]
 
 const TVA_RATE = 0.2
+const BLACK_FRIDAY_REF = 900
 
 function findTier(n: number) {
   return TIERS.find((t) => n >= t.min)!
-}
-
-function tierLabel(n: number) {
-  if (n >= 6) return 'Pack de 6 appliqué (le plus avantageux)'
-  if (n >= 3) return 'Pack de 3 appliqué'
-  return 'Tarif à l\u2019unité'
 }
 
 const PHILOSOPHIE = [
@@ -757,6 +960,65 @@ const CartContext = createContext<CartCtx>({
 function unitPrice(n: number, format: 'P' | 'D') {
   const tier = findTier(n)
   return format === 'P' ? tier.pres : tier.dist
+}
+
+function workshopById(id: number) {
+  return WORKSHOPS.find((w) => w.id === id)
+}
+
+function isPromoWorkshop(w: Workshop) {
+  return typeof w.promoPrice === 'number'
+}
+
+function allowsDistance(w: Workshop) {
+  return w.audience !== 'collaborateur' && w.distance !== false
+}
+
+function eligibleCount(lines: Line[]) {
+  return lines.filter((l) => {
+    const w = workshopById(l.workshopId)
+    return !!w && !isPromoWorkshop(w)
+  }).length
+}
+
+function linePrice(line: Line, lines: Line[]) {
+  const w = workshopById(line.workshopId)
+  if (!w) return 0
+  if (isPromoWorkshop(w)) return w.promoPrice!
+  const tier = findTier(eligibleCount(lines) || 1)
+  return line.format === 'P' ? tier.pres : tier.dist
+}
+
+function lineRefPrice(line: Line) {
+  const w = workshopById(line.workshopId)
+  if (w && isPromoWorkshop(w)) return BLACK_FRIDAY_REF
+  return unitPrice(0, line.format)
+}
+
+function cartTotal(lines: Line[]) {
+  return lines.reduce((sum, line) => sum + linePrice(line, lines), 0)
+}
+
+function cartRef(lines: Line[]) {
+  return lines.reduce((sum, line) => sum + lineRefPrice(line), 0)
+}
+
+function promoCount(lines: Line[]) {
+  return lines.filter((l) => {
+    const w = workshopById(l.workshopId)
+    return !!w && isPromoWorkshop(w)
+  }).length
+}
+
+function tierLabel(lines: Line[]) {
+  const promos = promoCount(lines)
+  const eligible = eligibleCount(lines)
+  let base = 'Tarif à l\u2019unité'
+  if (eligible >= 6) base = 'Pack de 6 appliqué (le plus avantageux)'
+  else if (eligible >= 3) base = 'Pack de 3 appliqué'
+  if (promos > 0 && eligible === 0) return 'Tarif Black Friday appliqué · non cumulable avec les autres offres'
+  if (promos > 0) return `${base} · Black Friday non cumulable sur les ateliers de décembre`
+  return base
 }
 
 function useCart(): CartCtx {
@@ -880,7 +1142,7 @@ function SpeakerAvatar({ name, ini, photo, finalised }: { name: string; ini: str
   )
 }
 
-function AxesBlock({ w }: { w: (typeof WORKSHOPS)[number] }) {
+function AxesBlock({ w }: { w: Workshop }) {
   const [open, setOpen] = useState(false)
   if (w.finalised) {
     return (
@@ -928,7 +1190,7 @@ function AxesBlock({ w }: { w: (typeof WORKSHOPS)[number] }) {
 
 function isWorkshopPast(w: { passed?: boolean; d: string; mois: string }) {
   if (typeof w.passed === 'boolean') return w.passed
-  const monthMap: Record<string, number> = { oct: 9, nov: 10 }
+  const monthMap: Record<string, number> = { oct: 9, nov: 10, dec: 11 }
   const monthIndex = monthMap[w.mois.toLowerCase()]
   if (monthIndex !== undefined) {
     const day = parseInt(w.d, 10)
@@ -940,7 +1202,7 @@ function isWorkshopPast(w: { passed?: boolean; d: string; mois: string }) {
 }
 
 function workshopTimestamp(w: { d: string; mois: string }) {
-  const monthMap: Record<string, number> = { oct: 9, nov: 10 }
+  const monthMap: Record<string, number> = { oct: 9, nov: 10, dec: 11 }
   const monthIndex = monthMap[w.mois.toLowerCase()]
   return monthIndex === undefined ? Number.MAX_SAFE_INTEGER : new Date(2026, monthIndex, parseInt(w.d, 10)).getTime()
 }
@@ -949,21 +1211,24 @@ function isWorkshopBookable(w: { passed?: boolean; postponed?: boolean; d: strin
   return !w.postponed && !isWorkshopPast(w)
 }
 
-function workshopHours(w: { horaires?: string }) {
-  return w.horaires ?? '15h – 18h30'
+function workshopHours(w: { horaires?: string; audience?: WorkshopAudience }) {
+  if (w.horaires) return w.horaires
+  return w.audience === 'collaborateur' ? '14h30 – 17h30' : '15h – 18h30'
 }
 
-function WorkshopCard({ w }: { w: (typeof WORKSHOPS)[number] }) {
+function WorkshopCard({ w }: { w: Workshop }) {
   const cart = useCart()
   const line = cart.lines.find((l) => l.workshopId === w.id)
   const [sel, setSel] = useState<'P' | 'D'>(line ? line.format : 'P')
-  const format: 'P' | 'D' = line ? line.format : sel
+  const distance = allowsDistance(w)
+  const format: 'P' | 'D' = distance ? (line ? line.format : sel) : 'P'
   const module = MODULES.find((m) => m.id === w.module)!
   const speakerPhoto = SPEAKERS.find((s) => s.name === w.speaker)?.photo ?? null
   const past = isWorkshopPast(w)
   const bookable = isWorkshopBookable(w)
+  const promo = isPromoWorkshop(w)
   const pick = (f: 'P' | 'D') => {
-    if (!bookable) return
+    if (!bookable || !distance) return
     setSel(f)
     if (line) cart.setFormat(w.id, f)
   }
@@ -991,6 +1256,7 @@ function WorkshopCard({ w }: { w: (typeof WORKSHOPS)[number] }) {
           </span>
         </div>
         <div className="top-right" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '4px' }}>
+          {w.audience === 'collaborateur' && <span className="badge audience">Collaborateurs</span>}
           {w.postponed ? (
             <span className="badge warn">Reporté</span>
           ) : past ? (
@@ -1017,8 +1283,18 @@ function WorkshopCard({ w }: { w: (typeof WORKSHOPS)[number] }) {
         {w.speaker}
       </div>
       <div className="loc">
-        <MapPin size={13} /> <a href={LOCATION_MAPS} target="_blank" rel="noreferrer">{LOCATION_CARD}</a> · ou à distance · {workshopHours(w)}
+        <MapPin size={13} /> <a href={LOCATION_MAPS} target="_blank" rel="noreferrer">{LOCATION_CARD}</a>
+        {distance ? ' · ou à distance' : ' · présentiel uniquement'} · {workshopHours(w)}
       </div>
+
+      {promo && (
+        <div className="pf-price">
+          <span className="pf-old">{BLACK_FRIDAY_REF} DH</span>
+          <span className="pf-now">{w.promoPrice} DH HT</span>
+          <span className="pf-ttc">{Math.round(w.promoPrice! * (1 + TVA_RATE))} DH TTC</span>
+          <span className="badge bf">Black Friday</span>
+        </div>
+      )}
 
       <AxesBlock w={w} />
 
@@ -1034,20 +1310,24 @@ function WorkshopCard({ w }: { w: (typeof WORKSHOPS)[number] }) {
           </button>
         ) : (
           <>
-            <div className="toggle">
-              <button
-                className={format === 'P' ? 'on' : ''}
-                onClick={() => pick('P')}
-              >
-                Présentiel
-              </button>
-              <button
-                className={format === 'D' ? 'on' : ''}
-                onClick={() => pick('D')}
-              >
-                Distanciel
-              </button>
-            </div>
+            {distance ? (
+              <div className="toggle">
+                <button
+                  className={format === 'P' ? 'on' : ''}
+                  onClick={() => pick('P')}
+                >
+                  Présentiel
+                </button>
+                <button
+                  className={format === 'D' ? 'on' : ''}
+                  onClick={() => pick('D')}
+                >
+                  Distanciel
+                </button>
+              </div>
+            ) : (
+              <span className="format-note">Présentiel · Casablanca</span>
+            )}
             <button
               className={`add ${line ? 'in' : ''}`}
               onClick={() => (line ? cart.remove(w.id) : cart.add(w.id, format))}
@@ -1272,7 +1552,12 @@ function Footer() {
 // ---------------------------------------------------------------------------
 
 function Hero() {
-  const next = [...WORKSHOPS].filter(isWorkshopBookable).sort((a, b) => workshopTimestamp(a) - workshopTimestamp(b))[0] ?? WORKSHOPS[0]
+  const next =
+    [...WORKSHOPS]
+      .filter((w) => w.mois === 'dec' && isWorkshopBookable(w))
+      .sort((a, b) => workshopTimestamp(a) - workshopTimestamp(b))[0] ??
+    [...WORKSHOPS].filter(isWorkshopBookable).sort((a, b) => workshopTimestamp(a) - workshopTimestamp(b))[0] ??
+    WORKSHOPS[0]
   const module = MODULES.find((m) => m.id === next.module)!
   return (
     <section className="hero">
@@ -1280,19 +1565,20 @@ function Hero() {
       <div className="hero-copy">
         <p className="eyebrow hero-eyebrow">
           <Sparkles size={14} strokeWidth={1.6} />
-          FORMATION CONTINUE · PHARMACIENS
+          FORMATION CONTINUE · PHARMACIENS &amp; COLLABORATEURS
         </p>
         <h1>
-          La formation continue des pharmaciens, <em>en présentiel à Casablanca et à distance.</em>
+          La formation continue des pharmaciens et des équipes officinales,{' '}
+          <em>en présentiel à Casablanca et à distance.</em>
         </h1>
         <p className="hero-text">
-          Deux ateliers par semaine, animés par des experts reconnus. Des cas de comptoir concrets,
-          des quiz, une pédagogie vivante et une attestation à la clé. Composez votre sélection et
-          réservez en un message.
+          Les ateliers de décembre sont arrivés, avec les tarifs Black Friday. Des cas de comptoir
+          concrets, des quiz, une pédagogie vivante et une attestation à la clé. Composez votre
+          sélection et réservez en un message.
         </p>
         <div className="hero-actions">
           <Link to="/programme" className="button primary">
-            Voir le programme d'octobre & novembre <ArrowRight size={18} />
+            Voir le programme de décembre <ArrowRight size={18} />
           </Link>
           <Link to="/philosophie" className="button primary">
             <Play size={15} fill="currentColor" /> Comment ça marche
@@ -1303,10 +1589,10 @@ function Hero() {
             <MapPin size={15} /> Présentiel à <a href={LOCATION_MAPS} target="_blank" rel="noreferrer"><b>{LOCATION_SHORT}, Casablanca</b></a>
           </span>
           <span>
-            <Monitor size={15} /> À <b>distance</b>
+            <Monitor size={15} /> À <b>distance</b> pour les pharmaciens
           </span>
           <span>
-            <Clock size={15} /> Mardi &amp; jeudi · <b>15h à 18h30</b>
+            <Clock size={15} /> <b>Dates et horaires selon les ateliers</b>
           </span>
         </div>
 
@@ -1314,8 +1600,8 @@ function Hero() {
           <div className="hs-item">
             <Gauge size={20} strokeWidth={1.8} />
             <div>
-              <b>02</b>
-              <span>ateliers / semaine</span>
+              <b>4 + 3</b>
+              <span>ateliers pharmaciens & collaborateurs</span>
             </div>
           </div>
           <div className="hs-item">
@@ -1484,10 +1770,11 @@ function ModulesSection() {
 }
 
 function Programme() {
-  const [month, setMonth] = useState('all')
+  const [month, setMonth] = useState('dec')
   const [filter, setFilter] = useState('all')
   const [q, setQ] = useState('')
   const [page, setPage] = useState(1)
+  const [audience, setAudience] = useState<'pharmacien' | 'collaborateur'>('pharmacien')
   const PER = 9
 
   const matching = WORKSHOPS.filter((w) => month === 'all' || w.mois === month)
@@ -1509,6 +1796,10 @@ function Programme() {
   const safePage = Math.min(page, pages)
   const current = shown.slice((safePage - 1) * PER, safePage * PER)
 
+  const decPharmaciens = shown.filter((w) => w.audience !== 'collaborateur')
+  const decCollaborateurs = shown.filter((w) => w.audience === 'collaborateur')
+  const decMode = month === 'dec'
+
   const changeMonth = (m: string) => {
     setMonth(m)
     setPage(1)
@@ -1519,21 +1810,24 @@ function Programme() {
     setPage(1)
   }
 
+  const cardList = (list: Workshop[]) =>
+    list.map((w, i) => (
+      <ReReveal key={w.id} delay={Math.min(i * 40, 200)} className="card-slot">
+        <WorkshopCard w={w} />
+      </ReReveal>
+    ))
+
   return (
     <section className="section programme" id="programme" style={{ background: 'var(--cloud)' }}>
       <ReReveal>
-        <p className="eyebrow">03 / Le programme d'octobre & novembre</p>
+        <p className="eyebrow">03 / Le programme</p>
       </ReReveal>
-      <ReReveal delay={60}>
-        <h2>
-          Le <span>programme</span> d'octobre & novembre.
-        </h2>
-      </ReReveal>
-      <ReReveal delay={120} className="filters month-tabs">
+      <ReReveal delay={60} className="filters month-tabs">
         {[
-          ['all', 'Les deux mois'],
-          ['oct', 'Octobre'],
+          ['dec', 'Décembre'],
           ['nov', 'Novembre'],
+          ['oct', 'Octobre'],
+          ['all', 'Tous les mois'],
         ].map(([m, label]) => (
           <button
             key={m}
@@ -1544,6 +1838,54 @@ function Programme() {
           </button>
         ))}
       </ReReveal>
+      <ReReveal delay={90}>
+        <h2>
+          {month === 'all' ? (
+            <>Tous les <span>ateliers</span>.</>
+          ) : month === 'oct' ? (
+            <>Les <span>ateliers</span> d’octobre.</>
+          ) : (
+            <>Les <span>ateliers</span> de {month === 'dec' ? 'décembre' : 'novembre'}.</>
+          )}
+        </h2>
+      </ReReveal>
+      <ReReveal delay={120}>
+        <p className="lead">
+          {month === 'dec'
+            ? 'Deux parcours distincts : les ateliers pharmaciens et les ateliers collaborateurs d’officine.'
+            : 'Retrouvez l’ensemble des ateliers du programme.'}
+        </p>
+      </ReReveal>
+
+      {decMode && (
+        <ReReveal delay={150} className="audience-switch">
+          <button
+            type="button"
+            aria-pressed={audience === 'pharmacien'}
+            className={`audience-tab ${audience === 'pharmacien' ? 'on' : ''}`}
+            onClick={() => setAudience('pharmacien')}
+          >
+            <span className="at-top">
+              <span className="at-label">Ateliers pharmaciens</span>
+              <span className="at-count">{decPharmaciens.length}</span>
+            </span>
+            <span className="at-sub">Présentiel à Casablanca ou à distance · 15h – 18h</span>
+          </button>
+          <button
+            type="button"
+            aria-pressed={audience === 'collaborateur'}
+            className={`audience-tab ${audience === 'collaborateur' ? 'on' : ''}`}
+            onClick={() => setAudience('collaborateur')}
+          >
+            <span className="at-top">
+              <span className="at-label">Ateliers collaborateurs</span>
+              <span className="at-count">{decCollaborateurs.length}</span>
+            </span>
+            <span className="at-sub">En présentiel à Casablanca uniquement · 14h30 – 17h30</span>
+          </button>
+        </ReReveal>
+      )}
+
       <ReReveal delay={160} className="filters">
         <button className={`chip ${filter === 'all' ? 'on' : ''}`} onClick={() => changeFilter('all')}>
           Tous
@@ -1572,17 +1914,63 @@ function Programme() {
         />
       </ReReveal>
 
-      <div className="cards">
-        {current.map((w, i) => (
-          <ReReveal key={w.id} delay={Math.min(i * 40, 200)} className="card-slot">
-            <WorkshopCard w={w} />
-          </ReReveal>
-        ))}
-      </div>
+      {decMode ? (
+        <div className="audience-groups">
+          {audience === 'pharmacien' && decPharmaciens.length > 0 && (
+            <div className="audience-group">
+              <ReReveal className="audience-head">
+                <div>
+                  <span className="audience-kicker">Décembre · Public pharmacien</span>
+                  <h3>Ateliers pharmaciens</h3>
+                  <p className="audience-desc">
+                    Présentiel à Casablanca ou à distance · 15h – 18h.
+                  </p>
+                </div>
+                <span className="audience-count">
+                  {decPharmaciens.length} atelier{decPharmaciens.length > 1 ? 's' : ''}
+                </span>
+              </ReReveal>
+              <div className="cards">{cardList(decPharmaciens)}</div>
+            </div>
+          )}
+
+          {audience === 'collaborateur' && decCollaborateurs.length > 0 && (
+            <div className="audience-group audience-group-collab">
+              <ReReveal className="audience-head">
+                <div>
+                  <span className="audience-kicker">Décembre · Public collaborateur</span>
+                  <h3>Ateliers collaborateurs</h3>
+                  <p className="audience-desc">
+                    En présentiel à Casablanca uniquement · 14h30 – 17h30.
+                  </p>
+                </div>
+                <span className="audience-count">
+                  {decCollaborateurs.length} atelier{decCollaborateurs.length > 1 ? 's' : ''}
+                </span>
+              </ReReveal>
+              <div className="cards">{cardList(decCollaborateurs)}</div>
+            </div>
+          )}
+        </div>
+      ) : (
+        <div className="cards">{cardList(current)}</div>
+      )}
 
       {shown.length === 0 && <p className="prog-empty">Aucun atelier ne correspond à votre recherche.</p>}
+      {decMode && shown.length > 0 && (audience === 'pharmacien' ? decPharmaciens : decCollaborateurs).length === 0 && (
+        <p className="prog-empty">
+          Aucun atelier ne correspond dans ce public.{' '}
+          <button
+            type="button"
+            className="link-btn"
+            onClick={() => setAudience(audience === 'pharmacien' ? 'collaborateur' : 'pharmacien')}
+          >
+            Voir les ateliers {audience === 'pharmacien' ? 'collaborateurs' : 'pharmaciens'}
+          </button>
+        </p>
+      )}
 
-      {pages > 1 && (
+      {!decMode && pages > 1 && (
         <div className="pagination">
           <button
             className="page-btn"
@@ -1652,17 +2040,54 @@ function Tarifs() {
       <div className="pricing-copy">
         <ReReveal delay={60}>
           <h2>
-            Trois formules, <i>dégressives.</i>
+            Tarifs, packs <i>et Black Friday.</i>
           </h2>
         </ReReveal>
         <ReReveal delay={120}>
           <p>
-            Le prix par atelier baisse selon le nombre d'ateliers dans votre panier ; le distanciel
-            retire 100 DH par atelier à chaque palier. Le panier applique automatiquement le
-            meilleur palier. Chaque inscription est nominative (un seul participant).
+            Les ateliers de décembre sont au tarif Black Friday : le prix promotionnel est déjà
+            final. Les formules dégressives ci-dessous s'appliquent aux autres ateliers ; le
+            distanciel retire 100 DH par atelier à chaque palier. Chaque inscription est nominative
+            (un seul participant).
           </p>
         </ReReveal>
       </div>
+      <ReReveal className="bf-banner">
+        <div className="bf-head">
+          <span className="badge bf">Black Friday</span>
+          <span className="bf-title">Ateliers de décembre</span>
+        </div>
+        <div className="bf-grid">
+          <div className="bf-item">
+            <span>Pharmaciens</span>
+            <div>
+              <s>900 DH</s>
+              <b>500 DH HT</b>
+              <small>600 DH TTC</small>
+            </div>
+          </div>
+          <div className="bf-item">
+            <span>Atelier « S'installer en officine » · 9 déc.</span>
+            <div>
+              <s>900 DH</s>
+              <b>300 DH HT</b>
+              <small>360 DH TTC</small>
+            </div>
+          </div>
+          <div className="bf-item">
+            <span>Collaborateurs</span>
+            <div>
+              <s>900 DH</s>
+              <b>300 DH HT</b>
+              <small>360 DH TTC</small>
+            </div>
+          </div>
+        </div>
+        <p className="bf-note">
+          Une seule promotion par article : le tarif Black Friday n'est pas cumulable avec les packs
+          ni avec aucun code promo.
+        </p>
+      </ReReveal>
       <div className="price-stack">
         {[
           ['À l\u2019unité', 900, 800, '1 à 2 ateliers'],
@@ -1755,7 +2180,7 @@ function AvisSection({ all = false }: { all?: boolean }) {
       </ReReveal>
       <ReReveal delay={120}>
         <p className="lead">
-          Des retours authentiques de pharmaciens qui ont participé aux ateliers d'octobre 2026.
+          Des retours authentiques de pharmaciens qui ont participé aux ateliers d'octobre et novembre 2026.
         </p>
       </ReReveal>
       <div className="avis-grid">
@@ -1992,22 +2417,15 @@ function ModuleView() {
 function Inscription() {
   const cart = useCart()
   const n = cart.count
-  const tier = findTier(n || 1)
   const [form, setForm] = useState({ prenom: '', nom: '', tel: '', email: '', pharma: '', ville: '', adresseFacture: '', iceFacture: '' })
   const [tried, setTried] = useState(false)
   const [send, setSend] = useState<'idle' | 'sending' | 'ok' | 'error'>('idle')
   const [facture, setFacture] = useState(false)
 
-  const total = useMemo(
-    () => cart.lines.reduce((s, l) => s + unitPrice(cart.count, l.format), 0),
-    [cart.lines, cart.count],
-  )
+  const total = useMemo(() => cartTotal(cart.lines), [cart.lines])
   const tva = facture ? Math.round(total * TVA_RATE) : 0
   const totalTtc = total + tva
-  const ref = useMemo(
-    () => cart.lines.reduce((s, l) => s + unitPrice(1, l.format), 0),
-    [cart.lines],
-  )
+  const ref = useMemo(() => cartRef(cart.lines), [cart.lines])
   const save = ref - total
 
   const set =
@@ -2051,16 +2469,18 @@ function Inscription() {
     const empty = getEmpty()
     if (empty.length || n === 0) return
     const ateliers = cart.lines.map((l) => {
-      const w = WORKSHOPS.find((x) => x.id === l.workshopId)!
-      const p = unitPrice(cart.count, l.format)
+      const w = workshopById(l.workshopId)!
+      const p = linePrice(l, cart.lines)
       return {
         titre: w.title.split(' : ')[0],
         format: l.format === 'P' ? 'présentiel' : 'distanciel',
         date: w.date,
         prix: p,
+        public: w.audience ?? 'pharmacien',
+        blackFriday: isPromoWorkshop(w),
       }
     })
-    const lignes = ateliers.map((a) => `- ${a.titre} (${a.format}, ${a.date}) : ${a.prix} DH`)
+    const lignes = ateliers.map((a) => `- ${a.titre} (${a.format}, ${a.date}) : ${a.prix} DH${a.blackFriday ? ' · Black Friday' : ''}`)
     const msg = [
       'Bonjour, je souhaite m\u2019inscrire au Passeport Formation.',
       '',
@@ -2071,14 +2491,14 @@ function Inscription() {
       `- Pharmacie ou faculté : ${form.pharma}`,
       `- Ville : ${form.ville}`,
       '',
-      `Formule : ${tier.label} (${tier.pres} DH/atelier en présentiel)`,
+      `Tarification : ${tierLabel(cart.lines)}`,
       'Ateliers :',
       ...lignes,
       facture
         ? `Sous-total (hors taxes) : ${total.toLocaleString('fr-FR')} DH`
         : '',
       facture ? `TVA 20% : ${tva.toLocaleString('fr-FR')} DH` : '',
-      `Total à régler${facture ? ' (TTC)' : ''} : ${totalTtc.toLocaleString('fr-FR')} DH`,
+      `Total à régler${facture ? ' (TTC)' : ' (HT)'} : ${totalTtc.toLocaleString('fr-FR')} DH`,
       save > 0 ? `Économie vs tarif unité : ${save.toLocaleString('fr-FR')} DH` : '',
       facture ? 'Je souhaite une facture.' : '',
       facture ? `Adresse de facturation : ${form.adresseFacture}` : '',
@@ -2105,7 +2525,7 @@ function Inscription() {
           ville: form.ville.trim(),
           adresseFacture: facture ? form.adresseFacture.trim() : '',
           iceFacture: facture ? form.iceFacture.trim() : '',
-          formule: `${tier.label} (${tier.pres} DH/atelier en présentiel)`,
+          formule: tierLabel(cart.lines),
           total,
           totalTtc,
           tva,
@@ -2259,7 +2679,8 @@ function Inscription() {
             <>
               <div className="cart-lines">
                 {cart.lines.map((l) => {
-                  const w = WORKSHOPS.find((x) => x.id === l.workshopId)!
+                  const w = workshopById(l.workshopId)!
+                  const distance = allowsDistance(w)
                   return (
                     <div className="ci" key={l.workshopId}>
                       <div>
@@ -2267,21 +2688,30 @@ function Inscription() {
                           {w.d} {w.mois}
                         </b>
                         <span>{w.title.split(' : ')[0]}</span>
-                        <button
-                          className={`ci-fmt ${l.format === 'P' ? 'on' : ''}`}
-                          onClick={() => cart.setFormat(l.workshopId, 'P')}
-                        >
-                          Présentiel
-                        </button>
-                        <button
-                          className={`ci-fmt ${l.format === 'D' ? 'on' : ''}`}
-                          onClick={() => cart.setFormat(l.workshopId, 'D')}
-                        >
-                          Distanciel
-                        </button>
+                        {distance ? (
+                          <>
+                            <button
+                              className={`ci-fmt ${l.format === 'P' ? 'on' : ''}`}
+                              onClick={() => cart.setFormat(l.workshopId, 'P')}
+                            >
+                              Présentiel
+                            </button>
+                            <button
+                              className={`ci-fmt ${l.format === 'D' ? 'on' : ''}`}
+                              onClick={() => cart.setFormat(l.workshopId, 'D')}
+                            >
+                              Distanciel
+                            </button>
+                          </>
+                        ) : (
+                          <span className="ci-only">Présentiel · Casablanca</span>
+                        )}
                       </div>
                       <div className="ci-right">
-                        <strong>{unitPrice(cart.count, l.format)} DH</strong>
+                        <div className="ci-price">
+                          {isPromoWorkshop(w) && <s>{BLACK_FRIDAY_REF} DH</s>}
+                          <strong>{linePrice(l, cart.lines)} DH</strong>
+                        </div>
                         <button className="ci-x" onClick={() => cart.remove(l.workshopId)}>
                           <Minus size={14} />
                         </button>
@@ -2291,7 +2721,7 @@ function Inscription() {
                 })}
               </div>
               <div className="cart-ft">
-                <div className="tier">{tierLabel(n)}</div>
+                <div className="tier">{tierLabel(cart.lines)}</div>
 
                 <div className="facture-box">
                   <b>Besoin d’une facture ?</b>
@@ -2320,12 +2750,13 @@ function Inscription() {
                 </div>
 
                 <div className="sum-row">
-                  <span>Total{facture ? ' TTC' : ' (HT)'}</span>
+                  <span>{facture ? 'Total TTC' : 'Total (HT)'}</span>
                   <strong>{totalTtc.toLocaleString('fr-FR')} DH</strong>
                 </div>
                 {facture && (
                   <div className="tva-row">
-                    dont {tva.toLocaleString('fr-FR')} DH de TVA (20 %)
+                    Sous-total HT : {total.toLocaleString('fr-FR')} DH · dont TVA 20 % :{' '}
+                    {tva.toLocaleString('fr-FR')} DH
                   </div>
                 )}
                 {save > 0 && <div className="save-row">Vous économisez {save.toLocaleString('fr-FR')} DH</div>}
@@ -2382,13 +2813,20 @@ function CartProvider({ children }: { children: React.ReactNode }) {
   const value: CartCtx = {
     lines,
     add: (id, format) => setLines((l) => {
-      const workshop = WORKSHOPS.find((w) => w.id === id)
+      const workshop = workshopById(id)
+      const safeFormat = workshop && allowsDistance(workshop) ? format : 'P'
       return workshop && isWorkshopBookable(workshop) && !l.some((x) => x.workshopId === id)
-        ? [...l, { workshopId: id, format }]
+        ? [...l, { workshopId: id, format: safeFormat }]
         : l
     }),
     remove: (id) => setLines((l) => l.filter((x) => x.workshopId !== id)),
-    setFormat: (id, format) => setLines((l) => l.map((x) => (x.workshopId === id ? { ...x, format } : x))),
+    setFormat: (id, format) => setLines((l) =>
+      l.map((x) => {
+        if (x.workshopId !== id) return x
+        const workshop = workshopById(id)
+        return { ...x, format: workshop && allowsDistance(workshop) ? format : 'P' }
+      }),
+    ),
     clear: () => setLines([]),
     count: lines.length,
   }
@@ -2448,13 +2886,9 @@ function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
   const cart = useCart()
   const navigate = useNavigate()
   const n = cart.count
-  const total = useMemo(
-    () => cart.lines.reduce((s, l) => s + unitPrice(cart.count, l.format), 0),
-    [cart.lines, cart.count],
-  )
-  const ref = useMemo(() => cart.lines.reduce((s, l) => s + unitPrice(1, l.format), 0), [cart.lines])
+  const total = useMemo(() => cartTotal(cart.lines), [cart.lines])
+  const ref = useMemo(() => cartRef(cart.lines), [cart.lines])
   const save = ref - total
-  const tier = findTier(n || 1)
 
   useEffect(() => {
     if (!open) return
@@ -2506,7 +2940,8 @@ function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
           <>
             <div className="cart-lines">
               {cart.lines.map((l) => {
-                const w = WORKSHOPS.find((x) => x.id === l.workshopId)!
+                const w = workshopById(l.workshopId)!
+                const distance = allowsDistance(w)
                 return (
                   <div className="ci" key={l.workshopId}>
                     <div>
@@ -2514,23 +2949,30 @@ function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
                         {w.d} {w.mois}
                       </b>
                       <span>{w.title.split(' : ')[0]}</span>
-                      <div className="ci-fmts">
-                        <button
-                          className={`ci-fmt ${l.format === 'P' ? 'on' : ''}`}
-                          onClick={() => cart.setFormat(l.workshopId, 'P')}
-                        >
-                          Présentiel
-                        </button>
-                        <button
-                          className={`ci-fmt ${l.format === 'D' ? 'on' : ''}`}
-                          onClick={() => cart.setFormat(l.workshopId, 'D')}
-                        >
-                          Distanciel
-                        </button>
-                      </div>
+                      {distance ? (
+                        <div className="ci-fmts">
+                          <button
+                            className={`ci-fmt ${l.format === 'P' ? 'on' : ''}`}
+                            onClick={() => cart.setFormat(l.workshopId, 'P')}
+                          >
+                            Présentiel
+                          </button>
+                          <button
+                            className={`ci-fmt ${l.format === 'D' ? 'on' : ''}`}
+                            onClick={() => cart.setFormat(l.workshopId, 'D')}
+                          >
+                            Distanciel
+                          </button>
+                        </div>
+                      ) : (
+                        <span className="ci-only">Présentiel · Casablanca</span>
+                      )}
                     </div>
                     <div className="ci-right">
-                      <strong>{unitPrice(cart.count, l.format)} DH</strong>
+                      <div className="ci-price">
+                        {isPromoWorkshop(w) && <s>{BLACK_FRIDAY_REF} DH</s>}
+                        <strong>{linePrice(l, cart.lines)} DH</strong>
+                      </div>
                       <button className="ci-x" onClick={() => cart.remove(l.workshopId)} aria-label="Retirer du panier">
                         <Minus size={14} />
                       </button>
@@ -2541,10 +2983,14 @@ function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
             </div>
 
             <div className="cart-ft">
-              <div className="tier">{tierLabel(n)}</div>
+              <div className="tier">{tierLabel(cart.lines)}</div>
               <div className="sum-row">
-                <span>Total</span>
+                <span>Total HT</span>
                 <strong>{total.toLocaleString('fr-FR')} DH</strong>
+              </div>
+              <div className="tva-row">
+                TVA 20 % avec facture : {Math.round(total * TVA_RATE).toLocaleString('fr-FR')} DH ·
+                soit {Math.round(total * (1 + TVA_RATE)).toLocaleString('fr-FR')} DH TTC
               </div>
               {save > 0 && <div className="save-row">Vous économisez {save.toLocaleString('fr-FR')} DH</div>}
               <button className="button wa full" onClick={goFinalize}>
