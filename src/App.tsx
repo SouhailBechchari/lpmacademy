@@ -14,7 +14,6 @@ import {
   Search,
   FileText,
   FlaskConical,
-  Gauge,
   Images,
   Layers,
   MapPin,
@@ -566,7 +565,7 @@ const WORKSHOPS: Workshop[] = [
     ],
     audience: 'collaborateur',
     promoPrice: 300,
-    distance: false,
+    distance: true,
   },
   {
     id: 22,
@@ -591,7 +590,7 @@ const WORKSHOPS: Workshop[] = [
     ],
     audience: 'collaborateur',
     promoPrice: 300,
-    distance: false,
+    distance: true,
   },
   {
     id: 23,
@@ -617,7 +616,7 @@ const WORKSHOPS: Workshop[] = [
     ],
     audience: 'collaborateur',
     promoPrice: 300,
-    distance: false,
+    distance: true,
   },
 ]
 
@@ -786,13 +785,13 @@ const SPEAKERS = [
 
 const FAQ = [
   ['Puis-je ne prendre qu\u2019un seul atelier ?', "Oui. La formule à l'unité est faite pour ça. Pour les ateliers de décembre, le tarif Black Friday est déjà le prix final."],
-  ['Présentiel ou distanciel ?', `Les ateliers pharmaciens sont hybrides : en présentiel, vous êtes sur place ${LOCATION_FULL} ; en distanciel, vous suivez la même séance à distance. Les ateliers collaborateurs ont lieu uniquement en présentiel à Casablanca.`],
+  ['Présentiel ou distanciel ?', `Tous les ateliers sont hybrides : en présentiel, vous êtes sur place ${LOCATION_FULL} ; en distanciel, vous suivez la même séance à distance.`],
   ['Comment se passe le paiement ?', "Vous finalisez sur WhatsApp. Nous confirmons le montant et vous envoyons le RIB ; votre place est réservée dès réception du justificatif."],
   ['Y a-t-il une attestation ?', 'Oui, une attestation de participation est remise à l\u2019issue de chaque atelier.'],
-  ['Où ont lieu les ateliers ?', "À l'Espace Le Carré d'Or, à Casablanca (à côté de la gare Casa Oasis), et à distance pour les ateliers pharmaciens."],
+  ['Où ont lieu les ateliers ?', "À l'Espace Le Carré d'Or, à Casablanca (à côté de la gare Casa Oasis), ou à distance."],
   ['Les packs sont-ils nominatifs ?', "Oui. Chaque inscription est nominative : le tarif dégressif s'applique selon le nombre d'ateliers que vous suivez vous-même, hors ateliers Black Friday de décembre."],
   ['Le tarif Black Friday est-il cumulable ?', "Non. C'est une seule promotion par article : le tarif Black Friday est le prix promotionnel final et ne se cumule ni avec les packs, ni avec un code promo (early bird, parrainage, fidélité)."],
-  ['Les collaborateurs peuvent-ils participer ?', "Oui. Trois ateliers de décembre sont dédiés aux aides-pharmaciens, parapharmaciens et préparateurs, en présentiel à Casablanca le samedi après-midi, de 14h30 à 17h30."],
+  ['Les collaborateurs peuvent-ils participer ?', "Oui. Trois ateliers de décembre sont dédiés aux aides-pharmaciens, parapharmaciens et préparateurs, le samedi après-midi, de 14h30 à 17h30, en présentiel à Casablanca ou à distance."],
 ]
 
 const AVIS = [
@@ -980,7 +979,7 @@ function isPromoWorkshop(w: Workshop) {
 }
 
 function allowsDistance(w: Workshop) {
-  return w.audience !== 'collaborateur' && w.distance !== false
+  return w.distance !== false
 }
 
 function eligibleCount(lines: Line[]) {
@@ -1562,9 +1561,6 @@ function Footer() {
 
 function Hero() {
   const next =
-    [...WORKSHOPS]
-      .filter((w) => w.mois === 'dec' && isWorkshopBookable(w))
-      .sort((a, b) => workshopTimestamp(a) - workshopTimestamp(b))[0] ??
     [...WORKSHOPS].filter(isWorkshopBookable).sort((a, b) => workshopTimestamp(a) - workshopTimestamp(b))[0] ??
     WORKSHOPS[0]
   const module = MODULES.find((m) => m.id === next.module)!
@@ -1598,7 +1594,7 @@ function Hero() {
             <MapPin size={15} /> Présentiel à <a href={LOCATION_MAPS} target="_blank" rel="noreferrer"><b>{LOCATION_SHORT}, Casablanca</b></a>
           </span>
           <span>
-            <Monitor size={15} /> À <b>distance</b> pour les pharmaciens
+            <Monitor size={15} /> À <b>distance</b> pour les deux publics
           </span>
           <span>
             <Clock size={15} /> <b>Dates et horaires selon les ateliers</b>
@@ -1606,13 +1602,6 @@ function Hero() {
         </div>
 
         <div className="hero-stats">
-          <div className="hs-item">
-            <Gauge size={20} strokeWidth={1.8} />
-            <div>
-              <b>4 + 3</b>
-              <span>ateliers pharmaciens & collaborateurs</span>
-            </div>
-          </div>
           <div className="hs-item">
             <Layers size={20} strokeWidth={1.8} />
             <div>
@@ -1623,7 +1612,7 @@ function Hero() {
           <div className="hs-item">
             <BadgeCheck size={20} strokeWidth={1.8} />
             <div>
-              <b>08+</b>
+              <b>+10</b>
               <span>experts reconnus</span>
             </div>
           </div>
@@ -1680,6 +1669,7 @@ function Hero() {
           <div className="hc-meta">
             <span>
               <MapPin size={13} /> Présentiel · {LOCATION_CARD}
+              {allowsDistance(next) ? ' ou à distance' : ''}
             </span>
             <span>{workshopHours(next)}</span>
           </div>
@@ -1890,7 +1880,7 @@ function Programme() {
               <span className="at-label">Ateliers collaborateurs</span>
               <span className="at-count">{decCollaborateurs.length}</span>
             </span>
-            <span className="at-sub">En présentiel à Casablanca uniquement · 14h30 – 17h30</span>
+            <span className="at-sub">Présentiel à Casablanca ou à distance · 14h30 – 17h30</span>
           </button>
         </ReReveal>
       )}
@@ -1950,7 +1940,7 @@ function Programme() {
                   <span className="audience-kicker">Décembre · Public collaborateur</span>
                   <h3>Ateliers collaborateurs</h3>
                   <p className="audience-desc">
-                    En présentiel à Casablanca uniquement · 14h30 – 17h30.
+                    Présentiel à Casablanca ou à distance · 14h30 – 17h30.
                   </p>
                 </div>
                 <span className="audience-count">
