@@ -1581,6 +1581,20 @@ function Hero() {
           concrets, des quiz, une pédagogie vivante et une attestation à la clé. Composez votre
           sélection et réservez en un message.
         </p>
+        <Link to="/programme" className="hero-bf">
+          <span className="hero-bf-pill">
+            <Sparkles size={13} /> Black Friday
+          </span>
+          <span className="hero-bf-copy">
+            <b>Ateliers de décembre</b>
+            <span>
+              dès 300 DH HT <s>900 DH</s> · tarif spécial le 9 déc.
+            </span>
+          </span>
+          <span className="hero-bf-go">
+            <ArrowRight size={15} />
+          </span>
+        </Link>
         <div className="hero-actions">
           <Link to="/programme" className="button primary">
             Voir le programme de décembre <ArrowRight size={18} />

@@ -359,6 +359,34 @@ body.has-mouse * { cursor: none !important; }
   font-size: 17px;
 }
 
+.hero-bf {
+  display: inline-flex; align-items: center; gap: 13px; flex-wrap: wrap;
+  max-width: 100%;
+  margin-top: 22px; padding: 9px 14px 9px 9px;
+  background: var(--card); border: 1px solid rgba(192,57,43,.28);
+  border-radius: 16px; box-shadow: var(--shadow-s);
+  color: var(--navy); font-family: 'Manrope', sans-serif;
+  transition: transform 0.26s cubic-bezier(0.2,0.8,0.2,1), box-shadow 0.26s ease, border-color 0.26s ease;
+}
+.hero-bf:hover {
+  transform: translateY(-2px);
+  border-color: rgba(192,57,43,.55);
+  box-shadow: var(--shadow-m);
+}
+.hero-bf-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: linear-gradient(135deg, #c0392b, #8e1b12); color: #fff;
+  border-radius: 999px; padding: 8px 12px;
+  font-size: 10.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+  white-space: nowrap; box-shadow: 0 6px 16px rgba(142,27,18,.28);
+}
+.hero-bf-pill svg { flex: 0 0 auto; }
+.hero-bf-copy { display: grid; gap: 1px; font-size: 12.5px; color: var(--mut); line-height: 1.35; }
+.hero-bf-copy b { color: var(--navy); font-size: 13.5px; font-weight: 800; }
+.hero-bf-copy s { color: #a0a8a4; }
+.hero-bf-go { display: inline-flex; color: #c0392b; transition: transform 0.22s ease; }
+.hero-bf:hover .hero-bf-go { transform: translateX(3px); }
+
 .hero-actions { display: flex; align-items: center; gap: 26px; margin-top: 38px; flex-wrap: wrap; }
 
 .button {
@@ -1687,6 +1715,10 @@ footer::before {
 :root[data-theme='dark'] .hero h1 { color: #eef5fb; }
 :root[data-theme='dark'] .hero h1 em { color: var(--lime); }
 :root[data-theme='dark'] .hero-text { color: #a9bfcf; }
+:root[data-theme='dark'] .hero-bf { background: var(--card); border-color: rgba(255,138,128,.3); }
+:root[data-theme='dark'] .hero-bf-copy { color: #9db2c3; }
+:root[data-theme='dark'] .hero-bf-copy b { color: #eaf3fa; }
+:root[data-theme='dark'] .hero-bf-copy s { color: #6e8798; }
 :root[data-theme='dark'] .hero-stripe {
   background: linear-gradient(180deg, rgba(22,44,66,.9), rgba(15,30,46,.72));
   border-color: #24405a;
