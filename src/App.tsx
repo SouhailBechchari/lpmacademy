@@ -871,6 +871,15 @@ const AVIS = [
 ]
 
 const PHOTO_FILES = [
+  'DSC02955.jpg.jpeg',
+  'DSC02968.jpg.jpeg',
+  'DSC02989.jpg.jpeg',
+  'DSC03000.jpg.jpeg',
+  'DSC03014.jpg.jpeg',
+  'DSC03016.jpg.jpeg',
+  'DSC03019.jpg.jpeg',
+  'DSC03050.jpg.jpeg',
+  'DSC03060.jpg.jpeg',
   '1.jpeg',
   '2.jpeg',
   'WhatsApp Image 2026-10-31 at 20.37.12 (1).jpeg',
@@ -1770,7 +1779,7 @@ function ModulesSection() {
 }
 
 function Programme() {
-  const [month, setMonth] = useState('dec')
+  const [month, setMonth] = useState('all')
   const [filter, setFilter] = useState('all')
   const [q, setQ] = useState('')
   const [page, setPage] = useState(1)
@@ -1824,10 +1833,10 @@ function Programme() {
       </ReReveal>
       <ReReveal delay={60} className="filters month-tabs">
         {[
+          ['all', 'Tous les programmes'],
           ['dec', 'Décembre'],
           ['nov', 'Novembre'],
           ['oct', 'Octobre'],
-          ['all', 'Tous les mois'],
         ].map(([m, label]) => (
           <button
             key={m}
