@@ -570,9 +570,9 @@ const WORKSHOPS: Workshop[] = [
   {
     id: 22,
     jour: 'Sam',
-    d: '12',
+    d: '19',
     mois: 'dec',
-    date: 'samedi 12 déc.',
+    date: 'samedi 19 déc.',
     horaires: '14h30 – 17h30',
     module: 'pathologies',
     finalised: true,
